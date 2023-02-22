@@ -45,14 +45,14 @@ const ClientSchema = mongoose.Schema({
         type: String,
         required: [true, "Please add a bill status"]
     },
-    itemList: {
-        type: [ {
+    itemList: [
+         {
             itemName: String,
             itemQuantity: Number,
             itemPrice: Number,
             total: Number,
-        } ] 
-    }
+        }
+    ]
 }, {timestamps: true})
 
 module.exports = mongoose.model('ClientBill', ClientSchema)

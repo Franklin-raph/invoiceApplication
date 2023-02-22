@@ -3,7 +3,7 @@ const Vendor = require('../models/vendorModel')
 const mongoose = require('mongoose')
 
 // Register a client purchase item info into the invoice
-const registerClientPurchaseInfo = async (req, res) => {
+const registerClientBillInfo = async (req, res) => {
     const {clientName, clientEmail, clientStreetAddress, clientCountry, clientCity, clientPostalCode, 
         invoiceDate, paymentTerms, productDescription, itemList, status} = req.body
 
@@ -33,7 +33,7 @@ const getBillInfoFromInvoice = async (req, res) => {
 
     try {
         // if(await ClientBill.findById(req.vendor) === null) return res.status(404).json({Msg: "Vendor not found"})
-        //     const signedInvendorId = await Vendor.findById(req.vendor.id)
+        // const signedInvendorId = await Vendor.findById(req.vendor.id)
         
         if(!mongoose.Types.ObjectId.isValid(billId)) return res.status(404).json({Err: "No such item detail found"})
 
@@ -119,7 +119,7 @@ const updateBillInfo = async (req, res) => {
 }
 
 module.exports = {
-    registerClientPurchaseInfo,
+    registerClientBillInfo,
     getBillInfoFromInvoice,
     getAllBillInfoFromInvoice,
     deleteABillInfo,
