@@ -1,17 +1,22 @@
-import Login from './pages/Login'
 import './App.css'
+import Login from './pages/Login'
+import Register from './pages/Register'
 import InvoiceHomePage from './pages/InvoiceHomePage'
 import Sidenav from './components/Sidenav'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
 
+  const logedInVendor = localStorage.getItem('vendorInfo')
+
   return (
     <div className="App">
       <Router>
-        <Sidenav />
+        {logedInVendor && <Sidenav />}
+        {/* <Sidenav /> */}
         <Routes>
           <Route path='/' element={<InvoiceHomePage />} />
+          <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
         </Routes>
       </Router>

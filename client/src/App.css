@@ -1,3 +1,25 @@
 * {
     font-family: 'Montserrat';
 }
+
+.multiStepFormContainer div:nth-of-type(2) div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.multiStepFormContainer div:nth-of-type(2) div button {
+    background-color: #7B5EF8;
+    padding: 7px 1rem;
+    border-radius: 5px;
+}
+
+.multiStepFormContainer button:disabled {
+    background-color: gray !important;
+    cursor: not-allowed;
+}
+
+.multiStepFormContainer input {
+    color: #000;
+}

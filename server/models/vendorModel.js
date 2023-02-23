@@ -1,9 +1,13 @@
 const mongoose = require('mongoose')
 
 const VendorSchema = mongoose.Schema({
-    name: {
+    fName: {
         type: String,
-        required: [true, "Please Provide a name"]
+        required: [true, "Please Provide a first name"]
+    },
+    lName: {
+        type: String,
+        required: [true, "Please Provide a last name"]
     },
     email: {
         type: String,

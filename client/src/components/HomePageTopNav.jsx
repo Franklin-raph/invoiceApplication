@@ -2,7 +2,7 @@ import React from 'react'
 
 const HomePageTopNav = () => {
     return (
-        <div className="text-white flex items-center justify-between w-2/3 my-20">
+        <div className="text-white flex items-center justify-between w-[60%] my-20">
             <div>
                 <h1 className="text-3xl font-[600]">Invoces</h1>
                 <p>There are 7 total invoices</p>
