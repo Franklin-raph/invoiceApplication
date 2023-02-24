@@ -23,3 +23,7 @@
 .multiStepFormContainer input {
     color: #000;
 }
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
