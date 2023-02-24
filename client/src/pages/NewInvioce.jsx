@@ -7,7 +7,7 @@ const NewInvioce = () => {
 
     const [clientName, setClientName] = useState("Frank")
     const [clientEmail, setClientEmail] = useState("frank@gmail.com")
-    const [clientCounrty, setClientCountry] = useState("Nigeria")
+    const [clientCountry, setClientCountry] = useState("Nigeria")
     const [clientCity, setClientCity] = useState("Anambra Awka")
     const [clientStreetAddress, setClientStreetAddress] = useState("Ifite School Gate")
     const [clientPostalCode, setClientPostalCode] = useState("14210")
@@ -18,17 +18,33 @@ const NewInvioce = () => {
     const [alertType, setAlertType] = useState("")
 
     const { vendorData } = useSelector((state) => state.vendorAuth)
-    console.log(vendorData.vendor.streetAddress)
 
-    function handleClientDetailSubmission(e) {
+    const clientBillInfo = {
+        clientName, clientEmail, clientCountry,
+        clientCity, clientStreetAddress, clientPostalCode,
+        invoiceDate, paymentTerms, productDescription,
+        status: "Draft"
+    }
+
+    async function handleClientDetailSubmission(e) {
         e.preventDefault();
-        if (!clientName || !clientEmail || !clientCounrty || !clientCity || !clientStreetAddress || !clientPostalCode || !invoiceDate || !paymentTerms || !productDescription) {
-            setError("Update all fields")
+        if (!clientName || !clientEmail || !clientCountry || !clientCity || !clientStreetAddress || !clientPostalCode || !invoiceDate || !paymentTerms || !productDescription) {
+            setError("Update all client's details")
             setTimeout(() => {
                 setError("")
             }, 2000)
         }
-        console.log(clientName, clientEmail, clientCounrty, clientCity, clientStreetAddress, clientPostalCode, new Date(invoiceDate).toDateString(), paymentTerms, productDescription)
+
+        const response = await fetch("http://localhost:5000/api/v1/clienbillinfo/registerClientPurchaseInfo", {
+            method: "POST",
+            body: JSON.stringify(clientBillInfo),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${vendorData.token}`
+            }
+        })
+        const data = await response.json();
+        console.log(data)
     }
 
     return (
@@ -74,7 +90,7 @@ const NewInvioce = () => {
                     <div className='flex items-center gap-4'>
                         <div className="block my-3 w-full">
                             <h1>Client's Country</h1>
-                            <input type="text" value={clientCounrty} onChange={e => setClientCountry(e.target.value)} placeholder='Nigeria' className="focus:outline-none border-gray-800 rounded-[4px] border-[1px] pl-3 py-2 w-full bg-[#141625]" />
+                            <input type="text" value={clientCountry} onChange={e => setClientCountry(e.target.value)} placeholder='Nigeria' className="focus:outline-none border-gray-800 rounded-[4px] border-[1px] pl-3 py-2 w-full bg-[#141625]" />
                         </div>
                         <div className="block my-3 w-full">
                             <h1>Client's City</h1>
