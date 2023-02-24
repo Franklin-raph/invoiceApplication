@@ -4,10 +4,20 @@ import Register from './pages/Register'
 import InvoiceHomePage from './pages/InvoiceHomePage'
 import Sidenav from './components/Sidenav'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import NewInvioce from './pages/NewInvioce'
 
 function App() {
 
   const logedInVendor = localStorage.getItem('vendorInfo')
+  // const navigate = useNavigate()
+
+  useEffect(() => {
+    if (logedInVendor) {
+      // window.location.assign('/')
+      console.log("first")
+    }
+  }, [])
 
   return (
     <div className="App">
@@ -16,6 +26,7 @@ function App() {
         {/* <Sidenav /> */}
         <Routes>
           <Route path='/' element={<InvoiceHomePage />} />
+          <Route path='/newinvoice' element={<NewInvioce />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
         </Routes>

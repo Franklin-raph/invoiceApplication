@@ -28,7 +28,7 @@ const registerVendor = async (req, res) => {
 
                 // checking if the vendors email exists
                 let vendorEmail = await Vendor.findOne({email})
-                if(vendorEmail) return res.status(400).json({msg:"Vendor with this email already exists"})
+                if(vendorEmail) return res.status(400).json({err:"Vendor with this email already exists"})
 
                 // creating the vendor
                 const vendor = new Vendor({...req.body})
@@ -62,18 +62,18 @@ const loginVendor = async (req, res) => {
         // checking if vendor exists or not
         const vendor = await Vendor.findOne({email})
 
-        if(!vendor) return res.status(400).json({Err: "Invalid login credentials"})
+        if(!vendor) return res.status(400).json({err: "Invalid login credentials"})
         
         const token = createToken(vendor._id)
 
         if(vendor && (await bcrypt.compare(password, vendor.password))){
             return res.status(200).json({vendor,token})
         }else{
-            res.status(400).json({Err: "Inavlid login credentials"})
+            res.status(400).json({err: "Inavlid login credentials"})
         }
     } catch (error) {
         console.log(error)
-        return res.status(500).json({Err: error.message})
+        return res.status(500).json({err: error.message})
     }
 }
 
@@ -93,7 +93,7 @@ const updateVendorAccount = async (req, res) => {
         const signedInvendorId = await Vendor.findById(req.vendor.id)
 
         // checking if the vendors Id is a valid one
-        if(!mongoose.Types.ObjectId.isValid(vendorId)) return res.status(404).json({Err: "No such vendor found"})
+        if(!mongoose.Types.ObjectId.isValid(vendorId)) return res.status(404).json({err: "No such vendor found"})
 
         // preventing other vendors from updating another vendors account
         if(vendorId !== signedInvendorId._id.toString()) return res.status(401).json({Msg: "Not authorized"})
@@ -103,7 +103,7 @@ const updateVendorAccount = async (req, res) => {
 
         res.status(200).json(vendorAccountToUpdate)
     } catch (error) {
-        res.status(500).json({Err: error.message})
+        res.status(500).json({err: error.message})
     }
 }
 
@@ -121,7 +121,7 @@ const deleteVendorAccount = async (req, res) => {
         if(await Vendor.findById(req.vendor) === null) return res.status(404).json({Msg: "Vendor not found"})
         const signedInvendorId = await Vendor.findById(req.vendor.id)
 
-        if(!mongoose.Types.ObjectId.isValid(vendorId)) return res.status(404).json({Err: "No such vendor found"})
+        if(!mongoose.Types.ObjectId.isValid(vendorId)) return res.status(404).json({err: "No such vendor found"})
 
         if(vendorId !== signedInvendorId._id.toString()) return res.status(401).json({Msg: "Not authorized"})
 
@@ -129,7 +129,7 @@ const deleteVendorAccount = async (req, res) => {
 
         res.status(200).json({msg:"Vendor account deleted successfully", vendorId})
     } catch (error) {
-        res.status(500).json({Err: error.message})
+        res.status(500).json({err: error.message})
     }
 }
 

@@ -30,9 +30,13 @@ const StepOne = ({ vendorDetails, nextStep, setFname, setLname, setEmail, setPas
 
     return (
         <div className="flex justify-center items-center">
-            <div className="mt-8 pt-5 bg-white flex items-center justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" >
+            <div className="mt-8 py-5 bg-white flex items-center justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" >
                 <div className="w-full px-12">
-                    <h1 className="text-start text-xl font-bold">Personal Information</h1>
+                    <div className="flex items-center justify-between mt-3 gap-2 relative">
+                        <h1 className="text-start text-xl font-bold">Personal Information</h1>
+                        <div className="h-0.5 bg-slate-200 w-2/5"></div>
+                        <p className="absolute text-xl px-3 py-1 text-white right-0 rounded-full bg-[#141625]">1</p>
+                    </div>
                     {error && <p className="text-white text-center bg-red-600 py-1 px-2">{error}</p>}
                     <label className="block my-3">
                         <h1>First Name</h1>
@@ -54,12 +58,14 @@ const StepOne = ({ vendorDetails, nextStep, setFname, setLname, setEmail, setPas
                         <h1>Confirm Password</h1>
                         <input onChange={(e) => setConfirmPassword(e.target.value)} value={vendorDetails.confirmPassword} type="password" placeholder='Confirm Password' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
                     </label>
-                    <button onClick={validateFieldsAndUpdateStep} className="flex justify-center items-center border-gray-300 rounded-[4px] border-[1px] px-3 py-1 hover:bg-slate-500 hover:text-white transition">
-                        <p>Next</p>
-                        <i className="ri-arrow-right-s-line"></i>
-                    </button>
-                    {/* <input type="submit" value="Sign In" className="w-full bg-green-500 text-white py-2 rounded-[4px] hover:cursor-pointer" /> */}
-                    <p className="text-center py-3 pb-5">Already have an account? <Link to='/login' className="underline">Sign In</Link> </p>
+                    <div className="flex justify-between items-center">
+                        <p className="text-center py-3 pb-5">Already have an account? <Link to='/login' className="underline">Sign In</Link> </p>
+
+                        <button onClick={validateFieldsAndUpdateStep} className="flex items-center border-gray-300 rounded-[4px] border-[1px] px-3 py-1 hover:bg-slate-500 hover:text-white transition">
+                            <p>Next</p>
+                            <i className="ri-arrow-right-s-line"></i>
+                        </button>
+                    </div>
                 </div>
                 <img src={LoginImage} className="w-2/4" alt="" />
             </div>

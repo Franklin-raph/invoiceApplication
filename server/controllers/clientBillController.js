@@ -9,7 +9,7 @@ const registerClientBillInfo = async (req, res) => {
 
         try {
             if(!clientName || !clientEmail || !clientStreetAddress || !clientCountry || !clientCity || !clientPostalCode 
-                || !invoiceDate || !paymentTerms || !productDescription || !itemList || !status) {
+                || !invoiceDate || !paymentTerms || !productDescription || !status) {
                 res.status(400).json({msg: "Please fill in all fields"})
                 return
             }else{

@@ -11,8 +11,17 @@ const InvoiceHomePage = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const { billData } = useSelector((state) => state.clientBill)
+    const { vendorData } = useSelector((state) => state.vendorAuth)
+
+    console.log(vendorData)
+
+    let logedInVendor = JSON.parse(localStorage.getItem('vendorInfo'))
 
     useEffect(() => {
+        if (vendorData) {
+            console.log("Logged in")
+            navigate('/')
+        }
         if (logedInVendor === null) {
             navigate('/login')
         } else {
@@ -21,7 +30,6 @@ const InvoiceHomePage = () => {
     }, [])
 
 
-    let logedInVendor = JSON.parse(localStorage.getItem('vendorInfo'))
 
     return (
         <div className="flex flex-col justify-start items-center">

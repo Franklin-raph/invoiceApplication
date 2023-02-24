@@ -19,9 +19,13 @@ const StepTwo = ({ vendorDetails, nextStep, prevStep, setBusinessName, setBusine
 
     return (
         <div className="flex justify-center items-center">
-            <div className="mt-14 pt-5 bg-white flex items-center justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" >
+            <div className="mt-14 py-5 bg-white flex items-center justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" >
                 <div className="w-full px-12">
-                    <h1 className="text-start text-xl font-bold">Business Information</h1>
+                    <div className="flex items-center justify-between mt-3 gap-2 relative">
+                        <h1 className="text-start text-xl font-bold mt-3">Business Information</h1>
+                        <div className="h-0.5 bg-slate-200 w-2/5"></div>
+                        <p className="absolute text-xl px-3 py-1 text-white right-0 rounded-full bg-[#141625]">2</p>
+                    </div>
                     {error && <p className="text-white text-center bg-red-600 py-1 px-2">{error}</p>}
                     <label className="block my-3">
                         <h1>Business Name</h1>

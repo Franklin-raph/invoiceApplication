@@ -44,7 +44,7 @@ const Register = () => {
         if (isSuccess || vendorData) {
             navigate('/')
         }
-    }, [])
+    }, [isLoading, isSuccess, isError,])
 
     const vendorDetails = {
         fName, lName, email, password, city, streetAddress, postalCode, country,
