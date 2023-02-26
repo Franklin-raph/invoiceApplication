@@ -14,9 +14,9 @@ const Alert = ({ message, alertType }) => {
                 }
 
                 {alertType === "Danger" ?
-                    <p className="text-center text-red-500 text-xl py-1 px-2 mb-3">{message}</p>
+                    <p className="text-center text-red-500 text-lg py-1 px-2 mb-3">{message}</p>
                     :
-                    <p className="text-center text-green-600 text-xl py-1 px-2 mb-3">{message}</p>
+                    <p className="text-center text-green-600 text-lg py-1 px-2 mb-3">{message}</p>
                 }
 
                 {alertType === "Success" ?

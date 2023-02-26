@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const HomePageTopNav = () => {
+const HomePageTopNav = ({ billData }) => {
     return (
         <div className="text-white flex items-center justify-between w-[60%] my-20">
             <div>
                 <h1 className="text-3xl font-[600]">Invoices</h1>
-                <p>There are 7 total invoices</p>
+                <p>There are {billData.data.length} total invoices</p>
             </div>
             <div className="flex items-center justify-between gap-10">
                 <div className="flex items-center justify-between gap-3">

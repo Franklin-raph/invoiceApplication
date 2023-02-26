@@ -1,8 +1,15 @@
-import React from 'react'
+import { useState } from 'react'
+import InputItemComponent from '../components/InputItemComponent'
 
 const Itemlist = () => {
+    const [itemName, setItemName] = useState("Bag of Rice")
+    const [itemQuantity, setItemQuantity] = useState(2)
+    const [itemPrice, setItemPrice] = useState(5000)
+    const [total, setTotal] = useState(itemQuantity * itemPrice)
     return (
-        <div>Itemlistdfjdi jidfud[f u fuid0foifoiforfiokrokrorkfrd]</div>
+        <div>
+            <InputItemComponent setItemName={setItemName} setItemQuantity={setItemQuantity} setItemPrice={setItemPrice} setTotal={setTotal} />
+        </div>
     )
 }
 
