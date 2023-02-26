@@ -48,8 +48,8 @@ const ClientSchema = mongoose.Schema({
     itemList: [
          {
             itemName: String,
-            itemQuantity: Number,
-            itemPrice: Number,
+            itemQuantity: String,
+            itemPrice: String,
             total: Number,
         }
     ]

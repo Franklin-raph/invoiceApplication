@@ -33,7 +33,7 @@ const InvoiceHomePage = () => {
 
     return (
         <div className="flex flex-col justify-start items-center">
-            <HomePageTopNav billData={billData} />
+            {billData && <HomePageTopNav billData={billData} />}
             <InvoiceCardContainer billData={billData} />
         </div>
     )

@@ -39,6 +39,7 @@ const Login = () => {
             setAlertType("Danger")
             setTimeout(() => {
                 setMessage("")
+                setAlertType("")
             }, 3000)
         }
         if (response.ok) {

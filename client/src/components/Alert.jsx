@@ -8,9 +8,9 @@ const Alert = ({ message, alertType }) => {
             <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg'>
 
                 {alertType === "Danger" ?
-                    <i class="ri-close-circle-line text-7xl text-red-500"></i>
+                    <i className="ri-close-circle-line text-7xl text-red-500"></i>
                     :
-                    <i class="ri-checkbox-circle-fill text-7xl text-green-600"></i>
+                    <i className="ri-checkbox-circle-fill text-7xl text-green-600"></i>
                 }
 
                 {alertType === "Danger" ?

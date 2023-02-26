@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import InputItemComponent from '../components/InputItemComponent'
+import ItemListContainer from '../components/ItemListContainer'
 
 const Itemlist = () => {
     const [itemName, setItemName] = useState("Bag of Rice")
@@ -9,6 +10,7 @@ const Itemlist = () => {
     return (
         <div>
             <InputItemComponent setItemName={setItemName} setItemQuantity={setItemQuantity} setItemPrice={setItemPrice} setTotal={setTotal} />
+            <ItemListContainer />
         </div>
     )
 }

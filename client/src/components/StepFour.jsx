@@ -36,6 +36,7 @@ const StepFour = ({ vendorDetails, prevStep }) => {
             setError(data.err)
             setTimeout(() => {
                 setError("")
+                setAlertType("")
             }, 3000)
         }
     }
