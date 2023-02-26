@@ -9,7 +9,7 @@ const Login = () => {
     // const [isLoading, setIsLoading] = useState(false)
     const [email, setEmail] = useState("frank1@gmail.com")
     const [password, setPassword] = useState("123456")
-    const [error, setError] = useState("")
+    const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
     const { vendorData } = useSelector((state) => state.vendorAuth)
     const navigate = useNavigate();
@@ -35,10 +35,10 @@ const Login = () => {
         });
         const data = await response.json();
         if (!response.ok) {
-            setError(data.err)
-            setAlertType("Error")
+            setMessage(data.err)
+            setAlertType("Danger")
             setTimeout(() => {
-                setError("")
+                setMessage("")
             }, 3000)
         }
         if (response.ok) {
@@ -54,7 +54,7 @@ const Login = () => {
             <form className="relative flex items-center h-full justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" onSubmit={handleVedorLogin}>
                 <div className="w-full p-12">
                     <h1 className="text-start text-xl text-white">Sign In</h1>
-                    {error && <Alert message={error} alertType={alertType} />}
+                    {message && <Alert message={message} alertType={alertType} />}
                     <label className="block my-7">
                         <input type="text" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full" />
                     </label>

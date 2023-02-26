@@ -1,11 +1,29 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Alert = ({ message, alertType }) => {
+    console.log(alertType)
     return (
         <div className=" flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-10">
-            <div className='bg-white flex items-center justify-center py-10 px-5 gap-4 flex-col rounded-lg'>
-                <i class="ri-close-circle-line text-7xl text-red-500"></i>
-                <p className="text-center text-red-500 text-2xl py-1 px-2 mb-3">{message}</p>
+            <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg'>
+
+                {alertType === "Danger" ?
+                    <i class="ri-close-circle-line text-7xl text-red-500"></i>
+                    :
+                    <i class="ri-checkbox-circle-fill text-7xl text-green-600"></i>
+                }
+
+                {alertType === "Danger" ?
+                    <p className="text-center text-red-500 text-xl py-1 px-2 mb-3">{message}</p>
+                    :
+                    <p className="text-center text-green-600 text-xl py-1 px-2 mb-3">{message}</p>
+                }
+
+                {alertType === "Success" ?
+                    <Link to='/itemlist' className='text-green-600 rounded-[4px] border-green-600 border-[1px] py-1 px-3 hover:bg-green-600 hover:text-white transition-all'>Continue</Link>
+                    :
+                    null
+                }
             </div>
         </div>
     )

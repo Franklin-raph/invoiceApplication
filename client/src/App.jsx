@@ -6,6 +6,7 @@ import Sidenav from './components/Sidenav'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import NewInvioce from './pages/NewInvioce'
+import Itemlist from './pages/Itemlist'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path='/newinvoice' element={<NewInvioce />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/itemlist' element={<Itemlist />} />
         </Routes>
       </Router>
     </div>

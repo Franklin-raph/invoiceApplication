@@ -14,7 +14,7 @@ const NewInvioce = () => {
     const [invoiceDate, setInvoiceDate] = useState("")
     const [paymentTerms, setPaymentTerms] = useState("")
     const [productDescription, setProductDescription] = useState("Web Development")
-    const [error, setError] = useState("")
+    const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
 
     const { vendorData } = useSelector((state) => state.vendorAuth)
@@ -29,9 +29,9 @@ const NewInvioce = () => {
     async function handleClientDetailSubmission(e) {
         e.preventDefault();
         if (!clientName || !clientEmail || !clientCountry || !clientCity || !clientStreetAddress || !clientPostalCode || !invoiceDate || !paymentTerms || !productDescription) {
-            setError("Update all client's details")
+            setMessage("Update all client's details")
             setTimeout(() => {
-                setError("")
+                setMessage("")
             }, 2000)
         }
 
@@ -44,12 +44,19 @@ const NewInvioce = () => {
             }
         })
         const data = await response.json();
+        if (response.ok) {
+            setMessage("Client's Bill information successfully created please click on the continue button below to provide details of items bought")
+            setAlertType("Success")
+        }
+        if (!response.ok) {
+            setAlertType("Danger")
+        }
         console.log(data)
     }
 
     return (
         <div className="text-white mt-20 w-[50%] mx-auto justify-between gap-[5rem] bg-[#1F213A] p-8 rounded-md mb-10 relative">
-            {error && <Alert message={error} alertType={alertType} />}
+            {message && <Alert message={message} alertType={alertType} />}
             <h1 className='text-xl font-bold'>Create #RT3080</h1>
             <div className='mt-9'>
                 <p className='font-bold text-[#7B5EF8]'>Bill From</p>
