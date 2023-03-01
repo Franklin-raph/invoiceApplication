@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import NewInvioce from './pages/NewInvioce'
 import Itemlist from './pages/Itemlist'
+import PreviewInvoice from './pages/PreviewInvoice'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/itemlist' element={<Itemlist />} />
+          <Route path='/invoicepreview/:billId' element={<PreviewInvoice />} />
         </Routes>
       </Router>
     </div>

@@ -1,14 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Invoicecard = ({ billData }) => {
     console.log(billData.data)
     return (
         <>
             {billData.data.map((bill) => (
-                <div key={bill._id} className="flex items-center w-full justify-between gap-[5rem] bg-[#1F213A] py-4 px-4 rounded-md hover:cursor-pointer">
-                    <h1>#RT3080</h1>
+                <Link to={`/invoicepreview/${bill._id}`} key={bill._id} className="flex items-center w-full justify-between gap-[5rem] bg-[#1F213A] py-4 px-4 rounded-md hover:cursor-pointer">
+                    <h1>#{bill._id.toString().substring(0, 6).toUpperCase()}</h1>
                     <p>Due {bill.invoiceDate}</p>
-                    <p>Franklin Raphael</p>
+                    <p>{bill.clientName}</p>
                     <h1>$9,200.25</h1>
                     <div className="flex items-center gap-3">
                         <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
@@ -17,7 +18,7 @@ const Invoicecard = ({ billData }) => {
                         </div>
                         <i className="ri-arrow-right-s-line text-[#7B5EF8]"></i>
                     </div>
-                </div>
+                </Link>
             ))}
             {/* <div className="flex items-center w-full justify-between gap-[5rem] bg-[#1F213A] py-4 px-4 rounded-md hover:cursor-pointer">
                 <h1>#RT3080</h1>

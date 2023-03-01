@@ -47,6 +47,8 @@ const NewInvioce = () => {
         if (response.ok) {
             setMessage("Client's Bill information successfully created please click on the continue button below to provide details of items bought")
             setAlertType("Success")
+            localStorage.setItem("clientBill", JSON.stringify(data))
+            localStorage.setItem("billId", data._id)
         }
         if (!response.ok) {
             setAlertType("Danger")

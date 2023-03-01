@@ -19,7 +19,6 @@ const InvoiceHomePage = () => {
 
     useEffect(() => {
         if (vendorData) {
-            console.log("Logged in")
             navigate('/')
         }
         if (logedInVendor === null) {
