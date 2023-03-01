@@ -31,7 +31,7 @@ function App() {
           <Route path='/newinvoice' element={<NewInvioce />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/itemlist' element={<Itemlist />} />
+          <Route path='/itemlist/:billId' element={<Itemlist />} />
           <Route path='/invoicepreview/:billId' element={<PreviewInvoice />} />
         </Routes>
       </Router>

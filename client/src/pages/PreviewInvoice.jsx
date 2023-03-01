@@ -3,11 +3,16 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Alert from '../components/Alert'
+import { useNavigate } from 'react-router-dom';
+import ConfirmModal from '../components/ConfirmModal';
 
 const PreviewInvoice = () => {
     const items = useSelector((state) => state.itemList)
     const clientBill = JSON.parse(localStorage.getItem('clientBill'))
     const { vendorData } = useSelector((state) => state.vendorAuth)
+    const navigate = useNavigate()
+
+    console.log(items)
 
     const { billId } = useParams()
 
@@ -24,6 +29,7 @@ const PreviewInvoice = () => {
     const [itemList, setItemList] = useState(items)
     const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
+    const [confirmModal, setConfirmModal] = useState(false)
 
     const [billIssuedBy, setBillIssuedBy] = useState()
     const [billInfo, setBillInfo] = useState()
@@ -39,6 +45,11 @@ const PreviewInvoice = () => {
         getCurrentBillInfo()
     }, [])
 
+    function navigateHome() {
+        navigate('/')
+        location.reload()
+    }
+
     async function getCurrentBillInfo() {
         const res = await fetch(`http://localhost:5000/api/v1/clienbillinfo/billInfo/${billId}`, {
             headers: {
@@ -50,8 +61,23 @@ const PreviewInvoice = () => {
             setBillIssuedBy(data.billWasGivenBy)
             setBillInfo(data.billInfo)
         }
+    }
 
-        console.log(data)
+    async function deleteClientBillInfo() {
+        const res = await fetch(`http://localhost:5000/api/v1/clienbillinfo/deleteBill/${billId}`, {
+            method: "DELETE",
+            headers: {
+                'Content-type': "application/json",
+                Authorization: `Bearer ${vendorData.token}`
+            }
+        })
+        if (res.ok) {
+            navigateHome()
+        }
+    }
+
+    function confirmDelete() {
+        setConfirmModal(true)
     }
 
     async function updateClintBillInfo() {
@@ -76,6 +102,8 @@ const PreviewInvoice = () => {
         // }
     }
 
+
+
     return (
         <div className='text-white w-[80%] mx-auto mt-[3rem]'>
             <div className="flex items-center justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
@@ -88,7 +116,7 @@ const PreviewInvoice = () => {
                 </div>
                 <div className='flex items-center gap-4'>
                     <button className="py-[5px] px-3 bg-[#202B3F] rounded-md">Edit</button>
-                    <button className="py-[5px] px-3 bg-red-500 rounded-md">Delete</button>
+                    <button className="py-[5px] px-3 bg-red-500 rounded-md" onClick={confirmDelete}>Delete</button>
                     <button className="py-[5px] px-3 bg-green-500 rounded-md">Mark as Paid</button>
                 </div>
             </div>
@@ -138,7 +166,7 @@ const PreviewInvoice = () => {
                         </div>
                     </div>
                 }
-                <div className="flex items-start flex-col w-full justify-between gap-[2rem] bg-[#202B3F] mt-10 py-4 px-4 rounded-md">
+                <div className="text-gray-500 flex items-start flex-col w-full justify-between gap-[2rem] bg-[#202B3F] mt-10 py-4 px-4 rounded-md">
                     <div className="flex justify-between items-center w-full">
                         <p>Item Name</p>
                         <p>Quantity</p>
@@ -149,10 +177,10 @@ const PreviewInvoice = () => {
                         {billInfo &&
                             billInfo.itemList.map((item) => (
                                 <div key={item._id} className="flex justify-between items-center w-full">
-                                    <p>{item.itemName}</p>
+                                    <p className="font-bold text-white">{item.itemName}</p>
                                     <p>{item.itemQuantity}</p>
                                     <p>{item.itemPrice}</p>
-                                    <p>{item.total}</p>
+                                    <p className="font-bold text-white">{item.total}</p>
                                 </div>
                             ))
                         }
@@ -160,11 +188,17 @@ const PreviewInvoice = () => {
                 </div>
                 <div className="flex items-center w-full justify-between gap-[2rem] bg-[#0f141d] mt-7 py-4 px-4 rounded-md">
                     <p>Grand Total</p>
-                    <p></p>
+                    {billInfo &&
+                        <p>{billInfo.grandTotal}</p>
+                    }
                 </div>
             </div>
             {message && <Alert message={message} alertType={alertType} />}
-            <button className='ml-[5rem] text-white bg-green-500 px-3 py-2' onClick={updateClintBillInfo}>Submit</button>
+            <button className='w-full my-[2rem] text-white bg-green-500 px-3 py-2 rounded-sm' onClick={navigateHome}>Confirm</button>
+
+            {confirmModal &&
+                <ConfirmModal setConfirmModal={setConfirmModal} performAction={deleteClientBillInfo} header="Confirm Delete" body="Are you sure you want to delete this invoice data?" />
+            }
         </div>
     )
 }

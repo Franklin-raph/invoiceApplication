@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Alert = ({ message, alertType }) => {
-    console.log(alertType)
+    const billId = localStorage.getItem("billId")
     return (
         <div className=" flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-10">
             <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg'>
@@ -20,7 +20,7 @@ const Alert = ({ message, alertType }) => {
                 }
 
                 {alertType === "Success" ?
-                    <Link to='/itemlist' className='text-green-600 rounded-[4px] border-green-600 border-[1px] py-1 px-3 hover:bg-green-600 hover:text-white transition-all'>Continue</Link>
+                    <Link to={`/itemlist/${billId}`} className='text-green-600 rounded-[4px] border-green-600 border-[1px] py-1 px-3 hover:bg-green-600 hover:text-white transition-all'>Continue</Link>
                     :
                     null
                 }

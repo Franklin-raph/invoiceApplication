@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 // Register a client purchase item info into the invoice
 const registerClientBillInfo = async (req, res) => {
     const {clientName, clientEmail, clientStreetAddress, clientCountry, clientCity, clientPostalCode, 
-        invoiceDate, paymentTerms, productDescription, itemList, status} = req.body
+        invoiceDate, paymentTerms, productDescription, itemList, status, grandTotal} = req.body
 
         try {
             if(!clientName || !clientEmail || !clientStreetAddress || !clientCountry || !clientCity || !clientPostalCode 
@@ -63,6 +63,7 @@ const getAllBillInfoFromInvoice = async (req, res) => {
 const deleteABillInfo = async (req, res) => {
 
     const { billId } = req.params
+    
     try {
 
         if(!mongoose.Types.ObjectId.isValid(billId)) return res.status(404).json({msg: "No such bill details found!!"})
@@ -92,6 +93,7 @@ const updateBillInfo = async (req, res) => {
     // and this data contains all the vendors details
     // And this was being set that way from the auth middleware file in the middlewares folder
     const {billId} = req.params
+    const { itemList } = req.body
 
     try {
         
@@ -107,8 +109,14 @@ const updateBillInfo = async (req, res) => {
         
         if(billToupdate.vendor.toString() !== signedInvendorId._id.toString()) return res.status(401).json({msg: "Not authorized"})
 
+        let grandTotal = 0
+        itemList.forEach((i) => {
+            grandTotal += i.total
+        })
+        // console.log(grandTotal)
+
         // If all checks pass, the account is then updated and then returns the newly updated item
-        const clientBillToUpdate = await ClientBill.findOneAndUpdate({_id: billId}, {...req.body}, {new: true})
+        const clientBillToUpdate = await ClientBill.findOneAndUpdate({_id: billId}, {...req.body, grandTotal}, {new: true})
 
         console.log(clientBillToUpdate)
 

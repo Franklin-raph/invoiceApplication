@@ -52,7 +52,10 @@ const ClientSchema = mongoose.Schema({
             itemPrice: String,
             total: Number,
         }
-    ]
+    ],
+    grandTotal:{
+        type: Number
+      }
 }, {timestamps: true})
 
 module.exports = mongoose.model('ClientBill', ClientSchema)

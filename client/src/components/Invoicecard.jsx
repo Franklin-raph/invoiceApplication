@@ -10,7 +10,7 @@ const Invoicecard = ({ billData }) => {
                     <h1>#{bill._id.toString().substring(0, 6).toUpperCase()}</h1>
                     <p>Due {bill.invoiceDate}</p>
                     <p>{bill.clientName}</p>
-                    <h1>$9,200.25</h1>
+                    <h1>#{bill.grandTotal}</h1>
                     <div className="flex items-center gap-3">
                         <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
                             <span className="p-[4px] bg-green-800 rounded-full"></span>
