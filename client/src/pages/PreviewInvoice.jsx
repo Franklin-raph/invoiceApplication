@@ -5,6 +5,9 @@ import { useParams } from 'react-router-dom';
 import Alert from '../components/Alert'
 import { useNavigate } from 'react-router-dom';
 import ConfirmModal from '../components/ConfirmModal';
+import JsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
+// import 'boxicons'
 
 const PreviewInvoice = () => {
     const items = useSelector((state) => state.itemList)
@@ -30,9 +33,12 @@ const PreviewInvoice = () => {
     const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
     const [confirmModal, setConfirmModal] = useState(false)
+    const [warningModal, setWarningModal] = useState(false)
+    const [paidState, setPaidState] = useState(false)
 
     const [billIssuedBy, setBillIssuedBy] = useState()
     const [billInfo, setBillInfo] = useState()
+    const [fileGenerateModal, setFileGenerateModal] = useState(false)
 
     const updatedClientBillInfo = {
         clientName, clientEmail, clientCountry,
@@ -48,6 +54,27 @@ const PreviewInvoice = () => {
     function navigateHome() {
         navigate('/')
         location.reload()
+    }
+
+    function generatePDF() {
+        const invoice = new JsPDF('portrait', 'pt', 'a2');
+        invoice.html(document.querySelector('#bill'))
+            .then(() => {
+                invoice.save('report.pdf');
+                setFileGenerateModal(false)
+            })
+    }
+
+    function generateImg() {
+        const input = document.getElementById('bill');
+        html2canvas(input)
+            .then(function (canvas) {
+                let anchorTag = document.createElement("a");
+                anchorTag.download = "invoice.png";
+                anchorTag.href = canvas.toDataURL();
+                anchorTag.click();
+            });
+        setFileGenerateModal(false)
     }
 
     async function getCurrentBillInfo() {
@@ -80,7 +107,16 @@ const PreviewInvoice = () => {
         setConfirmModal(true)
     }
 
-    async function updateClintBillInfo() {
+    function confirmBill() {
+        setFileGenerateModal(true)
+    }
+
+    function confirmBillPaid() {
+        setWarningModal(true)
+    }
+
+    async function updatePaid() {
+        setPaidState(true)
         // const res = await fetch(`http://localhost:5000/api/v1/clienbillinfo/updatebillinfo/${billId}`, {
         //     method: "PUT",
         //     headers: {
@@ -109,22 +145,28 @@ const PreviewInvoice = () => {
             <div className="flex items-center justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
                 <div className='flex items-center gap-4'>
                     <p>Status</p>
-                    <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                        <span className="p-[4px] bg-green-800 rounded-full"></span>
-                        <p className="font-[600] text-green-400">Paid</p>
-                    </div>
+                    {!paidState ?
+                        <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
+                            <span className="p-[4px] bg-yellow-600 rounded-full"></span>
+                            <p className="font-[600] text-yellow-400">Pending</p>
+                        </div> :
+                        <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
+                            <span className="p-[4px] bg-green-800 rounded-full"></span>
+                            <p className="font-[600] text-green-400">Paid</p>
+                        </div>
+                    }
                 </div>
                 <div className='flex items-center gap-4'>
-                    <button className="py-[5px] px-3 bg-[#202B3F] rounded-md">Edit</button>
+                    <button className="py-[5px] px-3 bg-[#202B3F] rounded-md" onClick={() => navigate(`/itemlist/${billId}`)}>Edit</button>
                     <button className="py-[5px] px-3 bg-red-500 rounded-md" onClick={confirmDelete}>Delete</button>
-                    <button className="py-[5px] px-3 bg-green-500 rounded-md">Mark as Paid</button>
+                    {!paidState && <button className="py-[5px] px-3 bg-green-500 rounded-md" onClick={updatePaid}>Mark as Paid</button>}
                 </div>
             </div>
 
-            <div className=" bg-[#1F213A] py-5 px-6 rounded-md mt-8">
+            <div className=" bg-[#1F213A] py-5 px-6 rounded-md mt-8" id='bill'>
                 <div className='flex items-start justify-between gap-[5rem]'>
                     <div className='flex items-start flex-col'>
-                        <p className="font-bold text-xl">#{billId.toString().substring(0, 6).toUpperCase()}</p>
+                        <p className="font-bold text-xl text-white">#{billId.toString().substring(0, 6).toUpperCase()}</p>
                         <p className="text-gray-500 text-[18px]">Web Design</p>
                     </div>
                     <div className='flex items-start flex-col text-gray-500'>
@@ -144,11 +186,11 @@ const PreviewInvoice = () => {
                         <div className='flex items-start flex-col'>
                             <div className='mb-5'>
                                 <p className='text-gray-500'>Invoice Date</p>
-                                <p className="font-bold text-lg">{billInfo.invoiceDate}</p>
+                                <p className="font-bold text-lg text-white">{billInfo.invoiceDate}</p>
                             </div>
                             <div>
                                 <p className='text-gray-500'>Payment Due</p>
-                                <p className="font-bold text-lg">{billInfo.paymentTerms}</p>
+                                <p className="font-bold text-lg text-white">{billInfo.paymentTerms}</p>
                             </div>
                         </div>
                         <div className='flex items-start flex-col text-gray-500'>
@@ -161,7 +203,7 @@ const PreviewInvoice = () => {
                         </div>
                         <div className='flex items-start flex-col'>
                             <p className='text-gray-500'>Send to</p>
-                            <p className="font-bold text-lg">{billInfo.clientEmail}</p>
+                            <p className="font-bold text-lg text-white">{billInfo.clientEmail}</p>
 
                         </div>
                     </div>
@@ -187,18 +229,61 @@ const PreviewInvoice = () => {
                     </div>
                 </div>
                 <div className="flex items-center w-full justify-between gap-[2rem] bg-[#0f141d] mt-7 py-4 px-4 rounded-md">
-                    <p>Grand Total</p>
+                    <p className='text-white'>Grand Total</p>
                     {billInfo &&
-                        <p>{billInfo.grandTotal}</p>
+                        <p className='text-white'>{billInfo.grandTotal}</p>
                     }
                 </div>
             </div>
             {message && <Alert message={message} alertType={alertType} />}
-            <button className='w-full my-[2rem] text-white bg-green-500 px-3 py-2 rounded-sm' onClick={navigateHome}>Confirm</button>
+
+            {paidState ?
+                <div className="flex items-center w-full">
+                    <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-sm' onClick={confirmBill}>Confirm Bill</button>
+                </div>
+                :
+                <div className="flex items-center w-full">
+                    <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBillPaid}>Confirm Bill</button>
+                </div>
+            }
 
             {confirmModal &&
                 <ConfirmModal setConfirmModal={setConfirmModal} performAction={deleteClientBillInfo} header="Confirm Delete" body="Are you sure you want to delete this invoice data?" />
             }
+
+            {warningModal &&
+                <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-10">
+                    <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
+                        <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setWarningModal(!warningModal)}></i>
+                        <i className="ri-error-warning-fill text-7xl text-yellow-500"></i>
+                        <p>Please Mark the bill as <span className='px-1 py-[1px] bg-green-500 text-white rounded-sm'>Paid</span> before you can confirm this purchase</p>
+                    </div>
+                </div>
+            }
+
+
+            {fileGenerateModal &&
+                <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-10">
+                    <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
+                        <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setFileGenerateModal(!fileGenerateModal)}></i>
+                        <i className="ri-checkbox-circle-fill text-7xl text-green-600"></i>
+                        <p>Bill has been confirmed</p>
+                        <p>Export Invoice as</p>
+                        <div className='flex items-center justify-center gap-[3rem]'>
+                            <div className='flex items-center justify-center flex-col cursor-pointer' onClick={generateImg}>
+                                <box-icon size="40px" type='solid' name='file-image' color="#202B3F"></box-icon>
+                                <p>Image</p>
+                            </div>
+                            <p>OR</p>
+                            <div className='flex items-center justify-center gap-2 flex-col cursor-pointer' onClick={generatePDF}>
+                                <box-icon size="40px" type='solid' name='file-pdf' color="#202B3F"></box-icon>
+                                <p>PDF</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
         </div>
     )
 }

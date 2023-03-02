@@ -17,6 +17,29 @@ let data = [
    }
 ];
 
+let files = [
+    {
+    "item 1":"car",
+    "total": 3
+    },
+    {
+    "item 2":"Phone",
+    "total": 6
+   },
+   {
+    "item 3":"Plane",
+    "total": 9
+   },
+   {
+    "item 3":"Plane",
+    "total": 12
+   }
+];
+
+let newArray = [...data, ...files]
+
+console.log(newArray)
+
 // for(let i = 0; i <= data.length; i++){
 //     console.log(data[i].total)
 // }

@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     if (logedInVendor) {
       // window.location.assign('/')
-      console.log("first")
+      // console.log("first")
     }
   }, [])
 

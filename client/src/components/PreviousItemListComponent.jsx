@@ -1,19 +1,16 @@
-import { decrementItemListArray, editItemListArray } from '../redux/ItemListSlice';
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { decrementItemListArray, editItemListArray } from '../redux/ItemListSlice';
 
-const ItemListCard = ({ item, previousItemList }) => {
-
-    // console.log(previousItemList)
-
+const PreviousItemList = ({ previousItem }) => {
     const [isEdit, setIsEdit] = useState(false);
-    const [editItemName, setEditItemName] = useState(item.itemName);
-    const [editItemQuantity, setEditItemQuantity] = useState(item.itemQuantity);
-    const [editItemPrice, setEditItemPrice] = useState(item.itemPrice);
-    const [editTotal, setEditTotal] = useState(item.total);
+    const [editItemName, setEditItemName] = useState(previousItem.itemName);
+    const [editItemQuantity, setEditItemQuantity] = useState(previousItem.itemQuantity);
+    const [editItemPrice, setEditItemPrice] = useState(previousItem.itemPrice);
+    const [editTotal, setEditTotal] = useState(previousItem.total);
 
     const dispatch = useDispatch()
-    const editItemId = item.itemId
+    const editItemId = previousItem.itemId
 
     function updateItem(e) {
         e.preventDefault()
@@ -62,28 +59,27 @@ const ItemListCard = ({ item, previousItemList }) => {
                 <div className="my-[1rem] flex items-center justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">
                     <div className="block ">
                         <h1>Item Name</h1>
-                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.itemName}</p>
+                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{previousItem.itemName}</p>
                     </div>
                     <div className="block  w-[10%]">
                         <h1>Item Qty.</h1>
-                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.itemQuantity}</p>
+                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{previousItem.itemQuantity}</p>
                     </div>
                     <div className="block  w-[15%]">
                         <h1>Unit Price</h1>
-                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.itemPrice}</p>
+                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{previousItem.itemPrice}</p>
                     </div>
                     <div className="block w-[10%]">
                         <h1>Total Price</h1>
-                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.total}</p>
+                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{previousItem.total}</p>
                     </div>
                     <div className='flex items-center justify-center gap-4 mt-1'>
-                        <i className="ri-edit-box-fill mt-4 rounded-full text-[#1F213A] bg-yellow-500 px-3 py-2 cursor-pointer" onClick={() => setIsEdit(true)}></i>
-                        <i onClick={() => dispatch(decrementItemListArray(item.itemId))} className="ri-delete-bin-fill mt-4 rounded-full text-[#1F213A] bg-red-600 px-3 py-2 cursor-pointer"></i>
-                        {/* <button className='mt-4 rounded-[4px] bg-red-600 px-3 py-2' >Delete</button> */}
+                        {/* <i className="ri-edit-box-fill mt-4 rounded-full text-[#1F213A] bg-yellow-500 px-3 py-2 cursor-pointer" onClick={() => setIsEdit(true)}></i>
+                        <i onClick={() => dispatch(decrementItemListArray(previousItem.itemId))} className="ri-delete-bin-fill mt-4 rounded-full text-[#1F213A] bg-red-600 px-3 py-2 cursor-pointer"></i> */}
                     </div>
                 </div>
             </>
         )
 }
 
-export default ItemListCard
+export default PreviousItemList
