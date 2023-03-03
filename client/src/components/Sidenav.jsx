@@ -16,8 +16,8 @@ const Sidenav = () => {
     }
 
     return (
-        <div className="pb-3 top-0 bottom-0 left-0 fixed h-full flex justify-between flex-col w-20 bg-[#1F213A] rounded-br-xl">
-            <Link to='/' className="logo text-white">Logo</Link>
+        <div className="pb-3 top-0 bottom-0 left-0 fixed h-full flex items-center justify-between flex-col w-20 bg-[#1F213A] rounded-br-xl">
+            <Link to='/' className="logo mt-5"><box-icon name='home' color="white" size="30px"></box-icon></Link>
             <div className="flex flex-col justify-center items-center">
                 <i className="ri-sun-fill hover:cursor-pointer text-white mb-5 text-xl"></i>
                 {/* <div className="py-[0.5px] w-full my-5 bg-gray-500"></div> */}

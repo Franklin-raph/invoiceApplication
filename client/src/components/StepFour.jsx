@@ -10,7 +10,7 @@ const StepFour = ({ vendorDetails, prevStep }) => {
     } = vendorDetails
 
     const navigate = useNavigate()
-    const [error, setError] = useState("")
+    const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
 
     const handleVedorRegister = async (e) => {
@@ -29,11 +29,14 @@ const StepFour = ({ vendorDetails, prevStep }) => {
         const data = await response.json();
         if (response.ok) {
             localStorage.setItem('vendorInfo', JSON.stringify(data))
-            navigate('/')
+            setMessage("Acount Creation was successfull ")
+            setAlertType("Danger")
+            // navigate('/')
             location.reload()
         }
         if (!response.ok) {
             setError(data.err)
+            setAlertType("Danger")
             setTimeout(() => {
                 setError("")
                 setAlertType("")

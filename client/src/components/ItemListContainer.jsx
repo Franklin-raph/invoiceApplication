@@ -72,7 +72,10 @@ const ItemListContainer = ({ previousItemList }) => {
                 <>
                     <div className='text-white flex items-center justify-between'>
                         <h1 className='text-left text-2xl font-bold'>Item List</h1>
-                        <p className='text-[18px] font-normal bg-[#7B5EF8] rounded-md py-1 px-2'> Total Items : {(items.length + previousItemList.length)}</p>
+                        <div className='text-[18px] relative flex items-center justify-center'>
+                            <i class="ri-shopping-cart-2-fill text-[50px]"></i>
+                            <p className="absolute bg-[#7B5EF8] text-[14px] rounded-full py-1 px-2 border-2 border-[#141625] top-0 right-0">{(items.length + previousItemList.length)}</p>
+                        </div>
                     </div>
                     <p className='text-white text-lg'>Newly Purchased Items <span className='text-[16px] font-normal'>({items.length})</span></p>
                     {items.map((item) =>

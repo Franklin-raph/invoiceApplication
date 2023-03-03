@@ -3,6 +3,7 @@ import InputItemComponent from '../components/InputItemComponent'
 import ItemListContainer from '../components/ItemListContainer'
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Itemlist = () => {
 
@@ -15,9 +16,14 @@ const Itemlist = () => {
     const [previousItemList, setPreviousItemList] = useState([])
 
     const { vendorData } = useSelector((state) => state.vendorAuth)
+    const navigate = useNavigate()
 
     useEffect(() => {
-        getClintBillInfo()
+        if (!vendorData) {
+            navigate('/')
+        } else {
+            getClintBillInfo()
+        }
     }, [])
 
     async function getClintBillInfo() {

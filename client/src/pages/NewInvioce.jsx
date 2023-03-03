@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Alert from '../components/Alert'
+import { useNavigate } from 'react-router-dom'
 
 const NewInvioce = () => {
 
@@ -17,14 +18,25 @@ const NewInvioce = () => {
     const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
 
+    const navigate = useNavigate()
+
     const { vendorData } = useSelector((state) => state.vendorAuth)
 
     const clientBillInfo = {
         clientName, clientEmail, clientCountry,
         clientCity, clientStreetAddress, clientPostalCode,
         invoiceDate, paymentTerms, productDescription,
-        status: "Draft"
+        status: "Pending"
     }
+
+    let logedInVendor = JSON.parse(localStorage.getItem('vendorInfo'))
+
+    useEffect(() => {
+        if (!vendorData) {
+            console.log("Not logged in")
+            navigate('/login')
+        }
+    }, [])
 
     async function handleClientDetailSubmission(e) {
         e.preventDefault();
@@ -60,30 +72,32 @@ const NewInvioce = () => {
         <div className="text-white mt-20 w-[50%] mx-auto justify-between gap-[5rem] bg-[#1F213A] p-8 rounded-md mb-10 relative">
             {message && <Alert message={message} alertType={alertType} />}
             <h1 className='text-xl font-bold'>Create #RT3080</h1>
-            <div className='mt-9'>
-                <p className='font-bold text-[#7B5EF8]'>Bill From</p>
-                <div className='flex items-center gap-4'>
-                    <div className="block my-3 w-full">
-                        <h1>Country</h1>
-                        <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.country}</p>
+            {vendorData &&
+                <div className='mt-9'>
+                    <p className='font-bold text-[#7B5EF8]'>Bill From</p>
+                    <div className='flex items-center gap-4'>
+                        <div className="block my-3 w-full">
+                            <h1>Country</h1>
+                            <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.country}</p>
+                        </div>
+                        <div className="block my-3 w-full">
+                            <h1>City</h1>
+                            <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.city}</p>
+                        </div>
                     </div>
-                    <div className="block my-3 w-full">
-                        <h1>City</h1>
-                        <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.city}</p>
-                    </div>
-                </div>
 
-                <div className='flex items-center gap-4 mt-3'>
-                    <div className="block my-3 w-full">
-                        <h1>Street Address</h1>
-                        <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.streetAddress}</p>
-                    </div>
-                    <div className="block my-3 w-full">
-                        <h1>Postal Code</h1>
-                        <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.postalCode}</p>
+                    <div className='flex items-center gap-4 mt-3'>
+                        <div className="block my-3 w-full">
+                            <h1>Street Address</h1>
+                            <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.streetAddress}</p>
+                        </div>
+                        <div className="block my-3 w-full">
+                            <h1>Postal Code</h1>
+                            <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.postalCode}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
 
             <form onSubmit={handleClientDetailSubmission}>
                 <div className='mt-20'>

@@ -48,7 +48,12 @@ const PreviewInvoice = () => {
     }
 
     useEffect(() => {
-        getCurrentBillInfo()
+        if (!vendorData) {
+            console.log("Not logged in")
+            navigate('/login')
+        } else {
+            getCurrentBillInfo()
+        }
     }, [])
 
     function navigateHome() {
@@ -84,6 +89,7 @@ const PreviewInvoice = () => {
             },
         })
         const data = await res.json()
+        console.log(data)
         if (res.ok) {
             setBillIssuedBy(data.billWasGivenBy)
             setBillInfo(data.billInfo)
@@ -107,8 +113,28 @@ const PreviewInvoice = () => {
         setConfirmModal(true)
     }
 
-    function confirmBill() {
+    async function confirmBill() {
         setFileGenerateModal(true)
+        // console.log()
+        const res = await fetch(`http://localhost:5000/api/v1/clienbillinfo/updatebillinfo/${billId}`, {
+            method: "PUT",
+            headers: {
+                'Content-type': "application/json",
+                Authorization: `Bearer ${vendorData.token}`
+            },
+            body: JSON.stringify({ ...billInfo, status: "Paid" })
+        })
+        const data = await res.json()
+        if (res.ok) {
+            // setMessage("Success")
+            // setAlertType("Success")
+            // console.log(data)
+        }
+        if (!res.ok) {
+            // console.log("Un Successful")
+            // setMessage("Un Successful")
+            // setAlertType("Danger")
+        }
     }
 
     function confirmBillPaid() {
@@ -117,6 +143,7 @@ const PreviewInvoice = () => {
 
     async function updatePaid() {
         setPaidState(true)
+        console.log({ ...billInfo, status: "Paid" })
         // const res = await fetch(`http://localhost:5000/api/v1/clienbillinfo/updatebillinfo/${billId}`, {
         //     method: "PUT",
         //     headers: {
@@ -142,26 +169,44 @@ const PreviewInvoice = () => {
 
     return (
         <div className='text-white w-[80%] mx-auto mt-[3rem]'>
-            <div className="flex items-center justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
-                <div className='flex items-center gap-4'>
-                    <p>Status</p>
-                    {!paidState ?
-                        <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                            <span className="p-[4px] bg-yellow-600 rounded-full"></span>
-                            <p className="font-[600] text-yellow-400">Pending</p>
-                        </div> :
+            {billInfo && billInfo.status === "Paid" ?
+                <div className="flex items-center justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
+                    <div className='flex items-center gap-4'>
+                        <p>Status</p>
                         <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
                             <span className="p-[4px] bg-green-800 rounded-full"></span>
                             <p className="font-[600] text-green-400">Paid</p>
                         </div>
-                    }
+                    </div>
+                    <div className='flex items-center gap-4'>
+                        <button className="py-[5px] px-3 bg-red-500 rounded-md" onClick={confirmDelete}>Delete</button>
+                    </div>
                 </div>
-                <div className='flex items-center gap-4'>
-                    <button className="py-[5px] px-3 bg-[#202B3F] rounded-md" onClick={() => navigate(`/itemlist/${billId}`)}>Edit</button>
-                    <button className="py-[5px] px-3 bg-red-500 rounded-md" onClick={confirmDelete}>Delete</button>
-                    {!paidState && <button className="py-[5px] px-3 bg-green-500 rounded-md" onClick={updatePaid}>Mark as Paid</button>}
+                :
+                <div className="flex items-center justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
+                    <div className='flex items-center gap-4'>
+                        <p>Status</p>
+                        <>
+                            {!paidState ?
+                                <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
+                                    <span className="p-[4px] bg-yellow-600 rounded-full"></span>
+                                    <p className="font-[600] text-yellow-400">Pending</p>
+                                </div> :
+                                <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
+                                    <span className="p-[4px] bg-green-800 rounded-full"></span>
+                                    <p className="font-[600] text-green-400">Paid</p>
+                                </div>
+                            }
+                        </>
+                    </div>
+                    <div className='flex items-center gap-4'>
+                        {!paidState && <button className="py-[5px] px-3 bg-[#202B3F] rounded-md" onClick={() => navigate(`/itemlist/${billId}`)}>Edit</button>}
+                        <button className="py-[5px] px-3 bg-red-500 rounded-md" onClick={confirmDelete}>Delete</button>
+                        {!paidState && <button className="py-[5px] px-3 bg-green-500 rounded-md" onClick={updatePaid}>Mark as Paid</button>}
+                    </div>
                 </div>
-            </div>
+            }
+
 
             <div className=" bg-[#1F213A] py-5 px-6 rounded-md mt-8" id='bill'>
                 <div className='flex items-start justify-between gap-[5rem]'>
@@ -237,15 +282,24 @@ const PreviewInvoice = () => {
             </div>
             {message && <Alert message={message} alertType={alertType} />}
 
-            {paidState ?
+            {billInfo && billInfo.status === "Paid" ?
                 <div className="flex items-center w-full">
-                    <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-sm' onClick={confirmBill}>Confirm Bill</button>
-                </div>
-                :
-                <div className="flex items-center w-full">
-                    <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBillPaid}>Confirm Bill</button>
-                </div>
+                    <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBill}>Confirm Payment</button>
+                </div> :
+                <>
+                    {paidState ?
+                        <div className="flex items-center w-full">
+                            <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBill}>Confirm Payment</button>
+                        </div>
+                        :
+                        <div className="flex items-center w-full">
+                            <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBillPaid}>Confirm Bill</button>
+                        </div>
+                    }
+                </>
+
             }
+
 
             {confirmModal &&
                 <ConfirmModal setConfirmModal={setConfirmModal} performAction={deleteClientBillInfo} header="Confirm Delete" body="Are you sure you want to delete this invoice data?" />
@@ -267,7 +321,7 @@ const PreviewInvoice = () => {
                     <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
                         <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setFileGenerateModal(!fileGenerateModal)}></i>
                         <i className="ri-checkbox-circle-fill text-7xl text-green-600"></i>
-                        <p>Bill has been confirmed</p>
+                        <p>Bill and Payment has been confirmed</p>
                         <p>Export Invoice as</p>
                         <div className='flex items-center justify-center gap-[3rem]'>
                             <div className='flex items-center justify-center flex-col cursor-pointer' onClick={generateImg}>
@@ -279,6 +333,9 @@ const PreviewInvoice = () => {
                                 <box-icon size="40px" type='solid' name='file-pdf' color="#202B3F"></box-icon>
                                 <p>PDF</p>
                             </div>
+                        </div>
+                        <div>
+                            <p onClick={() => print()}>Print</p>
                         </div>
                     </div>
                 </div>
