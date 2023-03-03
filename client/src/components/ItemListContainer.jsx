@@ -50,7 +50,7 @@ const ItemListContainer = ({ previousItemList }) => {
     // console.log(previousItemList)
 
     async function updateClintBillInfo() {
-        const res = await fetch(`http://localhost:5000/api/v1/clienbillinfo/updatebillinfo/${billId}`, {
+        const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/updatebillinfo/${billId}`, {
             method: "PUT",
             headers: {
                 'Content-type': "application/json",

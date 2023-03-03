@@ -47,7 +47,7 @@ const NewInvioce = () => {
             }, 2000)
         }
 
-        const response = await fetch("http://localhost:5000/api/v1/clienbillinfo/registerClientPurchaseInfo", {
+        const response = await fetch("https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/registerClientPurchaseInfo", {
             method: "POST",
             body: JSON.stringify(clientBillInfo),
             headers: {

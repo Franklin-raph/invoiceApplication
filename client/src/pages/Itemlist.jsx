@@ -27,7 +27,7 @@ const Itemlist = () => {
     }, [])
 
     async function getClintBillInfo() {
-        const res = await fetch(`http://localhost:5000/api/v1/clienbillinfo/billinfo/${billId}`, {
+        const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/billinfo/${billId}`, {
             headers: {
                 'Content-type': "application/json",
                 Authorization: `Bearer ${vendorData.token}`

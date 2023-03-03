@@ -83,7 +83,7 @@ const PreviewInvoice = () => {
     }
 
     async function getCurrentBillInfo() {
-        const res = await fetch(`http://localhost:5000/api/v1/clienbillinfo/billInfo/${billId}`, {
+        const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/billInfo/${billId}`, {
             headers: {
                 Authorization: `Bearer ${vendorData.token}`
             },
@@ -97,7 +97,7 @@ const PreviewInvoice = () => {
     }
 
     async function deleteClientBillInfo() {
-        const res = await fetch(`http://localhost:5000/api/v1/clienbillinfo/deleteBill/${billId}`, {
+        const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/deleteBill/${billId}`, {
             method: "DELETE",
             headers: {
                 'Content-type': "application/json",
@@ -116,7 +116,7 @@ const PreviewInvoice = () => {
     async function confirmBill() {
         setFileGenerateModal(true)
         // console.log()
-        const res = await fetch(`http://localhost:5000/api/v1/clienbillinfo/updatebillinfo/${billId}`, {
+        const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/updatebillinfo/${billId}`, {
             method: "PUT",
             headers: {
                 'Content-type': "application/json",
