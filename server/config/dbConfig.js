@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 require("dotenv").config();
-const dbConnectionString = process.env.MONGO_LOCAL_URI
+const dbConnectionString = process.env.MONGO_REMOTE_URL
 
 mongoose.set("strictQuery", true);
 
