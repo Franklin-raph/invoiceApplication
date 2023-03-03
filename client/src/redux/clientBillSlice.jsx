@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const getAllBillInfo = createAsyncThunk(
     'getAllBillThunk',
     async (payload, thunkAPI) => {
-        const response = await fetch('http://localhost:5000/api/v1/clienbillinfo/allBillInfo');
+        const response = await fetch('https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/allBillInfo');
         console.log(response)
         const data = await response.json();
         if (!response.ok) {

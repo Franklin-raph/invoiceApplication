@@ -35,10 +35,10 @@ const StepFour = ({ vendorDetails, prevStep }) => {
             location.reload()
         }
         if (!response.ok) {
-            setError(data.err)
+            setMessage(data.err)
             setAlertType("Danger")
             setTimeout(() => {
-                setError("")
+                setMessage("")
                 setAlertType("")
             }, 3000)
         }
@@ -49,7 +49,7 @@ const StepFour = ({ vendorDetails, prevStep }) => {
             <div className="mt-14 pb-5 bg-white flex items-center justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" >
                 <div className="w-full ">
                     <p className="text-xl mb-8 text-center font-bold text-white bg-[#1F213A] py-3">Please Confirm the following details</p>
-                    {error && <Alert message={error} alertType={alertType} />}
+                    {message && <Alert message={message} alertType={alertType} />}
                     <div className='px-12'>
                         <p className='mb-3 px-2 py-1 bg-[#1F213A] inline-block text-white rounded-[5px]'>Personal Details</p>
                         <div className="flex items-center gap-3 mb-4">

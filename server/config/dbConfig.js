@@ -7,6 +7,7 @@ mongoose.set("strictQuery", true);
 const dbConnectionMethod = async () => {
     try {
         await mongoose.connect(dbConnectionString)
+        console.log(dbConnectionString)
         console.log("Db Connected")
     } catch (error) {
         console.log(Error)
