@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Alert from '../components/Alert'
 import { useNavigate } from 'react-router-dom'
+import LoadingSpinner from '../components/LoaderComponent'
 
 const NewInvioce = () => {
 
@@ -17,6 +18,7 @@ const NewInvioce = () => {
     const [productDescription, setProductDescription] = useState("Web Development")
     const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
 
@@ -39,6 +41,7 @@ const NewInvioce = () => {
     }, [])
 
     async function handleClientDetailSubmission(e) {
+        setLoading(true)
         e.preventDefault();
         if (!clientName || !clientEmail || !clientCountry || !clientCity || !clientStreetAddress || !clientPostalCode || !invoiceDate || !paymentTerms || !productDescription) {
             setMessage("Update all client's details")
@@ -55,15 +58,20 @@ const NewInvioce = () => {
                 Authorization: `Bearer ${vendorData.token}`
             }
         })
+        if (response) {
+            setLoading(false)
+        }
         const data = await response.json();
         if (response.ok) {
             setMessage("Client's Bill information successfully created please click on the continue button below to provide details of items bought")
             setAlertType("Success")
             localStorage.setItem("clientBill", JSON.stringify(data))
             localStorage.setItem("billId", data._id)
+            console.log(data)
         }
         if (!response.ok) {
             setAlertType("Danger")
+            console.log(data)
         }
         console.log(data)
     }
@@ -71,6 +79,7 @@ const NewInvioce = () => {
     return (
         <div className="text-white mt-20 w-[50%] mx-auto justify-between gap-[5rem] bg-[#1F213A] p-8 rounded-md mb-10 relative">
             {message && <Alert message={message} alertType={alertType} />}
+            {loading && <LoadingSpinner />}
             <h1 className='text-xl font-bold'>Create #RT3080</h1>
             {vendorData &&
                 <div className='mt-9'>

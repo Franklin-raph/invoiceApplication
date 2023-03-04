@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import ConfirmModal from '../components/ConfirmModal';
 import JsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
+import LoadingSpinner from '../components/LoaderComponent';
 // import 'boxicons'
 
 const PreviewInvoice = () => {
@@ -35,6 +36,7 @@ const PreviewInvoice = () => {
     const [confirmModal, setConfirmModal] = useState(false)
     const [warningModal, setWarningModal] = useState(false)
     const [paidState, setPaidState] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const [billIssuedBy, setBillIssuedBy] = useState()
     const [billInfo, setBillInfo] = useState()
@@ -83,11 +85,15 @@ const PreviewInvoice = () => {
     }
 
     async function getCurrentBillInfo() {
+        setLoading(true)
         const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/billInfo/${billId}`, {
             headers: {
                 Authorization: `Bearer ${vendorData.token}`
             },
         })
+        if (res) {
+            setLoading(false)
+        }
         const data = await res.json()
         console.log(data)
         if (res.ok) {
@@ -97,6 +103,7 @@ const PreviewInvoice = () => {
     }
 
     async function deleteClientBillInfo() {
+        setLoading(true)
         const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/deleteBill/${billId}`, {
             method: "DELETE",
             headers: {
@@ -104,6 +111,9 @@ const PreviewInvoice = () => {
                 Authorization: `Bearer ${vendorData.token}`
             }
         })
+        if (res) {
+            setLoading(false)
+        }
         if (res.ok) {
             navigateHome()
         }
@@ -114,7 +124,8 @@ const PreviewInvoice = () => {
     }
 
     async function confirmBill() {
-        setFileGenerateModal(true)
+        setLoading(true)
+
         // console.log()
         const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/updatebillinfo/${billId}`, {
             method: "PUT",
@@ -124,6 +135,10 @@ const PreviewInvoice = () => {
             },
             body: JSON.stringify({ ...billInfo, status: "Paid" })
         })
+        if (res) {
+            setLoading(false)
+            setFileGenerateModal(true)
+        }
         const data = await res.json()
         if (res.ok) {
             // setMessage("Success")
@@ -169,6 +184,7 @@ const PreviewInvoice = () => {
 
     return (
         <div className='text-white w-[80%] mx-auto mt-[3rem]'>
+            {loading && <LoadingSpinner />}
             {billInfo && billInfo.status === "Paid" ?
                 <div className="flex items-center justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
                     <div className='flex items-center gap-4'>
@@ -335,7 +351,7 @@ const PreviewInvoice = () => {
                             </div>
                         </div>
                         <div>
-                            <p onClick={() => print()}>Print</p>
+                            {/* <p onClick={() => print()}>Print</p> */}
                         </div>
                     </div>
                 </div>

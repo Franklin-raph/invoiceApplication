@@ -3,6 +3,7 @@ import LoginImage from '../assets/images/teaching-img.png'
 import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../components/Alert'
 import { useSelector } from 'react-redux'
+import LoadingSpinner from '../components/LoaderComponent'
 
 const Login = () => {
 
@@ -13,6 +14,7 @@ const Login = () => {
     const [alertType, setAlertType] = useState("")
     const { vendorData } = useSelector((state) => state.vendorAuth)
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (vendorData) {
@@ -22,6 +24,7 @@ const Login = () => {
 
 
     const handleVedorLogin = async (e) => {
+        setLoading(true)
         e.preventDefault();
         const response = await fetch('https://invoice-application-0qd7.onrender.com/api/v1/auth/login', {
             method: "POST",
@@ -33,6 +36,9 @@ const Login = () => {
                 password
             })
         });
+        if (response) {
+            setLoading(false)
+        }
         const data = await response.json();
         if (!response.ok) {
             setMessage(data.err)
@@ -52,6 +58,7 @@ const Login = () => {
 
     return (
         <div className="p-12 mx-auto w-full h-screen flex justify-center items-center">
+            {loading && <LoadingSpinner />}
             <form className="relative flex items-center h-full justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" onSubmit={handleVedorLogin}>
                 <div className="w-full p-12">
                     <h1 className="text-start text-xl text-white">Sign In</h1>

@@ -1,11 +1,19 @@
-import React from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom';
+import SearchBar from "./SearchBar";
+
 
 const Invoicecard = ({ billData }) => {
+    const [searchWord, setSearchWord] = useState("")
+
     console.log(billData.data)
     return (
         <>
-            {billData.data.map((bill) => (
+            <SearchBar setSearchWord={setSearchWord} />
+            {billData.data.filter((bill) => {
+                if (searchWord === "") return bill
+                else if (bill.clientName.toLowerCase().includes(searchWord.toLowerCase()) || bill.status.toLowerCase().includes(searchWord.toLowerCase())) return bill
+            }).map((bill) => (
                 <Link to={`/invoicepreview/${bill._id}`} key={bill._id} className="flex items-center w-full justify-between gap-[5rem] bg-[#1F213A] py-4 px-4 rounded-md hover:cursor-pointer">
                     <h1>#{bill._id.toString().substring(0, 6).toUpperCase()}</h1>
                     <p>Due {bill.invoiceDate}</p>
@@ -20,6 +28,10 @@ const Invoicecard = ({ billData }) => {
                     </div>
                 </Link>
             ))}
+
+            {/* {billData.data.map((bill) => (
+                
+            ))} */}
         </>
     )
 }

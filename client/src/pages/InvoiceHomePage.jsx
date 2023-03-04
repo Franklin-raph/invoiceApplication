@@ -4,6 +4,7 @@ import HomePageTopNav from '../components/HomePageTopNav'
 import InvoiceCardContainer from '../components/InvoiceCardContainer'
 import { getAllBillInfo } from '../redux/clientBillSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import LoadingSpinner from '../components/LoaderComponent'
 
 
 const InvoiceHomePage = () => {
@@ -28,13 +29,19 @@ const InvoiceHomePage = () => {
         }
     }, [])
 
-
-
     return (
-        <div className="flex flex-col justify-start items-center">
-            {billData && <HomePageTopNav billData={billData} />}
-            <InvoiceCardContainer billData={billData} />
-        </div>
+        <>
+            {billData ?
+                <div className="flex flex-col justify-start items-center">
+                    <HomePageTopNav billData={billData} />
+                    <InvoiceCardContainer billData={billData} />
+                </div>
+                :
+                // <>Loading</>
+                <LoadingSpinner />
+            }
+        </>
+
     )
 }
 

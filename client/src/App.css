@@ -106,7 +106,7 @@
 }
 
 .loader-parent {
-    width: 18%;
+    width: 100%;
     margin: 0 auto;
     border-radius: 10px;
     border: 4px solid transparent;

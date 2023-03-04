@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ConfirmModal from './ConfirmModal';
 import PreviousItemListComponent from './PreviousItemListComponent';
+import LoadingSpinner from '../components/LoaderComponent'
 
 
 const ItemListContainer = ({ previousItemList }) => {
@@ -13,6 +14,7 @@ const ItemListContainer = ({ previousItemList }) => {
     const clientBill = JSON.parse(localStorage.getItem('clientBill'))
     const { vendorData } = useSelector((state) => state.vendorAuth)
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
 
     // console.log(items)
 
@@ -50,6 +52,7 @@ const ItemListContainer = ({ previousItemList }) => {
     // console.log(previousItemList)
 
     async function updateClintBillInfo() {
+        setLoading(true)
         const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/updatebillinfo/${billId}`, {
             method: "PUT",
             headers: {
@@ -58,6 +61,9 @@ const ItemListContainer = ({ previousItemList }) => {
             },
             body: JSON.stringify({ ...updatedClientBillInfo, itemList })
         })
+        if (res) {
+            setLoading(false)
+        }
         const data = await res.json()
         if (res.ok) {
             navigate(`/invoicepreview/${billId}`)
@@ -68,6 +74,7 @@ const ItemListContainer = ({ previousItemList }) => {
 
     return (
         <div className="w-[70%] mx-auto my-[4rem] relative">
+            {loading && <LoadingSpinner />}
             {items &&
                 <>
                     <div className='text-white flex items-center justify-between'>
