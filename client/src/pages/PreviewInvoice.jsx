@@ -189,7 +189,7 @@ const PreviewInvoice = () => {
 
 
     return (
-        <div className='text-white w-[90%] md:w-[80%] mx-auto md;mt-[3rem] mt-24'>
+        <div className='text-white w-[90%] md:w-[80%] mx-auto md:mt-[3rem] mt-24'>
             {loading && <LoadingSpinner />}
             {billInfo && billInfo.status === "Paid" ?
                 <div className="flex flex-col md:flex-row md:items-center items-start justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
@@ -230,8 +230,8 @@ const PreviewInvoice = () => {
             }
 
 
-            <div className=" bg-[#1F213A] py-5 px-6 rounded-md mt-8" id='bill'>
-                <div className='flex items-start justify-between gap-[5rem]'>
+            <div className=" bg-[#1F213A] py-5 px-4 md:px-6 rounded-md mt-8" id='bill'>
+                <div className='flex flex-col items-start justify-between gap-[2rem] md:gap-[5rem]'>
                     <div className='flex items-start flex-col'>
                         <p className="font-bold text-xl text-white">#{billId.toString().substring(0, 6).toUpperCase()}</p>
                         <p className="text-gray-500 text-[18px]">Web Design</p>
@@ -239,6 +239,7 @@ const PreviewInvoice = () => {
                     <div className='flex items-start flex-col text-gray-500'>
                         {billIssuedBy &&
                             <>
+                                <p className='text-white'>Bill From</p>
                                 <p>{billIssuedBy.streetAddress}</p>
                                 <p>{billIssuedBy.city}</p>
                                 <p>{billIssuedBy.postalCode}</p>
@@ -249,15 +250,15 @@ const PreviewInvoice = () => {
                 </div>
 
                 {billInfo &&
-                    <div className='flex items-start justify-between gap-[5rem] mt-9'>
-                        <div className='flex items-start flex-col'>
+                    <div className='flex flex-col items-start justify-between gap-[2rem] md:gap-[5rem] mt-9'>
+                        <div className='flex items-start justify-between w-full flex-row md:flex-col'>
                             <div className='mb-5'>
                                 <p className='text-gray-500'>Invoice Date</p>
-                                <p className="font-bold text-lg text-white">{billInfo.invoiceDate}</p>
+                                <p className="font-bold text-sm md:text-lg text-white">{billInfo.invoiceDate}</p>
                             </div>
                             <div>
                                 <p className='text-gray-500'>Payment Due</p>
-                                <p className="font-bold text-lg text-white">{paymentTerms}</p>
+                                <p className="font-bold text-sm md:text-lg text-white">{paymentTerms}</p>
                             </div>
                         </div>
                         <div className='flex items-start flex-col text-gray-500'>
