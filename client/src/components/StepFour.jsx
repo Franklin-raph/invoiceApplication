@@ -46,7 +46,7 @@ const StepFour = ({ vendorDetails, prevStep }) => {
 
     return (
         <div className="flex justify-center items-center relative">
-            <div className="mt-14 pb-5 bg-white flex items-center justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" >
+            <div className="my-14 pb-5 bg-white flex items-center justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" >
                 <div className="w-full ">
                     <p className="text-xl mb-8 text-center font-bold text-white bg-[#1F213A] py-3">Please Confirm the following details</p>
                     {message && <Alert message={message} alertType={alertType} />}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import LoginImage from '../assets/images/teaching-img.png'
+import LoginImage from '../assets/images/3d signin.jpeg'
 import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../components/Alert'
 import { useSelector } from 'react-redux'
@@ -59,8 +59,8 @@ const Login = () => {
     return (
         <div className="p-12 mx-auto w-full h-screen flex justify-center items-center">
             {loading && <LoadingSpinner />}
-            <form className="relative flex items-center h-full justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" onSubmit={handleVedorLogin}>
-                <div className="w-full p-12">
+            <form className="border-gray-800 border-[2px] relative flex items-center h-auto justify-between gap-9 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" onSubmit={handleVedorLogin}>
+                <div className="w-full px-6 lg:px-12 py-12">
                     <h1 className="text-start text-xl text-white">Sign In</h1>
                     {message && <Alert message={message} alertType={alertType} />}
                     <label className="block my-7">
@@ -72,7 +72,7 @@ const Login = () => {
                     <input type="submit" value="Sign In" className="w-full bg-green-500 text-white py-2 rounded-[4px] hover:cursor-pointer" />
                     <p className="text-center pt-3 text-white">Don't have an account? <Link to='/register'>Sign Up</Link> </p>
                 </div>
-                <img src={LoginImage} className="w-1/2" alt="" />
+                <img src={LoginImage} className="lg:w-1/2 lg:block hidden" alt="" />
             </form>
         </div >
     )

@@ -3,6 +3,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import InvoiceHomePage from './pages/InvoiceHomePage'
 import Sidenav from './components/Sidenav'
+import Topnav from './components/Topnav'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
 import NewInvioce from './pages/NewInvioce'
@@ -25,6 +26,7 @@ function App() {
     <div className="App">
       <Router>
         {logedInVendor && <Sidenav />}
+        {logedInVendor && <Topnav />}
         {/* <Sidenav /> */}
         <Routes>
           <Route path='/' element={<InvoiceHomePage />} />

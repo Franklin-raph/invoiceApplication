@@ -19,8 +19,8 @@ const StepTwo = ({ vendorDetails, nextStep, prevStep, setBusinessName, setBusine
 
     return (
         <div className="flex justify-center items-center">
-            <div className="mt-14 py-5 bg-white flex items-center justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" >
-                <div className="w-full px-12">
+            <div className="w-[80%] md:w-[90%] my-8 py-5 bg-white flex items-center h-auto justify-between gap-9 rounded-[12px] shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" >
+                <div className="w-full px-6 lg:px-12 py-12">
                     <div className="flex items-center justify-between mt-3 gap-2 relative">
                         <h1 className="text-start text-xl font-bold mt-3">Business Information</h1>
                         <div className="h-0.5 bg-slate-200 w-2/5"></div>
@@ -56,7 +56,7 @@ const StepTwo = ({ vendorDetails, nextStep, prevStep, setBusinessName, setBusine
                     {/* <input type="submit" value="Sign In" className="w-full bg-green-500 text-white py-2 rounded-[4px] hover:cursor-pointer" /> */}
                     <p className="text-center py-3 pb-5">Already have an account? <Link to='/login' className="underline">Sign In</Link> </p>
                 </div>
-                <img src={LoginImage} className="w-2/4" alt="" />
+                <img src={LoginImage} className="lg:w-1/2 lg:block hidden" alt="" />
             </div>
         </div>
     )

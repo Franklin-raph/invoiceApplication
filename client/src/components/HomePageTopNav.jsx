@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const HomePageTopNav = ({ billData }) => {
     return (
-        <div className="text-white flex items-center justify-between w-[60%] my-20">
+        <div className="text-white flex items-center justify-between w-[90%] my-[8rem]">
             <div>
                 <h1 className="text-3xl font-[600]">Invoices</h1>
                 <p>There are {billData.data.length} total invoices</p>
