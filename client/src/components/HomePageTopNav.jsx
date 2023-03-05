@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 
 const HomePageTopNav = ({ billData }) => {
     return (
-        <div className="text-white flex items-center justify-between w-[90%] my-[8rem]">
+        <div className="text-white flex items-center justify-between w-[90%] md:w-[55%] mt-[8rem] mb-10">
             <div>
                 <h1 className="text-3xl font-[600]">Invoices</h1>
-                <p>There are {billData.data.length} total invoices</p>
+                <p className='hidden md:block'>There are {billData.data.length} total invoices</p>
+                <p className='md:hidden block'>{billData.data.length} Invoices</p>
             </div>
             <div className="flex items-center justify-between gap-10">
                 {/* <div className="flex items-center justify-between gap-3">
@@ -16,7 +17,7 @@ const HomePageTopNav = ({ billData }) => {
                 <Link to="/newinvoice">
                     <div className="flex items-center justify-between bg-[#7B5EF8] rounded-full gap-2 py-1 px-2 hover:cursor-pointer">
                         <i className="ri-add-circle-fill text-xl"></i>
-                        <p>New Invoice</p>
+                        <p className="hidden md:block">New Invoice</p>
                     </div>
                 </Link>
             </div>

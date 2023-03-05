@@ -57,10 +57,10 @@ const Login = () => {
     }
 
     return (
-        <div className="p-12 mx-auto w-full h-screen flex justify-center items-center">
+        <div className="p-0 lg:p-12 mx-auto h-screen flex justify-center items-center">
             {loading && <LoadingSpinner />}
-            <form className="border-gray-800 border-[2px] relative flex items-center h-auto justify-between gap-9 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" onSubmit={handleVedorLogin}>
-                <div className="w-full px-6 lg:px-12 py-12">
+            <form className="border-gray-800 border-[2px] w-[90%] relative flex items-center h-auto justify-between gap-9 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" onSubmit={handleVedorLogin}>
+                <div className="w-full px-5 lg:px-12 py-12">
                     <h1 className="text-start text-xl text-white">Sign In</h1>
                     {message && <Alert message={message} alertType={alertType} />}
                     <label className="block my-7">

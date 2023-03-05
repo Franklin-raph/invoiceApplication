@@ -8,7 +8,7 @@ const Invoicecard = ({ billData }) => {
 
     console.log(billData.data)
     return (
-        <div className="text-white grid gap-5 pb-9 px-9 w-full mx-auto">
+        <div className="text-white grid gap-5 pb-9 px-5 w-full mx-auto relative">
             <SearchBar setSearchWord={setSearchWord} />
             {billData.data.filter((bill) => {
                 if (searchWord === "") return bill
@@ -44,7 +44,6 @@ const Invoicecard = ({ billData }) => {
                                     <span className="p-[4px] bg-green-800 rounded-full"></span>
                                     <p className="font-[600] text-green-400">{bill.status}</p>
                                 </div>
-                                <i className="ri-arrow-right-s-line text-[#7B5EF8]"></i>
                             </div>
                         </div>
                     </Link>

@@ -11,8 +11,18 @@ import LoadingSpinner from '../components/LoaderComponent';
 // import 'boxicons'
 
 const PreviewInvoice = () => {
+
+    useEffect(() => {
+        if (!vendorData) {
+            console.log("Not logged in")
+            navigate('/login')
+        } else {
+            getCurrentBillInfo()
+        }
+    }, [])
+
     const items = useSelector((state) => state.itemList)
-    const clientBill = JSON.parse(localStorage.getItem('clientBill'))
+    // const clientBill = JSON.parse(localStorage.getItem('clientBill'))
     const { vendorData } = useSelector((state) => state.vendorAuth)
     const navigate = useNavigate()
 
@@ -20,16 +30,19 @@ const PreviewInvoice = () => {
 
     const { billId } = useParams()
 
-    const [clientName, setClientName] = useState(clientBill.clientName)
-    const [clientEmail, setClientEmail] = useState(clientBill.clientEmail)
-    const [clientCountry, setClientCountry] = useState(clientBill.clientCountry)
-    const [clientCity, setClientCity] = useState(clientBill.clientCity)
-    const [clientStreetAddress, setClientStreetAddress] = useState(clientBill.clientStreetAddress)
-    const [clientPostalCode, setClientPostalCode] = useState(clientBill.clientPostalCode)
-    const [invoiceDate, setInvoiceDate] = useState(clientBill.invoiceDate)
-    const [paymentTerms, setPaymentTerms] = useState(clientBill.paymentTerms)
-    const [productDescription, setProductDescription] = useState(clientBill.productDescription)
-    const [status, setStatus] = useState(clientBill.status)
+    const [clientBill, setClientBill] = useState()
+    console.log(clientBill)
+
+    const [clientName, setClientName] = useState("")
+    const [clientEmail, setClientEmail] = useState("")
+    const [clientCountry, setClientCountry] = useState("")
+    const [clientCity, setClientCity] = useState("")
+    const [clientStreetAddress, setClientStreetAddress] = useState("")
+    const [clientPostalCode, setClientPostalCode] = useState("")
+    const [invoiceDate, setInvoiceDate] = useState("")
+    const [paymentTerms, setPaymentTerms] = useState("")
+    const [productDescription, setProductDescription] = useState("")
+    const [status, setStatus] = useState("")
     const [itemList, setItemList] = useState(items)
     const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
@@ -42,21 +55,32 @@ const PreviewInvoice = () => {
     const [billInfo, setBillInfo] = useState()
     const [fileGenerateModal, setFileGenerateModal] = useState(false)
 
-    const updatedClientBillInfo = {
-        clientName, clientEmail, clientCountry,
-        clientCity, clientStreetAddress, clientPostalCode,
-        invoiceDate, paymentTerms, productDescription,
-        status, itemList
-    }
-
-    useEffect(() => {
-        if (!vendorData) {
-            console.log("Not logged in")
-            navigate('/login')
-        } else {
-            getCurrentBillInfo()
+    async function getCurrentBillInfo() {
+        setLoading(true)
+        const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/billInfo/${billId}`, {
+            headers: {
+                Authorization: `Bearer ${vendorData.token}`
+            },
+        })
+        if (res) {
+            setLoading(false)
         }
-    }, [])
+        const data = await res.json()
+        console.log(data)
+        if (res.ok) {
+            setClientName(data.billInfo.clientName)
+            setClientCity(data.billInfo.clientCity)
+            setClientCountry(data.billInfo.clientCountry)
+            setClientEmail(data.billInfo.clientEmail)
+            setClientPostalCode(data.billInfo.clientPostalCode)
+            setClientStreetAddress(data.billInfo.clientStreetAddress)
+            setProductDescription(data.billInfo.productDescription)
+            setPaymentTerms(data.billInfo.paymentTerms)
+            setInvoiceDate(data.billInfo.invoiceDate)
+            setBillIssuedBy(data.billWasGivenBy)
+            setBillInfo(data.billInfo)
+        }
+    }
 
     function navigateHome() {
         navigate('/')
@@ -82,24 +106,6 @@ const PreviewInvoice = () => {
                 anchorTag.click();
             });
         setFileGenerateModal(false)
-    }
-
-    async function getCurrentBillInfo() {
-        setLoading(true)
-        const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/billInfo/${billId}`, {
-            headers: {
-                Authorization: `Bearer ${vendorData.token}`
-            },
-        })
-        if (res) {
-            setLoading(false)
-        }
-        const data = await res.json()
-        console.log(data)
-        if (res.ok) {
-            setBillIssuedBy(data.billWasGivenBy)
-            setBillInfo(data.billInfo)
-        }
     }
 
     async function deleteClientBillInfo() {
@@ -183,10 +189,10 @@ const PreviewInvoice = () => {
 
 
     return (
-        <div className='text-white w-[80%] mx-auto mt-[3rem]'>
+        <div className='text-white w-[90%] md:w-[80%] mx-auto md;mt-[3rem] mt-24'>
             {loading && <LoadingSpinner />}
             {billInfo && billInfo.status === "Paid" ?
-                <div className="flex items-center justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
+                <div className="flex flex-col md:flex-row md:items-center items-start justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
                     <div className='flex items-center gap-4'>
                         <p>Status</p>
                         <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
@@ -199,7 +205,7 @@ const PreviewInvoice = () => {
                     </div>
                 </div>
                 :
-                <div className="flex items-center justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
+                <div className="flex flex-col md:flex-row md:items-center items-start justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
                     <div className='flex items-center gap-4'>
                         <p>Status</p>
                         <>
@@ -215,10 +221,10 @@ const PreviewInvoice = () => {
                             }
                         </>
                     </div>
-                    <div className='flex items-center gap-4'>
+                    <div className='flex items-center gap-3'>
                         {!paidState && <button className="py-[5px] px-3 bg-[#202B3F] rounded-md" onClick={() => navigate(`/itemlist/${billId}`)}>Edit</button>}
                         <button className="py-[5px] px-3 bg-red-500 rounded-md" onClick={confirmDelete}>Delete</button>
-                        {!paidState && <button className="py-[5px] px-3 bg-green-500 rounded-md" onClick={updatePaid}>Mark as Paid</button>}
+                        {!paidState && <button className="py-[5px] text-[14px] px-3 bg-green-500 rounded-md" onClick={updatePaid}>Mark as Paid</button>}
                     </div>
                 </div>
             }
@@ -251,20 +257,20 @@ const PreviewInvoice = () => {
                             </div>
                             <div>
                                 <p className='text-gray-500'>Payment Due</p>
-                                <p className="font-bold text-lg text-white">{billInfo.paymentTerms}</p>
+                                <p className="font-bold text-lg text-white">{paymentTerms}</p>
                             </div>
                         </div>
                         <div className='flex items-start flex-col text-gray-500'>
                             <p className='text-gray-500'>Bill to</p>
-                            <p className="font-bold text-lg my-2 text-white">{billInfo.clientName}</p>
-                            <p>{billInfo.clientStreetAddress}</p>
-                            <p>{billInfo.clientCity}</p>
-                            <p>{billInfo.clientPostalCode}</p>
-                            <p>{billInfo.clientCountry}</p>
+                            <p className="font-bold text-lg my-2 text-white">{clientName}</p>
+                            <p>{clientStreetAddress}</p>
+                            <p>{clientCity}</p>
+                            <p>{clientPostalCode}</p>
+                            <p>{clientCountry}</p>
                         </div>
                         <div className='flex items-start flex-col'>
                             <p className='text-gray-500'>Send to</p>
-                            <p className="font-bold text-lg text-white">{billInfo.clientEmail}</p>
+                            <p className="font-bold text-lg text-white">{clientEmail}</p>
 
                         </div>
                     </div>
@@ -351,7 +357,6 @@ const PreviewInvoice = () => {
                             </div>
                         </div>
                         <div>
-                            {/* <p onClick={() => print()}>Print</p> */}
                         </div>
                     </div>
                 </div>

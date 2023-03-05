@@ -7,7 +7,7 @@ const InvoiceCardContainer = ({ billData }) => {
     return (
         <>
 
-            <div>
+            <div className='w-full'>
                 {billData && <Invoicecard billData={billData} />}
             </div>
         </>

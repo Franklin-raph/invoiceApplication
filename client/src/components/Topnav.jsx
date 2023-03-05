@@ -17,7 +17,7 @@ const Topnav = () => {
 
 
     return (
-        <div className="lg:hidden pb-3 px-7 top-0 fixed w-full flex items-center justify-between bg-[#1F213A] rounded-br-xl">
+        <div className="lg:hidden pb-3 px-7 top-0 fixed  z-[999] w-full flex items-center justify-between bg-[#1F213A] rounded-br-xl">
             <Link to='/' className="logo mt-5"><box-icon name='home' color="white" size="30px"></box-icon></Link>
             <div className="flex justify-center items-center">
                 {/* <i className="ri-sun-fill hover:cursor-pointer text-white mb-5 text-xl"></i> */}
