@@ -13,13 +13,15 @@ const Itemlist = () => {
     const [itemQuantity, setItemQuantity] = useState(2)
     const [itemPrice, setItemPrice] = useState(5000)
     const [total, setTotal] = useState(itemQuantity * itemPrice)
-    const [previousItemList, setPreviousItemList] = useState([])
+    const [previousItemList, setPreviousItemList] = useState()
 
     const { vendorData } = useSelector((state) => state.vendorAuth)
     const navigate = useNavigate()
+    const logedInVendor = localStorage.getItem('vendorInfo')
 
     useEffect(() => {
-        if (!vendorData) {
+        if (!logedInVendor) {
+            console.log("Not logged in")
             navigate('/')
         } else {
             getClintBillInfo()
@@ -43,7 +45,7 @@ const Itemlist = () => {
     return (
         <div>
             <InputItemComponent setItemName={setItemName} setItemQuantity={setItemQuantity} setItemPrice={setItemPrice} setTotal={setTotal} />
-            <ItemListContainer previousItemList={previousItemList} />
+            {previousItemList && <ItemListContainer previousItemList={previousItemList} />}
         </div>
     )
 }
