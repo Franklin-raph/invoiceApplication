@@ -31,7 +31,6 @@ const PreviewInvoice = () => {
     const { billId } = useParams()
 
     const [clientBill, setClientBill] = useState()
-    console.log(clientBill)
 
     const [clientName, setClientName] = useState("")
     const [clientEmail, setClientEmail] = useState("")

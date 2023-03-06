@@ -50,10 +50,21 @@ const Invoicecard = ({ billData }) => {
                                 <h1>#{bill.grandTotal}</h1>
                             </div>
                             <div className="flex items-center gap-3">
-                                <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                                    <span className="p-[4px] bg-green-800 rounded-full"></span>
-                                    <p className="font-[600] text-green-400">{bill.status}</p>
-                                </div>
+                                {bill.status === "Pending" ?
+                                    <div className="flex items-center gap-3">
+                                        <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
+                                            <span className="p-[4px] bg-yellow-600 rounded-full"></span>
+                                            <p className="font-[600] text-yellow-400">{bill.status}</p>
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className="flex items-center gap-3">
+                                        <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
+                                            <span className="p-[4px] bg-green-800 rounded-full"></span>
+                                            <p className="font-[600] text-green-400">{bill.status}</p>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </Link>
