@@ -56,26 +56,30 @@ const PreviousItemList = ({ previousItem }) => {
             </form>
         ) : (
             <>
-                <div className="my-[1rem] flex items-center justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">
-                    <div className="block ">
+
+                <div className="flex flex-col px-4 items-start md:flex-row md:items-center w-[100%] md:w-[100%] mx-auto justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">
+                    <div className="block w-full md:w-[25%]">
                         <h1>Item Name</h1>
                         <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{previousItem.itemName}</p>
                     </div>
-                    <div className="block  w-[10%]">
-                        <h1>Item Qty.</h1>
-                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{previousItem.itemQuantity}</p>
+                    <div className="flex w-full md:w-[25%]">
+                        <div className="block w-full">
+                            <h1>Item Qty.</h1>
+                            <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{previousItem.itemQuantity}</p>
+                        </div>
+                        <div className="block w-full">
+                            <h1>Unit Price</h1>
+                            <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{previousItem.itemPrice}</p>
+                        </div>
                     </div>
-                    <div className="block  w-[15%]">
-                        <h1>Unit Price</h1>
-                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{previousItem.itemPrice}</p>
-                    </div>
-                    <div className="block w-[10%]">
+                    <div className="block md:w-[10%] w-full">
                         <h1>Total Price</h1>
                         <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{previousItem.total}</p>
                     </div>
                     <div className='flex items-center justify-center gap-4 mt-1'>
                         {/* <i className="ri-edit-box-fill mt-4 rounded-full text-[#1F213A] bg-yellow-500 px-3 py-2 cursor-pointer" onClick={() => setIsEdit(true)}></i>
-                        <i onClick={() => dispatch(decrementItemListArray(previousItem.itemId))} className="ri-delete-bin-fill mt-4 rounded-full text-[#1F213A] bg-red-600 px-3 py-2 cursor-pointer"></i> */}
+                        <i onClick={() => dispatch(decrementItemListArray(item.itemId))} className="ri-delete-bin-fill mt-4 rounded-full text-[#1F213A] bg-red-600 px-3 py-2 cursor-pointer"></i>
+                         */}
                     </div>
                 </div>
             </>

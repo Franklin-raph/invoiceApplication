@@ -9,6 +9,7 @@ const Itemlist = () => {
 
     const { billId } = useParams()
 
+    const [clientBillInfo, setClientBillInfo] = useState()
     const [itemName, setItemName] = useState("Bag of Rice")
     const [itemQuantity, setItemQuantity] = useState(2)
     const [itemPrice, setItemPrice] = useState(5000)
@@ -39,13 +40,14 @@ const Itemlist = () => {
         console.log(data)
         if (res.ok) {
             setPreviousItemList(data.billInfo.itemList)
+            setClientBillInfo(data.billInfo)
         }
     }
 
     return (
         <div>
             <InputItemComponent setItemName={setItemName} setItemQuantity={setItemQuantity} setItemPrice={setItemPrice} setTotal={setTotal} />
-            {previousItemList && <ItemListContainer previousItemList={previousItemList} />}
+            {previousItemList && <ItemListContainer previousItemList={previousItemList} clientBillInfo={clientBillInfo} />}
         </div>
     )
 }

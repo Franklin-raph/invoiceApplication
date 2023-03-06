@@ -7,11 +7,12 @@ import PreviousItemListComponent from './PreviousItemListComponent';
 import LoadingSpinner from '../components/LoaderComponent'
 
 
-const ItemListContainer = ({ previousItemList }) => {
+const ItemListContainer = ({ previousItemList, clientBillInfo }) => {
+    console.log(clientBillInfo)
 
 
     const items = useSelector((state) => state.itemList)
-    const clientBill = JSON.parse(localStorage.getItem('clientBill'))
+    // const clientBill = JSON.parse(localStorage.getItem('clientBill'))
     const { vendorData } = useSelector((state) => state.vendorAuth)
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
@@ -20,16 +21,16 @@ const ItemListContainer = ({ previousItemList }) => {
 
     const billId = localStorage.getItem('billId')
 
-    const [clientName, setClientName] = useState(clientBill.clientName)
-    const [clientEmail, setClientEmail] = useState(clientBill.clientEmail)
-    const [clientCountry, setClientCountry] = useState(clientBill.clientCountry)
-    const [clientCity, setClientCity] = useState(clientBill.clientCity)
-    const [clientStreetAddress, setClientStreetAddress] = useState(clientBill.clientStreetAddress)
-    const [clientPostalCode, setClientPostalCode] = useState(clientBill.clientPostalCode)
-    const [invoiceDate, setInvoiceDate] = useState(clientBill.invoiceDate)
-    const [paymentTerms, setPaymentTerms] = useState(clientBill.paymentTerms)
-    const [productDescription, setProductDescription] = useState(clientBill.productDescription)
-    const [status, setStatus] = useState(clientBill.status)
+    const [clientName, setClientName] = useState(clientBillInfo.clientName)
+    const [clientEmail, setClientEmail] = useState(clientBillInfo.clientEmail)
+    const [clientCountry, setClientCountry] = useState(clientBillInfo.clientCountry)
+    const [clientCity, setClientCity] = useState(clientBillInfo.clientCity)
+    const [clientStreetAddress, setClientStreetAddress] = useState(clientBillInfo.clientStreetAddress)
+    const [clientPostalCode, setClientPostalCode] = useState(clientBillInfo.clientPostalCode)
+    const [invoiceDate, setInvoiceDate] = useState(clientBillInfo.invoiceDate)
+    const [paymentTerms, setPaymentTerms] = useState(clientBillInfo.paymentTerms)
+    const [productDescription, setProductDescription] = useState(clientBillInfo.productDescription)
+    const [status, setStatus] = useState(clientBillInfo.status)
     const [itemList, setItemList] = useState()
     // const [previousItemList, setPreviousItemList] = useState([])
     const [message, setMessage] = useState("")
