@@ -38,19 +38,21 @@ const ItemListCard = ({ item, previousItemList }) => {
     return isEdit ?
         (
             <form onSubmit={updateItem} className="flex items-center w-[100%] mx-auto justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">
-                <div className="block ">
+                <div className="block w-full md:w-[25%]">
                     <h1>Item Name</h1>
                     <input type="text" value={editItemName} onChange={e => setEditItemName(e.target.value)} className="w-[100%] focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]" />
                 </div>
-                <div className="block  w-[10%]">
-                    <h1>Item Qty.</h1>
-                    <input type="number" value={editItemQuantity} onChange={e => setEditItemQuantity(e.target.value)} className="focus:outline-none border-gray-800 rounded-[4px] w-[100%] border-[1px] px-3 py-2 bg-[#141625]" />
+                <div className="flex w-full md:w-[25%]">
+                    <div className="block w-full">
+                        <h1>Item Qty.</h1>
+                        <input type="number" value={editItemQuantity} onChange={e => setEditItemQuantity(e.target.value)} className="focus:outline-none border-gray-800 rounded-[4px] w-[100%] border-[1px] px-3 py-2 bg-[#141625]" />
+                    </div>
+                    <div className="block w-full">
+                        <h1>Unit Price</h1>
+                        <input type="number" value={editItemPrice} onChange={e => setEditItemPrice(e.target.value)} className="focus:outline-none border-gray-800 rounded-[4px] w-[100%] border-[1px] px-3 py-2 bg-[#141625]" />
+                    </div>
                 </div>
-                <div className="block  w-[15%]">
-                    <h1>Unit Price</h1>
-                    <input type="number" value={editItemPrice} onChange={e => setEditItemPrice(e.target.value)} className="focus:outline-none border-gray-800 rounded-[4px] w-[100%] border-[1px] px-3 py-2 bg-[#141625]" />
-                </div>
-                <div className="block w-[10%]">
+                <div className="block md:w-[10%] w-full">
                     <h1>Total Price</h1>
                     <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{editTotal}</p>
                 </div>
@@ -59,20 +61,22 @@ const ItemListCard = ({ item, previousItemList }) => {
             </form>
         ) : (
             <>
-                <div className="my-[1rem] flex items-center justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">
-                    <div className="block ">
+                <div className="flex flex-col px-4 items-start md:flex-row md:items-center w-[100%] md:w-[80%] mx-auto justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">
+                    <div className="block w-full md:w-[25%]">
                         <h1>Item Name</h1>
                         <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.itemName}</p>
                     </div>
-                    <div className="block  w-[10%]">
-                        <h1>Item Qty.</h1>
-                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.itemQuantity}</p>
+                    <div className="flex w-full md:w-[25%]">
+                        <div className="block w-full">
+                            <h1>Item Qty.</h1>
+                            <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.itemQuantity}</p>
+                        </div>
+                        <div className="block w-full">
+                            <h1>Unit Price</h1>
+                            <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.itemPrice}</p>
+                        </div>
                     </div>
-                    <div className="block  w-[15%]">
-                        <h1>Unit Price</h1>
-                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.itemPrice}</p>
-                    </div>
-                    <div className="block w-[10%]">
+                    <div className="block md:w-[10%] w-full">
                         <h1>Total Price</h1>
                         <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.total}</p>
                     </div>

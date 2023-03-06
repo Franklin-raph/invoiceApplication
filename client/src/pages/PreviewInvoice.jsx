@@ -276,6 +276,7 @@ const PreviewInvoice = () => {
                         </div>
                     </div>
                 }
+
                 <div className="text-gray-500 flex items-start flex-col w-full justify-between gap-[2rem] bg-[#202B3F] mt-10 py-4 px-4 rounded-md">
                     <div className="flex justify-between items-center w-full">
                         <p>Item Name</p>
@@ -305,30 +306,33 @@ const PreviewInvoice = () => {
             </div>
             {message && <Alert message={message} alertType={alertType} />}
 
-            {billInfo && billInfo.status === "Paid" ?
-                <div className="flex items-center w-full">
-                    <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBill}>Confirm Payment</button>
-                </div> :
-                <>
-                    {paidState ?
-                        <div className="flex items-center w-full">
-                            <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBill}>Confirm Payment</button>
-                        </div>
-                        :
-                        <div className="flex items-center w-full">
-                            <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBillPaid}>Confirm Bill</button>
-                        </div>
-                    }
-                </>
+            {
+                billInfo && billInfo.status === "Paid" ?
+                    <div className="flex items-center w-full">
+                        <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBill}>Confirm Payment</button>
+                    </div> :
+                    <>
+                        {paidState ?
+                            <div className="flex items-center w-full">
+                                <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBill}>Confirm Payment</button>
+                            </div>
+                            :
+                            <div className="flex items-center w-full">
+                                <button className='my-[2rem] text-white bg-green-500 px-3 py-2 rounded-md' onClick={confirmBillPaid}>Confirm Bill</button>
+                            </div>
+                        }
+                    </>
 
             }
 
 
-            {confirmModal &&
+            {
+                confirmModal &&
                 <ConfirmModal setConfirmModal={setConfirmModal} performAction={deleteClientBillInfo} header="Confirm Delete" body="Are you sure you want to delete this invoice data?" />
             }
 
-            {warningModal &&
+            {
+                warningModal &&
                 <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-10">
                     <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
                         <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setWarningModal(!warningModal)}></i>
@@ -339,7 +343,8 @@ const PreviewInvoice = () => {
             }
 
 
-            {fileGenerateModal &&
+            {
+                fileGenerateModal &&
                 <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-10">
                     <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
                         <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setFileGenerateModal(!fileGenerateModal)}></i>
@@ -363,7 +368,7 @@ const PreviewInvoice = () => {
                 </div>
             }
 
-        </div>
+        </div >
     )
 }
 
