@@ -189,7 +189,7 @@ const PreviewInvoice = () => {
 
 
     return (
-        <div className='text-white w-[90%] md:w-[80%] mx-auto md:mt-[3rem] mt-24'>
+        <div className='text-white w-[90%] md:w-[80%] mx-auto mt-24'>
             {loading && <LoadingSpinner />}
             {billInfo && billInfo.status === "Paid" ?
                 <div className="flex flex-col md:flex-row md:items-center items-start justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
@@ -231,7 +231,7 @@ const PreviewInvoice = () => {
 
 
             <div className=" bg-[#1F213A] py-5 px-4 md:px-6 rounded-md mt-8" id='bill'>
-                <div className='flex flex-col items-start justify-between gap-[2rem] md:gap-[5rem]'>
+                <div className='flex md:flex-row flex-col items-start justify-between gap-[2rem] md:gap-[5rem]'>
                     <div className='flex items-start flex-col'>
                         <p className="font-bold text-xl text-white">#{billId.toString().substring(0, 6).toUpperCase()}</p>
                         <p className="text-gray-500 text-[18px]">Web Design</p>
@@ -250,8 +250,8 @@ const PreviewInvoice = () => {
                 </div>
 
                 {billInfo &&
-                    <div className='flex flex-col items-start justify-between gap-[2rem] md:gap-[5rem] mt-9'>
-                        <div className='flex items-start justify-between w-full flex-row md:flex-col'>
+                    <div className='flex md:flex-row flex-col items-start justify-between gap-[2rem] md:gap-[5rem] mt-9'>
+                        <div className='flex items-start justify-between flex-row md:flex-col'>
                             <div className='mb-5'>
                                 <p className='text-gray-500'>Invoice Date</p>
                                 <p className="font-bold text-sm md:text-lg text-white">{billInfo.invoiceDate}</p>
@@ -261,7 +261,7 @@ const PreviewInvoice = () => {
                                 <p className="font-bold text-sm md:text-lg text-white">{paymentTerms}</p>
                             </div>
                         </div>
-                        <div className='flex items-start flex-col text-gray-500'>
+                        <div className='flex items-start flex-col text-gray-500 '>
                             <p className='text-gray-500'>Bill to</p>
                             <p className="font-bold text-lg my-2 text-white">{clientName}</p>
                             <p>{clientStreetAddress}</p>
@@ -346,7 +346,7 @@ const PreviewInvoice = () => {
             {
                 fileGenerateModal &&
                 <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-10">
-                    <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
+                    <div className='bg-white flex items-center justify-center py-10 px-5 w-[90%] mt-[80px] md:w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
                         <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setFileGenerateModal(!fileGenerateModal)}></i>
                         <i className="ri-checkbox-circle-fill text-7xl text-green-600"></i>
                         <p>Bill and Payment has been confirmed</p>

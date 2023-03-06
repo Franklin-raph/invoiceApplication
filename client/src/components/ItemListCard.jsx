@@ -37,7 +37,7 @@ const ItemListCard = ({ item, previousItemList }) => {
 
     return isEdit ?
         (
-            <form onSubmit={updateItem} className="flex items-center w-[100%] mx-auto justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">
+            <form onSubmit={updateItem} className="flex flex-col px-4 items-start md:flex-row md:items-center w-[100%] md:w-[80%] mx-auto justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">
                 <div className="block w-full md:w-[25%]">
                     <h1>Item Name</h1>
                     <input type="text" value={editItemName} onChange={e => setEditItemName(e.target.value)} className="w-[100%] focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]" />
@@ -57,11 +57,11 @@ const ItemListCard = ({ item, previousItemList }) => {
                     <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{editTotal}</p>
                 </div>
                 <button className='mt-5 rounded-[4px] bg-green-600 px-3 py-2'>Update Item</button>
-                <button className='mt-5 rounded-[4px] bg-red-600 px-3 py-2' onClick={cancelEdit}>Cancel</button>
+                <button className='md:mt-5 rounded-[4px] bg-red-600 px-3 py-2' onClick={cancelEdit}>Cancel</button>
             </form>
         ) : (
             <>
-                <div className="flex flex-col px-4 items-start md:flex-row md:items-center w-[100%] md:w-[80%] mx-auto justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">
+                <div className="flex flex-col px-4 items-start md:flex-row md:items-center w-[100%] md:w-[100%] mx-auto justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">
                     <div className="block w-full md:w-[25%]">
                         <h1>Item Name</h1>
                         <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.itemName}</p>
