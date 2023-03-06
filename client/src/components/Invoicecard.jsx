@@ -20,13 +20,23 @@ const Invoicecard = ({ billData }) => {
                         <p>Due {bill.invoiceDate}</p>
                         <p>{bill.clientName}</p>
                         <h1>#{bill.grandTotal}</h1>
-                        <div className="flex items-center gap-3">
-                            <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                                <span className="p-[4px] bg-green-800 rounded-full"></span>
-                                <p className="font-[600] text-green-400">{bill.status}</p>
+                        {bill.status === "Pending" ?
+                            <div className="flex items-center gap-3">
+                                <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
+                                    <span className="p-[4px] bg-yellow-600 rounded-full"></span>
+                                    <p className="font-[600] text-yellow-400">{bill.status}</p>
+                                </div>
+                                <i className="ri-arrow-right-s-line text-[#7B5EF8]"></i>
                             </div>
-                            <i className="ri-arrow-right-s-line text-[#7B5EF8]"></i>
-                        </div>
+                            :
+                            <div className="flex items-center gap-3">
+                                <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
+                                    <span className="p-[4px] bg-green-800 rounded-full"></span>
+                                    <p className="font-[600] text-green-400">{bill.status}</p>
+                                </div>
+                                <i className="ri-arrow-right-s-line text-[#7B5EF8]"></i>
+                            </div>
+                        }
                     </Link>
 
                     <Link to={`/invoicepreview/${bill._id}`} key={bill._id} className="w-[100%] md:hidden flex flex-col gap-[5rem] bg-[#1F213A] py-4 px-4 rounded-md hover:cursor-pointer mx-auto">
