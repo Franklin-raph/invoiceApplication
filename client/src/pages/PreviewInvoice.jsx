@@ -290,7 +290,10 @@ const PreviewInvoice = () => {
                                     <p className="font-bold text-white">{item.itemName}</p>
                                     <p>{item.itemQuantity}</p>
                                     <p>{item.itemPrice}</p>
-                                    <p className="font-bold text-white">{item.total}</p>
+                                    <p className="font-bold text-white">{item.total.toLocaleString('en-US', {
+                                        style: 'currency',
+                                        currency: 'NGN',
+                                    })}</p>
                                 </div>
                             ))
                         }
@@ -299,7 +302,10 @@ const PreviewInvoice = () => {
                 <div className="flex items-center w-full justify-between gap-[2rem] bg-[#0f141d] mt-7 py-4 px-4 rounded-md">
                     <p className='text-white'>Grand Total</p>
                     {billInfo &&
-                        <p className='text-white'>{billInfo.grandTotal}</p>
+                        <p className='text-white'>{billInfo.grandTotal.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'NGN',
+                        })}</p>
                     }
                 </div>
             </div>
