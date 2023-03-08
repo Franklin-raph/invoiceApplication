@@ -54,10 +54,13 @@ const ItemListCard = ({ item, previousItemList }) => {
                 </div>
                 <div className="block md:w-[20%] w-full">
                     <h1>Total Price</h1>
-                    <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{editTotal.toLocaleString('en-US', {
-                        style: 'currency',
-                        currency: 'NGN',
-                    })}</p>
+                    <div className='text-white flex items-center cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]'>
+                        <i className="ph-currency-ngn"></i>
+                        <p>{editTotal.toLocaleString('en-US', {
+                            style: 'currency',
+                            currency: 'NGN',
+                        }).toString().slice(4)}</p>
+                    </div>
                 </div>
                 <button className='mt-5 rounded-[4px] bg-green-600 px-3 py-2'>Update Item</button>
                 <button className='md:mt-5 rounded-[4px] bg-red-600 px-3 py-2' onClick={cancelEdit}>Cancel</button>
@@ -81,10 +84,13 @@ const ItemListCard = ({ item, previousItemList }) => {
                     </div>
                     <div className="block md:w-[20%] w-full">
                         <h1>Total Price</h1>
-                        <p className="cursor-not-allowed  focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]">{item.total.toLocaleString('en-US', {
-                            style: 'currency',
-                            currency: 'NGN',
-                        })}</p>
+                        <div className='text-white flex items-center cursor-not-allowed focus:outline-none border-gray-800 rounded-[4px] border-[1px] px-3 py-2 bg-[#141625]'>
+                            <i className="ph-currency-ngn"></i>
+                            <p>{item.total.toLocaleString('en-US', {
+                                style: 'currency',
+                                currency: 'NGN',
+                            }).toString().slice(4)}</p>
+                        </div>
                     </div>
                     <div className='flex items-center justify-center gap-4 mt-1'>
                         <i className="ri-edit-box-fill mt-4 rounded-full text-[#1F213A] bg-yellow-500 px-3 py-2 cursor-pointer" onClick={() => setIsEdit(true)}></i>

@@ -21,10 +21,13 @@ const Invoicecard = ({ billData }) => {
                         <h1>#{bill._id.toString().substring(0, 6).toUpperCase()}</h1>
                         <p>Due {bill.invoiceDate}</p>
                         <p>{bill.clientName}</p>
-                        <h1>{bill.grandTotal.toLocaleString('en-US', {
-                            style: 'currency',
-                            currency: 'NGN',
-                        })}</h1>
+                        <div className='flex items-center'>
+                            <i className="ph-currency-ngn"></i>
+                            <p>{bill.grandTotal.toLocaleString('en-US', {
+                                style: 'currency',
+                                currency: 'NGN',
+                            }).toString().slice(4)}</p>
+                        </div>
                         {bill.status === "Pending" ?
                             <div className="flex items-center gap-3">
                                 <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
@@ -52,10 +55,13 @@ const Invoicecard = ({ billData }) => {
                         <div className="flex justify-between items-center gap-20">
                             <div>
                                 <p className='text-sm'>Due {bill.invoiceDate}</p>
-                                <h1>{bill.grandTotal.toLocaleString('en-US', {
-                                    style: 'currency',
-                                    currency: 'NGN',
-                                })}</h1>
+                                <div className='flex items-center'>
+                                    <i className="ph-currency-ngn"></i>
+                                    <p>{bill.grandTotal.toLocaleString('en-US', {
+                                        style: 'currency',
+                                        currency: 'NGN',
+                                    }).toString().slice(4)}</p>
+                                </div>
                             </div>
                             <div className="flex items-center gap-3">
                                 {bill.status === "Pending" ?

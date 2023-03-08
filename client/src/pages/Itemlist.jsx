@@ -10,9 +10,9 @@ const Itemlist = () => {
     const { billId } = useParams()
 
     const [clientBillInfo, setClientBillInfo] = useState()
-    const [itemName, setItemName] = useState("Bag of Rice")
-    const [itemQuantity, setItemQuantity] = useState(2)
-    const [itemPrice, setItemPrice] = useState(5000)
+    const [itemName, setItemName] = useState("")
+    const [itemQuantity, setItemQuantity] = useState()
+    const [itemPrice, setItemPrice] = useState()
     const [total, setTotal] = useState(itemQuantity * itemPrice)
     const [previousItemList, setPreviousItemList] = useState()
 
@@ -22,7 +22,6 @@ const Itemlist = () => {
 
     useEffect(() => {
         if (!logedInVendor) {
-            console.log("Not logged in")
             navigate('/')
         } else {
             getClintBillInfo()

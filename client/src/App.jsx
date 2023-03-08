@@ -9,24 +9,24 @@ import { useEffect } from 'react'
 import NewInvioce from './pages/NewInvioce'
 import Itemlist from './pages/Itemlist'
 import PreviewInvoice from './pages/PreviewInvoice'
+import { useState } from 'react'
 
 function App() {
 
   const logedInVendor = localStorage.getItem('vendorInfo')
-  // const navigate = useNavigate()
+  const [darkToggle, setDarkToggle] = useState(false)
 
-  useEffect(() => {
-    if (logedInVendor) {
-      // window.location.assign('/')
-      // console.log("first")
-    }
-  }, [])
+  function toggleBackground() {
+    console.log(darkToggle)
+    setDarkToggle(!darkToggle)
+  }
+
 
   return (
-    <div className="App">
+    <div className={`${darkToggle && 'dark'}`}>
       <Router>
-        {logedInVendor && <Sidenav />}
-        {logedInVendor && <Topnav />}
+        {logedInVendor && <Sidenav toggleBackground={toggleBackground} />}
+        {logedInVendor && <Topnav toggleBackground={toggleBackground} />}
         {/* <Sidenav /> */}
         <Routes>
           <Route path='/' element={<InvoiceHomePage />} />

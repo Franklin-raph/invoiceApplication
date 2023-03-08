@@ -7,15 +7,15 @@ import LoadingSpinner from '../components/LoaderComponent'
 
 const NewInvioce = () => {
 
-    const [clientName, setClientName] = useState("Frank")
-    const [clientEmail, setClientEmail] = useState("frank@gmail.com")
-    const [clientCountry, setClientCountry] = useState("Nigeria")
-    const [clientCity, setClientCity] = useState("Anambra Awka")
-    const [clientStreetAddress, setClientStreetAddress] = useState("Ifite School Gate")
-    const [clientPostalCode, setClientPostalCode] = useState("14210")
+    const [clientName, setClientName] = useState("")
+    const [clientEmail, setClientEmail] = useState("")
+    const [clientCountry, setClientCountry] = useState("")
+    const [clientCity, setClientCity] = useState("")
+    const [clientStreetAddress, setClientStreetAddress] = useState("")
+    const [clientPostalCode, setClientPostalCode] = useState("")
     const [invoiceDate, setInvoiceDate] = useState("")
     const [paymentTerms, setPaymentTerms] = useState("")
-    const [productDescription, setProductDescription] = useState("Web Development")
+    const [productDescription, setProductDescription] = useState("")
     const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
     const [loading, setLoading] = useState(false)

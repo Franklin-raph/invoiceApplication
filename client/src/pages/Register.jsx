@@ -8,19 +8,19 @@ import StepFour from '../components/StepFour'
 import { useSelector, useDispatch } from 'react-redux'
 
 const Register = () => {
-    const [fName, setFname] = useState("Frank")
-    const [lName, setLname] = useState("Raph")
-    const [email, setEmail] = useState("frank@gmail.com")
-    const [password, setPassword] = useState("12345")
-    const [confirmPassword, setConfirmPassword] = useState("12345")
-    const [businessName, setBusinessName] = useState("frank tech")
-    const [businessType, setBusinessType] = useState("web")
-    const [businessOwnersName, setBusinessOwnersName] = useState("frank raph")
-    const [businessWesite, setBusinessWesite] = useState("frank.com")
-    const [country, setCountry] = useState("Nigeria")
-    const [city, setCity] = useState("Awka")
-    const [streetAddress, setStreetAddress] = useState("Ifite")
-    const [postalCode, setPostalCode] = useState("421010")
+    const [fName, setFname] = useState("")
+    const [lName, setLname] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [businessName, setBusinessName] = useState("")
+    const [businessType, setBusinessType] = useState("")
+    const [businessOwnersName, setBusinessOwnersName] = useState("")
+    const [businessWesite, setBusinessWesite] = useState("")
+    const [country, setCountry] = useState("")
+    const [city, setCity] = useState("")
+    const [streetAddress, setStreetAddress] = useState("")
+    const [postalCode, setPostalCode] = useState("")
     const [formStep, setFormStep] = useState(1)
 
 

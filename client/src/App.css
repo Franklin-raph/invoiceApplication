@@ -123,3 +123,9 @@ body {
     width: 30%;
     margin-bottom: 1rem;
 }
+
+body:has(.dark) {
+    background-color: #fff !important;
+    color: #000 !important;
+    transition: .5s;
+}

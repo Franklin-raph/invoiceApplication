@@ -8,8 +8,8 @@ import LoadingSpinner from '../components/LoaderComponent'
 const Login = () => {
 
     // const [isLoading, setIsLoading] = useState(false)
-    const [email, setEmail] = useState("frank1@gmail.com")
-    const [password, setPassword] = useState("123456")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
     const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
     const { vendorData } = useSelector((state) => state.vendorAuth)
