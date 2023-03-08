@@ -116,8 +116,20 @@ const PreviewInvoice = () => {
                 Authorization: `Bearer ${vendorData.token}`
             }
         })
+        if (res.status === 401) {
+            setConfirmModal(false)
+            setMessage("This user is Unauthorized to delete this bill information because he/she isn't the one who created it. Please make sure tat the current signed in user is the one who created this billing information.")
+            setAlertType("Danger")
+            setTimeout(() => {
+                setMessage("")
+                setAlertType("")
+            }, 4000)
+
+            clearTimeout()
+        }
         if (res) {
             setLoading(false)
+            console.log(res)
         }
         if (res.ok) {
             navigateHome()

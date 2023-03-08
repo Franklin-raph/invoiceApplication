@@ -23,7 +23,7 @@ const Invoicecard = ({ billData }) => {
                         <p>{bill.clientName}</p>
                         <div className='flex items-center'>
                             <i className="ph-currency-ngn"></i>
-                            <p>{bill.grandTotal.toLocaleString('en-US', {
+                            <p className='font-bold'>{bill.grandTotal.toLocaleString('en-US', {
                                 style: 'currency',
                                 currency: 'NGN',
                             }).toString().slice(4)}</p>
@@ -57,7 +57,7 @@ const Invoicecard = ({ billData }) => {
                                 <p className='text-sm'>Due {bill.invoiceDate}</p>
                                 <div className='flex items-center'>
                                     <i className="ph-currency-ngn"></i>
-                                    <p>{bill.grandTotal.toLocaleString('en-US', {
+                                    <p className='font-bold'>{bill.grandTotal.toLocaleString('en-US', {
                                         style: 'currency',
                                         currency: 'NGN',
                                     }).toString().slice(4)}</p>
