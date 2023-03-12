@@ -118,7 +118,7 @@ const PreviewInvoice = () => {
         })
         if (res.status === 401) {
             setConfirmModal(false)
-            setMessage("This user is Unauthorized to delete this bill information because he/she isn't the one who created it. Please make sure tat the current signed in user is the one who created this billing information.")
+            setMessage("This user is Unauthorized to delete this bill information because he/she isn't the one who created it. Please make sure that the current signed in user is the one who created this billing information.")
             setAlertType("Danger")
             setTimeout(() => {
                 setMessage("")
@@ -289,30 +289,34 @@ const PreviewInvoice = () => {
                 }
 
                 <div className="text-gray-500 flex items-start flex-col w-full justify-between gap-[2rem] bg-[#202B3F] mt-10 py-4 px-4 rounded-md">
-                    <div className="flex justify-between items-center w-full">
-                        <p>Item Name</p>
-                        <p>Quantity</p>
-                        <p>Price</p>
-                        <p>Total</p>
-                    </div>
-                    <div className="flex justify-between items-start flex-col w-full gap-2">
+                    <table className="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
                         {billInfo &&
                             billInfo.itemList.map((item) => (
-                                <div key={item._id} className="flex justify-between items-center w-full">
-                                    <p className="font-bold text-white">{item.itemName}</p>
-                                    <p>{item.itemQuantity}</p>
-                                    <p>{item.itemPrice}</p>
-                                    <div className='text-white flex items-center'>
-                                        <i className="ph-currency-ngn"></i>
-                                        <p>{item.total.toLocaleString('en-US', {
-                                            style: 'currency',
-                                            currency: 'NGN',
-                                        }).toString().slice(4)}</p>
-                                    </div>
-                                </div>
+                                <tbody>
+                                    <tr key={item._id} >
+                                        <td className="font-bold text-white">{item.itemName}</td>
+                                        <td>{item.itemQuantity}</td>
+                                        <td>{item.itemPrice}</td>
+                                        <td className='text-white flex items-center'>
+                                            <i className="ph-currency-ngn"></i>
+                                            <p>{item.total.toLocaleString('en-US', {
+                                                style: 'currency',
+                                                currency: 'NGN',
+                                            }).toString().slice(4)}</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
                             ))
                         }
-                    </div>
+                    </table>
                 </div>
                 <div className="flex items-center w-full justify-between gap-[2rem] bg-[#0f141d] mt-7 py-4 px-4 rounded-md">
                     <p className='text-white'>Grand Total</p>
