@@ -1,25 +1,49 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const HomePageTopNav = ({ billData }) => {
+
+    const [loggedInVendor, setLoggedInVendor] = useState("")
+
+    useEffect(() => {
+        setLoggedInVendor(JSON.parse(localStorage.getItem("vendorInfo")))
+    }, [])
+
     return (
-        <div className="text-white flex items-center justify-between w-[90%] md:w-[55%] mt-[8rem] mb-10">
-            <div>
-                <h1 className="text-3xl font-[600]">Invoices</h1>
-                <p className='hidden md:block'>There are {billData.data.length} total invoices</p>
-                <p className='md:hidden block'>{billData.data.length} Invoices</p>
+        <div className="text-white w-[100%] lg:w-[85%] ml-0 lg:ml-[10rem] px-[4rem] mt-[8rem] lg:mt-[4rem] mb-10">
+            <div className='flex items-center justify-between mb-3'>
+                {loggedInVendor &&
+                    <p>Welcome, <span className='font-bold'>{loggedInVendor.vendor.fName} {loggedInVendor.vendor.lName}</span>!</p>
+                }
+                <p className='flex items-center gap-2'>Help center <i className="ri-question-line"></i> </p>
             </div>
-            <div className="flex items-center justify-between gap-10">
-                {/* <div className="flex items-center justify-between gap-3">
-                    <p>Filter by status</p>
-                    <i className="ri-arrow-down-s-line text-[#7B5EF8] hover:cursor-pointer"></i>
-                </div> */}
-                <Link to="/newinvoice">
-                    <div className="flex items-center justify-between bg-[#7B5EF8] rounded-full gap-2 py-1 px-2 hover:cursor-pointer">
-                        <i className="ri-add-circle-fill text-xl"></i>
-                        <p className="hidden md:block">New Invoice</p>
+            <div className='flex items-center justify-between'>
+                <div className='flex justify-between items-center w-full gap-10'>
+                    <div className='items-center justify-between p-5 flex bg-[#7B5EF8] w-full rounded-lg'>
+                        <div className='flex items-center justify-between flex-col'>
+                            <p>Total Invoice(s)</p>
+                            <p className='font-bold text-2xl'>{billData.data.length}</p>
+                        </div>
+                        <Link to="/newinvoice">
+                            <div className="flex items-center justify-between bg-[#1F213A] rounded-full gap-2 py-1 px-2 hover:cursor-pointer">
+                                <i className="ri-add-circle-fill text-xl"></i>
+                                <p className="hidden md:block">New Invoice</p>
+                            </div>
+                        </Link>
                     </div>
-                </Link>
+                    <div className='items-center justify-between p-5 flex bg-[#7B5EF8] w-full rounded-lg'>
+                        <div className='flex items-center justify-between flex-col'>
+                            <p>Total Income</p>
+                            <p className='font-bold text-xl flex gap-[1px] items-center'><i className="ph ph-currency-gbp"></i>100 million</p>
+                        </div>
+                        <Link to="#">
+                            <div className="flex items-center justify-between bg-[#1F213A] rounded-full gap-2 py-1 px-2 hover:cursor-pointer">
+                                <i className="ri-eye-fill text-xl"></i>
+                                <p className="hidden md:block">View Transactions</p>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
             </div>
         </div>
     )
