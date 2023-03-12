@@ -10,6 +10,7 @@ import NewInvioce from './pages/NewInvioce'
 import Itemlist from './pages/Itemlist'
 import PreviewInvoice from './pages/PreviewInvoice'
 import { useState } from 'react'
+import VendorSettings from './pages/VendorSettings'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/itemlist/:billId' element={<Itemlist />} />
           <Route path='/invoicepreview/:billId' element={<PreviewInvoice />} />
+          <Route path='/settings' element={<VendorSettings />} />
         </Routes>
       </Router>
     </div>
