@@ -128,7 +128,7 @@ body {
 .styled-table {
     overflow-x: auto;
     border-collapse: collapse;
-    margin: 25px 0;
+    /* margin: 25px 0; */
     font-size: 0.9em;
     font-family: sans-serif;
     width: 100%;
@@ -139,9 +139,20 @@ body {
     text-align: left;
 }
 
-.styled-table th,
+.styled-table th {
+    padding: 18px;
+}
+
+.styled-table th:first-child {
+    border-top-left-radius: 10%;
+}
+
+.styled-table th:last-child {
+    border-top-right-radius: 10%;
+}
+
 .styled-table td {
-    padding: 12px 15px;
+    padding: 15px;
 }
 
 .styled-table tbody tr.active-row {
@@ -152,5 +163,5 @@ body {
 
 
 .styled-table tbody tr {
-    border-bottom: 1px solid #575757;
+    border-top: 1px solid #575757;
 }

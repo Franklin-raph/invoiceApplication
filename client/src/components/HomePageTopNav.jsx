@@ -18,7 +18,7 @@ const HomePageTopNav = ({ billData }) => {
                 <p className='flex items-center gap-2'>Help center <i className="ri-question-line"></i> </p>
             </div>
             <div className='flex items-center justify-between'>
-                <div className='flex justify-between items-center w-full gap-10'>
+                <div className='flex flex-col md:flex-row justify-between items-center w-full gap-10'>
                     <div className='items-center justify-between p-5 flex bg-[#7B5EF8] w-full rounded-lg'>
                         <div className='flex items-center justify-between flex-col'>
                             <p>Total Invoice(s)</p>
@@ -27,7 +27,7 @@ const HomePageTopNav = ({ billData }) => {
                         <Link to="/newinvoice">
                             <div className="flex items-center justify-between bg-[#1F213A] rounded-full gap-2 py-1 px-2 hover:cursor-pointer">
                                 <i className="ri-add-circle-fill text-xl"></i>
-                                <p className="hidden md:block">New Invoice</p>
+                                <p className="hidden lg:block">New Invoice</p>
                             </div>
                         </Link>
                     </div>
@@ -39,7 +39,7 @@ const HomePageTopNav = ({ billData }) => {
                         <Link to="#">
                             <div className="flex items-center justify-between bg-[#1F213A] rounded-full gap-2 py-1 px-2 hover:cursor-pointer">
                                 <i className="ri-eye-fill text-xl"></i>
-                                <p className="hidden md:block">View Transactions</p>
+                                <p className="hidden lg:block">View Transactions</p>
                             </div>
                         </Link>
                     </div>
