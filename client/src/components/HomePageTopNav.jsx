@@ -10,7 +10,7 @@ const HomePageTopNav = ({ billData }) => {
     }, [])
 
     return (
-        <div className="text-white w-[100%] lg:w-[85%] ml-0 lg:ml-[10rem] px-[4rem] mt-[8rem] lg:mt-[4rem] mb-10">
+        <div className="text-white w-[100%] lg:w-[85%] ml-0 lg:ml-[10rem] px-[1rem] lg:px-[4rem] mt-[8rem] lg:mt-[4rem] mb-10">
             <div className='flex items-center justify-between mb-3'>
                 {loggedInVendor &&
                     <p>Welcome, <span className='font-bold'>{loggedInVendor.vendor.fName} {loggedInVendor.vendor.lName}</span>!</p>

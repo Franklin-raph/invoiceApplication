@@ -18,7 +18,7 @@ const Invoicecard = ({ billData }) => {
                 if (searchWord === "") return bill
                 else if (bill.clientName.toLowerCase().includes(searchWord.toLowerCase()) || bill.status.toLowerCase().includes(searchWord.toLowerCase())) return bill
             }).map((bill) => (
-                <Link to={`/invoicepreview/${bill._id}`} key={bill._id} className="w-[100%] md:hidden flex flex-col gap-[5rem] bg-[#1F213A] py-4 px-4 rounded-lg hover:cursor-pointer mx-auto">
+                <Link to={`/invoicepreview/${bill._id}`} key={bill._id} className="w-full md:hidden flex flex-col gap-[5rem] bg-[#1F213A] py-4 px-4 rounded-lg hover:cursor-pointer mx-auto">
                     <div className="flex justify-between items-center">
                         <h1>#{bill._id.toString().substring(0, 6).toUpperCase()}</h1>
                         <p>{bill.clientName}</p>
