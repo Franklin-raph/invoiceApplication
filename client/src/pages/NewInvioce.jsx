@@ -9,6 +9,7 @@ const NewInvioce = () => {
 
     const [clientName, setClientName] = useState("")
     const [clientEmail, setClientEmail] = useState("")
+    const [clientPhone, setClientPhone] = useState("")
     const [clientCountry, setClientCountry] = useState("")
     const [clientCity, setClientCity] = useState("")
     const [clientStreetAddress, setClientStreetAddress] = useState("")
@@ -117,10 +118,18 @@ const NewInvioce = () => {
                             <h1>Client's Name</h1>
                             <input type="text" value={clientName} onChange={e => setClientName(e.target.value)} placeholder='Frank' className="focus:outline-none border-gray-800 rounded-[4px] border-[1px] pl-3 py-2 w-full bg-[#141625]" />
                         </label>
-                        <div className="block my-3 w-full">
-                            <h1>Client's Email</h1>
-                            <input type="text" value={clientEmail} onChange={e => setClientEmail(e.target.value)} placeholder='client@gmail.com' className="focus:outline-none border-gray-800 rounded-[4px] border-[1px] pl-3 py-2 w-full bg-[#141625]" />
+
+                        <div className='flex items-center md:gap-4 flex-col md:flex-row'>
+                            <div className="block my-3 w-full">
+                                <h1>Client's Email</h1>
+                                <input type="text" value={clientEmail} onChange={e => setClientEmail(e.target.value)} placeholder='client@gmail.com' className="focus:outline-none border-gray-800 rounded-[4px] border-[1px] pl-3 py-2 w-full bg-[#141625]" />
+                            </div>
+                            <div className="block my-3 w-full">
+                                <h1>Client's Phone Number</h1>
+                                <input type="number" value={clientPhone} onChange={e => setClientPhone(e.target.value)} placeholder='+234 813 936 296 9' className="focus:outline-none border-gray-800 rounded-[4px] border-[1px] pl-3 py-2 w-full bg-[#141625]" />
+                            </div>
                         </div>
+
                         <div className='flex items-center md:gap-4 flex-col md:flex-row'>
                             <div className="block my-3 w-full">
                                 <h1>Client's Country</h1>

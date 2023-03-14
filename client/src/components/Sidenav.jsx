@@ -22,7 +22,7 @@ const Sidenav = ({ toggleBackground }) => {
                 <div className='w-full'>
                     <div className="flex flex-col justify-center items-center mt-5 text-white gap-2 pb-1">
                         <i className="ph ph-scroll text-[38px]"></i>
-                        <p>Invoice</p>
+                        <p>e-Invoice</p>
                     </div>
                     <div className='border-t-2 border-gray-700 w-full'></div>
                 </div>
@@ -36,7 +36,7 @@ const Sidenav = ({ toggleBackground }) => {
                         <p>New Invoice</p>
                     </Link>
                     <Link to='/clients' className={currentLocation.includes('/clients') ? "mt-5 flex items-center justify-start gap-2 text-white w-full bg-[#7B5EF8] py-2 rounded-lg pl-2" : "mt-5 flex items-center justify-start gap-2 text-white w-full py-2 rounded-lg pl-2"}>
-                        <i className="ph ph-users text-[24px]"></i>
+                        <i className="ph ph-users-three text-[24px]"></i>
                         <p>Clients</p>
                     </Link>
                     <Link to='/settings' className={currentLocation.includes('/settings') ? "mt-5 flex items-center justify-start gap-2 text-white w-full bg-[#7B5EF8] py-2 rounded-lg pl-2" : "mt-5 flex items-center justify-start gap-2 text-white w-full py-2 rounded-lg pl-2"}>

@@ -75,8 +75,8 @@ const Invoicecard = ({ billData }) => {
                         if (searchWord === "") return bill
                         else if (bill.clientName.toLowerCase().includes(searchWord.toLowerCase()) || bill.status.toLowerCase().includes(searchWord.toLowerCase())) return bill
                     }).map((bill) => (
-                        <tbody>
-                            <tr key={bill._id} onClick={() => navigate(`/invoicepreview/${bill._id}`)} className="hover:cursor-pointer">
+                        <tbody key={bill._id}>
+                            <tr onClick={() => navigate(`/invoicepreview/${bill._id}`)} className="hover:cursor-pointer">
                                 <td className="text-white">#{bill._id.toString().substring(0, 6).toUpperCase()}...</td>
                                 <td>{bill.invoiceDate}</td>
                                 <td>{bill.clientName}</td>

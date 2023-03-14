@@ -367,7 +367,7 @@ const PreviewInvoice = () => {
             {
                 warningModal &&
                 <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-[51]">
-                    <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
+                    <div className='bg-white flex items-center justify-center py-10 px-5 w-[85%] lg:w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
                         <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setWarningModal(!warningModal)}></i>
                         <i className="ri-error-warning-fill text-7xl text-yellow-500"></i>
                         <p>Please Mark the bill as <span className='px-1 py-[1px] bg-green-500 text-white rounded-sm'>Paid</span> before you can confirm this purchase</p>

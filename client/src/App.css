@@ -177,8 +177,60 @@ body {
     place-items: center;
 }
 
+svg {
+    filter: invert(1);
+    width: 25px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0;
+    /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    /* Firefox */
+}
+
+.clientInfo {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.clientInfo p,
+.clientInfo a,
+.clientInfo i {
+    color: #1F213A;
+    font-size: 18px;
+}
+
+.clientInfo i {
+    font-size: 28px;
+}
+
 @media screen and (max-width: 768px) {
     .searchAndText {
         grid-template-columns: 1fr;
+    }
+
+    .clientInfo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .clientInfo p,
+    .clientInfo a,
+    .clientInfo i {
+        font-size: 16px;
+    }
+
+    .clientInfo i {
+        font-size: 18px;
     }
 }
