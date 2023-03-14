@@ -47,7 +47,7 @@ const InputItemComponent = () => {
     }
 
     return (
-        <div className='relative'>
+        <div className='relative w-full mx-auto lg:ml-[6rem]'>
             {message && <Alert message={message} alertType={alertType} />}
             <h1 className='text-center text-white text-2xl font-bold mt-[5rem] mb-3'>Enter Purchased Item Details</h1>
             <div className="flex flex-col px-4 items-start md:flex-row md:items-center w-[90%] md:w-[80%] mx-auto justify-center gap-4 bg-[#1F213A] py-4 rounded-md text-white">

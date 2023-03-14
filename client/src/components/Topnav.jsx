@@ -17,7 +17,7 @@ const Topnav = ({ toggleBackground }) => {
 
 
     return (
-        <div className="lg:hidden pb-3 px-7 top-0 fixed z-[999] w-full flex items-center justify-between bg-[#1F213A] rounded-br-xl">
+        <div className="lg:hidden pb-3 px-7 top-0 fixed z-[999] w-full flex items-center justify-between bg-[#1F213A]">
             <Link to='/' className="logo mt-5"><i className="ph-house text-white text-[30px]"></i></Link>
             <div className="flex justify-center items-center gap-3">
                 {/* <i className="ph-sun-dim hover:cursor-pointer text-white text-2xl" onClick={toggleBackground}></i> */}

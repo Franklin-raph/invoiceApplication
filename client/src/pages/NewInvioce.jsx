@@ -78,7 +78,7 @@ const NewInvioce = () => {
     }
 
     return (
-        <div className="md:px-[100px] px-5">
+        <div className="md:px-[100px] px-5 mx-auto w-full md:w-[90%]">
             <div className="text-white mt-20 w-full md:w-[80%] mx-auto justify-between gap-[5rem] bg-[#1F213A] p-8 rounded-md mb-10 relative">
                 {message && <Alert message={message} alertType={alertType} />}
                 {loading && <LoadingSpinner />}

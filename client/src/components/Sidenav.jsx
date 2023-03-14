@@ -16,7 +16,7 @@ const Sidenav = ({ toggleBackground }) => {
 
     return (
         <div className="hidden pb-3 top-0 bottom-0 left-0 fixed z-50 h-full lg:flex items-center justify-between flex-col w-[15%] bg-[#1F213A]">
-            <div className="flex flex-col justify-center items-center w-full px-4">
+            <div className="flex flex-col justify-center items-center w-full px-4 sideNav">
                 <p className='mt-10 text-white'>Logo</p>
                 <Link to='/' className="logo mt-5 flex items-center justify-start gap-2 text-white w-full bg-[#7B5EF8] py-2 rounded-lg pl-2">
                     <i className="ph-house text-[24px]"></i>
@@ -37,10 +37,9 @@ const Sidenav = ({ toggleBackground }) => {
             </div>
 
             <div className='w-full'>
-                <div className='border-t-2 border-gray-500 w-full '></div>
-
-                <div className="logo mt-5 flex items-center justify-start gap-2 text-white w-full py-2 rounded-lg pl-2">
-                    <i className="ri-logout-box-r-line text-white text-center text-2xl hover:cursor-pointer" onClick={logout}></i>
+                <div className='border-t-2 border-gray-500 w-full'></div>
+                <div className="w-[90%] mx-auto pl-2 mt-5 flex items-center justify-start gap-2 text-white py-1 rounded-lg hover:cursor-pointer hover:bg-[#141625]">
+                    <i className="ri-logout-box-r-line text-white text-center text-2xl" onClick={logout}></i>
                     <p>Logout</p>
                 </div>
             </div>

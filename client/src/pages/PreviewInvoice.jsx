@@ -200,14 +200,14 @@ const PreviewInvoice = () => {
 
 
     return (
-        <div className='text-white w-[90%] md:w-[80%] mx-auto mt-24'>
+        <div className='text-white w-[90%] md:w-[75%] mx-auto lg:ml-[15rem] mt-24'>
             {loading && <LoadingSpinner />}
             {billInfo && billInfo.status === "Paid" ?
                 <div className="flex flex-col md:flex-row md:items-center items-start justify-between gap-[5rem] bg-[#1F213A] py-5 px-6 rounded-md">
                     <div className='flex items-center gap-4'>
                         <p>Status</p>
                         <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                            <span className="p-[4px] bg-green-800 rounded-full"></span>
+                            <i className="ri-checkbox-circle-line p-[3px] text-green-400"></i>
                             <p className="font-[600] text-green-400">Paid</p>
                         </div>
                     </div>
@@ -222,11 +222,12 @@ const PreviewInvoice = () => {
                         <>
                             {!paidState ?
                                 <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                                    <span className="p-[4px] bg-yellow-600 rounded-full"></span>
+                                    {/* <span className="p-[4px] bg-yellow-600 rounded-full"></span> */}
+                                    <i className="ri-time-line p-[4px] text-yellow-600"></i>
                                     <p className="font-[600] text-yellow-400">Pending</p>
                                 </div> :
                                 <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                                    <span className="p-[4px] bg-green-800 rounded-full"></span>
+                                    <i className="ri-checkbox-circle-line p-[3px] text-green-400"></i>
                                     <p className="font-[600] text-green-400">Paid</p>
                                 </div>
                             }
@@ -323,10 +324,15 @@ const PreviewInvoice = () => {
                     {billInfo &&
                         <div className='text-white flex items-center'>
                             <i className="ph-currency-ngn"></i>
-                            <p>{billInfo.grandTotal.toLocaleString('en-US', {
-                                style: 'currency',
-                                currency: 'NGN',
-                            }).toString().slice(4)}</p>
+                            {billInfo.grandTotal ?
+                                <p className='font-bold'>
+                                    {billInfo.grandTotal.toLocaleString('en-US', {
+                                        style: 'currency',
+                                        currency: 'NGN',
+                                    }).toString().slice(4)}
+                                </p> :
+                                <p>0</p>
+                            }
                         </div>
                     }
                 </div>
@@ -360,7 +366,7 @@ const PreviewInvoice = () => {
 
             {
                 warningModal &&
-                <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-10">
+                <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-[51]">
                     <div className='bg-white flex items-center justify-center py-10 px-5 w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
                         <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setWarningModal(!warningModal)}></i>
                         <i className="ri-error-warning-fill text-7xl text-yellow-500"></i>
@@ -372,7 +378,7 @@ const PreviewInvoice = () => {
 
             {
                 fileGenerateModal &&
-                <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-10">
+                <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-[51]">
                     <div className='bg-white flex items-center justify-center py-10 px-5 w-[90%] mt-[80px] md:w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
                         <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setFileGenerateModal(!fileGenerateModal)}></i>
                         <i className="ri-checkbox-circle-fill text-7xl text-green-600"></i>

@@ -74,7 +74,7 @@ const ItemListContainer = ({ previousItemList, clientBillInfo }) => {
     }
 
     return (
-        <div className="w-[90%] md:w-[80%] mx-auto my-[4rem] relative">
+        <div className="w-[90%] md:w-[80%] mx-auto lg:ml-[14rem] my-[4rem] relative">
             {loading && <LoadingSpinner />}
             {items &&
                 <>
@@ -97,7 +97,7 @@ const ItemListContainer = ({ previousItemList, clientBillInfo }) => {
                 <div className="my-[1rem]">
                     <p className='text-white text-lg'>Previously Purchased Items <span className='text-[16px] font-normal'>({previousItemList.length})</span></p>
                     {previousItemList.map((previousItem) =>
-                        <div key={previousItem._id}>
+                        <div key={previousItem._id} className="my-5">
                             <PreviousItemListComponent previousItem={previousItem} previousItemList={previousItemList} />
                         </div>
                     ).reverse()}

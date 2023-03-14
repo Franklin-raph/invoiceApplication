@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const Alert = ({ message, alertType }) => {
     const billId = localStorage.getItem("billId")
     return (
-        <div className=" flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-10">
+        <div className=" flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-[51]">
             <div className='bg-white flex items-center justify-center mt-[90px] lg:mt-0 py-10 px-5 w-[80%] lg:w-1/3 gap-4 flex-col rounded-lg'>
 
                 {alertType === "Danger" ?

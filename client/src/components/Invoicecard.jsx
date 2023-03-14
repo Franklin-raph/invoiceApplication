@@ -28,24 +28,29 @@ const Invoicecard = ({ billData }) => {
                             <p className='text-sm'>Due {bill.invoiceDate}</p>
                             <div className='flex items-center'>
                                 <i className="ph-currency-ngn"></i>
-                                <p className='font-bold'>{bill.grandTotal.toLocaleString('en-US', {
-                                    style: 'currency',
-                                    currency: 'NGN',
-                                }).toString().slice(4)}</p>
+                                {bill.grandTotal ?
+                                    <p className='font-bold'>
+                                        {bill.grandTotal.toLocaleString('en-US', {
+                                            style: 'currency',
+                                            currency: 'NGN',
+                                        }).toString().slice(4)}
+                                    </p> :
+                                    <p>0</p>
+                                }
                             </div>
                         </div>
                         <div className="flex items-center gap-3">
                             {bill.status === "Pending" ?
                                 <div className="flex items-center gap-3">
                                     <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                                        <span className="p-[4px] bg-yellow-600 rounded-full"></span>
+                                        <i className="ri-time-line p-[3px] text-yellow-600"></i>
                                         <p className="font-[600] text-yellow-400">{bill.status}</p>
                                     </div>
                                 </div>
                                 :
                                 <div className="flex items-center gap-3">
                                     <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                                        <span className="p-[4px] bg-green-800 rounded-full"></span>
+                                        <i className="ri-checkbox-circle-line p-[3px] text-green-800"></i>
                                         <p className="font-[600] text-green-400">{bill.status}</p>
                                     </div>
                                 </div>
@@ -77,26 +82,29 @@ const Invoicecard = ({ billData }) => {
                                 <td>{bill.clientName}</td>
                                 <td className='text-white flex items-center'>
                                     <i className="ph-currency-ngn"></i>
-                                    <p className='font-bold'>
-                                        {bill.grandTotal.toLocaleString('en-US', {
-                                            style: 'currency',
-                                            currency: 'NGN',
-                                        }).toString().slice(4)}
-                                    </p>
+                                    {bill.grandTotal ?
+                                        <p className='font-bold'>
+                                            {bill.grandTotal.toLocaleString('en-US', {
+                                                style: 'currency',
+                                                currency: 'NGN',
+                                            }).toString().slice(4)}
+                                        </p> :
+                                        <p>0</p>
+                                    }
                                 </td>
                                 <td>
                                     {bill.status === "Pending" ?
                                         <div className="flex items-center gap-3">
                                             <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                                                <span className="p-[4px] bg-yellow-600 rounded-full"></span>
+                                                <i className="ri-time-line p-[3px] text-yellow-600"></i>
                                                 <p className="font-[600] text-yellow-400">{bill.status}</p>
                                             </div>
                                         </div>
                                         :
                                         <div className="flex items-center gap-3">
                                             <div className="py-[5px] px-3 bg-[#202B3F] rounded-md flex items-center gap-2">
-                                                <span className="p-[4px] bg-green-800 rounded-full"></span>
-                                                <p className="font-[600] text-green-400">{bill.status}</p>
+                                                <i className="ri-checkbox-circle-line p-[3px] text-green-400"></i>
+                                                <p className="font-[600] text-green-600">{bill.status}</p>
                                             </div>
                                         </div>
                                     }
