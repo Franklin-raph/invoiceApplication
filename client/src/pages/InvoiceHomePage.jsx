@@ -20,7 +20,7 @@ const InvoiceHomePage = () => {
 
     useEffect(() => {
         if (vendorData) {
-            navigate('/')
+            navigate('/home')
         }
         if (logedInVendor === null) {
             navigate('/login')

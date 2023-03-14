@@ -11,6 +11,7 @@ import Itemlist from './pages/Itemlist'
 import PreviewInvoice from './pages/PreviewInvoice'
 import { useState } from 'react'
 import VendorSettings from './pages/VendorSettings'
+import Clients from './pages/Clients'
 
 function App() {
 
@@ -28,8 +29,8 @@ function App() {
       <Router>
         {logedInVendor && <Sidenav toggleBackground={toggleBackground} />}
         {logedInVendor && <Topnav toggleBackground={toggleBackground} />}
-        {/* <Sidenav /> */}
         <Routes>
+          <Route path='/home' element={<InvoiceHomePage />} />
           <Route path='/' element={<InvoiceHomePage />} />
           <Route path='/newinvoice' element={<NewInvioce />} />
           <Route path='/register' element={<Register />} />
@@ -37,6 +38,7 @@ function App() {
           <Route path='/itemlist/:billId' element={<Itemlist />} />
           <Route path='/invoicepreview/:billId' element={<PreviewInvoice />} />
           <Route path='/settings' element={<VendorSettings />} />
+          <Route path='/clients' element={<Clients />} />
         </Routes>
       </Router>
     </div>

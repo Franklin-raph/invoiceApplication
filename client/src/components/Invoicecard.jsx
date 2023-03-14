@@ -9,7 +9,7 @@ const Invoicecard = ({ billData }) => {
 
     return (
         <div className="text-white grid gap-5 pb-9 w-full mx-auto relative">
-            <div className='flex justify-between w-full items-center'>
+            <div className='searchAndText'>
                 <p className='w-full'>Recent Invoices</p>
                 <SearchBar setSearchWord={setSearchWord} />
             </div>

@@ -170,3 +170,15 @@ body {
     background-color: #141625;
     transition: .5s;
 }
+
+.searchAndText {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    place-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .searchAndText {
+        grid-template-columns: 1fr;
+    }
+}

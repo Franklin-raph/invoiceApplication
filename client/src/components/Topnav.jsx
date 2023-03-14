@@ -21,9 +21,10 @@ const Topnav = ({ toggleBackground }) => {
             <Link to='/' className="logo mt-5"><i className="ph-house text-white text-[30px]"></i></Link>
             <div className="flex justify-center items-center gap-3">
                 {/* <i className="ph-sun-dim hover:cursor-pointer text-white text-2xl" onClick={toggleBackground}></i> */}
-                <img src={userPic} className="rounded-full w-10" alt="" />
+                {/* <img src={userPic} className="rounded-full w-10" alt="" /> */}
             </div>
-            <i className="ri-logout-box-r-line text-white text-center text-2xl hover:cursor-pointer" onClick={logout}></i>
+            <i className="ri-menu-3-line text-white text-center text-2xl hover:cursor-pointer"></i>
+            {/* <i className="ri-logout-box-r-line text-white text-center text-2xl hover:cursor-pointer" onClick={logout}></i> */}
         </div>
     )
 }

@@ -30,7 +30,8 @@ export const updateVendor = createAsyncThunk(
 )
 
 export const logoutVendor = () => {
-    location.href = '/'
+    console.log("logout")
+    location.href = '/login'
     localStorage.removeItem('vendorInfo')
 }
 
