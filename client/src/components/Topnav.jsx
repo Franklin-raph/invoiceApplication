@@ -30,7 +30,7 @@ const Topnav = ({ toggleBackground, toggleNavOpen, toggleNavClose }) => {
     return (
         <div className="lg:hidden pb-3 px-7 top-0 fixed z-[999] w-full flex items-center justify-between bg-[#1F213A]">
             <Link to='/home' className="logo mt-5"><i className="ph ph-scroll text-white text-[30px]"></i></Link>
-            {toggleState ? <i className="ri-menu-3-line text-white text-center text-2xl hover:cursor-pointer" onClick={navOpen}></i> : <i className="ri-menu-2-line text-white text-center text-2xl hover:cursor-pointer" onClick={navClose}></i>}
+            {toggleState ? <i className="ri-menu-3-line text-white text-center text-2xl hover:cursor-pointer" onClick={navOpen}></i> : <i className="ri-close-circle-line text-white text-center text-2xl hover:cursor-pointer" onClick={navClose}></i>}
         </div>
     )
 }
