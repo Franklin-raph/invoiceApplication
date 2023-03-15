@@ -233,4 +233,8 @@ input[type=number] {
     .clientInfo i {
         font-size: 18px;
     }
+
+    .transitionClass {
+        transition: botttom 5s;
+    }
 }

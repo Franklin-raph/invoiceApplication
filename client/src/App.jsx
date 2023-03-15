@@ -12,23 +12,33 @@ import PreviewInvoice from './pages/PreviewInvoice'
 import { useState } from 'react'
 import VendorSettings from './pages/VendorSettings'
 import Clients from './pages/Clients'
+import BottomNav from './components/BottomNav'
 
 function App() {
 
   const logedInVendor = localStorage.getItem('vendorInfo')
   const [darkToggle, setDarkToggle] = useState(false)
+  const [navValue, setNavValue] = useState(-200)
 
   function toggleBackground() {
     console.log(darkToggle)
     setDarkToggle(!darkToggle)
   }
 
+  function toggleNavOpen() {
+    setNavValue(0)
+  }
+
+  function toggleNavClose() {
+    setNavValue(-200)
+  }
+
 
   return (
-    <div className={`${darkToggle && 'dark'}`}>
+    <div className={`${darkToggle && 'dark'} relative`}>
       <Router>
         {logedInVendor && <Sidenav toggleBackground={toggleBackground} />}
-        {logedInVendor && <Topnav toggleBackground={toggleBackground} />}
+        {logedInVendor && <Topnav toggleNavOpen={toggleNavOpen} toggleNavClose={toggleNavClose} toggleBackground={toggleBackground} />}
         <Routes>
           <Route path='/home' element={<InvoiceHomePage />} />
           <Route path='/' element={<InvoiceHomePage />} />
@@ -40,6 +50,7 @@ function App() {
           <Route path='/settings' element={<VendorSettings />} />
           <Route path='/clients' element={<Clients />} />
         </Routes>
+        {logedInVendor && <BottomNav navValue={navValue} toggleBackground={toggleBackground} />}
       </Router>
     </div>
   )

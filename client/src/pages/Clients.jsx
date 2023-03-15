@@ -41,7 +41,7 @@ const Clients = () => {
     }
 
     return (
-        <div className="lg:px-[100px] px-5 lg:ml-[10rem] mx-auto w-full lg:w-[90%] mb-10">
+        <div className="lg:px-[100px] px-5 lg:ml-[10rem] mx-auto w-full lg:w-[90%] md:mt-2 mt-[6rem] md:mb-2 mb-[10rem]">
             {loading && <LoadingSpinner />}
             <div className="text-white mt-20 w-full lg:w-[90%] mx-auto">
                 <div className='searchAndText'>

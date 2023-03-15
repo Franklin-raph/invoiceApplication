@@ -80,7 +80,7 @@ const Invoicecard = ({ billData }) => {
                                 <td className="text-white">#{bill._id.toString().substring(0, 6).toUpperCase()}...</td>
                                 <td>{bill.invoiceDate}</td>
                                 <td>{bill.clientName}</td>
-                                <td className='text-white flex items-center'>
+                                <td className='text-white flex items-center justify-center mt-2'>
                                     <i className="ph-currency-ngn"></i>
                                     {bill.grandTotal ?
                                         <p className='font-bold'>
