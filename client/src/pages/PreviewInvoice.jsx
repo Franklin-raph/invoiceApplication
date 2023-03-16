@@ -10,8 +10,9 @@ import html2canvas from 'html2canvas'
 import LoadingSpinner from '../components/LoaderComponent';
 // import 'boxicons'
 
-const PreviewInvoice = () => {
+const PreviewInvoice = ({ baseUrl }) => {
 
+    // console.log(baseUrl)
     useEffect(() => {
         if (!vendorData) {
             console.log("Not logged in")
@@ -56,7 +57,7 @@ const PreviewInvoice = () => {
 
     async function getCurrentBillInfo() {
         setLoading(true)
-        const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/billInfo/${billId}`, {
+        const res = await fetch(`${baseUrl}/clienbillinfo/billInfo/${billId}`, {
             headers: {
                 Authorization: `Bearer ${vendorData.token}`
             },
@@ -108,8 +109,9 @@ const PreviewInvoice = () => {
     }
 
     async function deleteClientBillInfo() {
+        console.log(baseUrl)
         setLoading(true)
-        const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/deleteBill/${billId}`, {
+        const res = await fetch(`${baseUrl}/clienbillinfo/deleteBill/${billId}`, {
             method: "DELETE",
             headers: {
                 'Content-type': "application/json",
@@ -144,7 +146,7 @@ const PreviewInvoice = () => {
         setLoading(true)
 
         // console.log()
-        const res = await fetch(`https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/updatebillinfo/${billId}`, {
+        const res = await fetch(`${baseUrl}/clienbillinfo/updatebillinfo/${billId}`, {
             method: "PUT",
             headers: {
                 'Content-type': "application/json",
@@ -301,8 +303,8 @@ const PreviewInvoice = () => {
                         </thead>
                         {billInfo &&
                             billInfo.itemList.map((item) => (
-                                <tbody>
-                                    <tr key={item._id} >
+                                <tbody key={item._id} >
+                                    <tr>
                                         <td className="font-bold text-white">{item.itemName}</td>
                                         <td>{item.itemQuantity}</td>
                                         <td>{item.itemPrice}</td>

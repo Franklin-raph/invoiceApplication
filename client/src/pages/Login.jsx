@@ -5,7 +5,7 @@ import Alert from '../components/Alert'
 import { useSelector } from 'react-redux'
 import LoadingSpinner from '../components/LoaderComponent'
 
-const Login = () => {
+const Login = ({ baseUrl }) => {
 
     // const [isLoading, setIsLoading] = useState(false)
     const [email, setEmail] = useState("")
@@ -26,7 +26,7 @@ const Login = () => {
     const handleVedorLogin = async (e) => {
         setLoading(true)
         e.preventDefault();
-        const response = await fetch('https://invoice-application-0qd7.onrender.com/api/v1/auth/login', {
+        const response = await fetch(`${baseUrl}/auth/login`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

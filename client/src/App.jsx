@@ -19,6 +19,7 @@ function App() {
   const logedInVendor = localStorage.getItem('vendorInfo')
   const [darkToggle, setDarkToggle] = useState(false)
   const [navValue, setNavValue] = useState(-200)
+  const [baseUrl, setBaseUrl] = useState("https://invoice-application-0qd7.onrender.com/api/v1")
 
   function toggleBackground() {
     console.log(darkToggle)
@@ -40,13 +41,13 @@ function App() {
         {logedInVendor && <Sidenav toggleBackground={toggleBackground} />}
         {logedInVendor && <Topnav toggleNavOpen={toggleNavOpen} toggleNavClose={toggleNavClose} toggleBackground={toggleBackground} />}
         <Routes>
-          <Route path='/home' element={<InvoiceHomePage />} />
+          <Route path='/home' element={<InvoiceHomePage baseUrl={baseUrl} />} />
           <Route path='/' element={<InvoiceHomePage />} />
           <Route path='/newinvoice' element={<NewInvioce />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
           <Route path='/itemlist/:billId' element={<Itemlist />} />
-          <Route path='/invoicepreview/:billId' element={<PreviewInvoice />} />
+          <Route path='/invoicepreview/:billId' element={<PreviewInvoice baseUrl={baseUrl} />} />
           <Route path='/settings' element={<VendorSettings />} />
           <Route path='/clients' element={<Clients />} />
         </Routes>
