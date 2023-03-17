@@ -24,6 +24,7 @@ const Login = ({ baseUrl }) => {
 
 
     const handleVedorLogin = async (e) => {
+        console.log(baseUrl)
         setLoading(true)
         e.preventDefault();
         const response = await fetch(`${baseUrl}/auth/login`, {

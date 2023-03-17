@@ -48,15 +48,15 @@ const StepOne = ({ vendorDetails, nextStep, setFname, setLname, setEmail, setPas
                     </label>
                     <label className="block my-3">
                         <h1>Email</h1>
-                        <input onChange={(e) => setEmail(e.target.value)} value={vendorDetails.email} type="text" placeholder='Email' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full  mt-2" />
+                        <input onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder='Email' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full  mt-2" />
                     </label>
                     <label className="block my-3">
                         <h1>Password</h1>
-                        <input onChange={(e) => setPassword(e.target.value)} value={vendorDetails.password} type="password" placeholder='Password' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
+                        <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder='Password' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
                     </label>
                     <label className="block my-3">
                         <h1>Confirm Password</h1>
-                        <input onChange={(e) => setConfirmPassword(e.target.value)} value={vendorDetails.confirmPassword} type="password" placeholder='Confirm Password' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
+                        <input onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} type="password" placeholder='Confirm Password' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
                     </label>
                     <div className="flex justify-between items-center flex-col lg:flex-row">
                         <p className="text-center py-3 pb-5">Already have an account? <Link to='/login' className="underline">Sign In</Link> </p>

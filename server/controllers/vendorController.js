@@ -87,7 +87,6 @@ const updateVendorAccount = async (req, res) => {
     const vendorId = req.params.id
 
     try {
-        
         // Checking if the vendor exists
         if(await Vendor.findById(req.vendor) === null) return res.status(404).json({Msg: "Vendor not found"})
         const signedInvendorId = await Vendor.findById(req.vendor.id)

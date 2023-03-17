@@ -80,7 +80,7 @@ const NewInvioce = () => {
 
     return (
         <div className="md:px-[100px] px-5 mx-auto w-full md:w-[90%] md:mt-2 mt-[6rem] md:mb-2 mb-[10rem]">
-            <div className="text-white mt-20 w-full md:w-[80%] mx-auto justify-between gap-[5rem] bg-[#1F213A] p-8 rounded-md mb-10 relative">
+            <div className="text-white mt-20 w-full md:w-[80%] mx-auto justify-between gap-[5rem] bg-[#1F213A] px-4 py-8 md:p-8 rounded-md mb-10 relative">
                 {message && <Alert message={message} alertType={alertType} />}
                 {loading && <LoadingSpinner />}
                 <h1 className='text-xl font-bold'>Create Billing Info</h1>

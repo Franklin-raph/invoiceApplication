@@ -7,6 +7,7 @@ import LoadingSpinner from '../components/LoaderComponent'
 
 
 const Clients = () => {
+    const [searchWord, setSearchWord] = useState("")
 
     const navigate = useNavigate()
     const dispatch = useDispatch();
@@ -46,10 +47,13 @@ const Clients = () => {
             <div className="text-white mt-20 w-full lg:w-[90%] mx-auto">
                 <div className='searchAndText'>
                     <h1 className='w-full'>My Clients</h1>
-                    <SearchBar />
+                    <SearchBar setSearchWord={setSearchWord} />
                 </div>
                 <div className='relative grid grid-cols-1 lg:grid-cols-2 gap-3 mt-3'>
-                    {billData && billData.data.map(client => (
+                    {billData && billData.data.filter((client) => {
+                        if (searchWord === "") return client
+                        else if (client.clientName.toLowerCase().includes(searchWord.toLowerCase())) return client
+                    }).map((client) => (
                         <div onClick={() => viewClientInfo(client._id)} key={client._id} className="bg-[#1F213A] p-5 rounded-md hover:cursor-pointer flex items-center justify-between">
                             <p>{client.clientName}</p>
                             <i className="ph ph-eye text-[20px]"></i>
