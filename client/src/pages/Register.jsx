@@ -11,6 +11,7 @@ const Register = () => {
     const [fName, setFname] = useState("")
     const [lName, setLname] = useState("")
     const [email, setEmail] = useState("")
+    const [businessContact, setBusinessContact] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const [businessName, setBusinessName] = useState("")
@@ -48,7 +49,7 @@ const Register = () => {
 
     const vendorDetails = {
         fName, lName, email, password, city, streetAddress, postalCode, country,
-        businessName, businessOwnersName, businessType, businessWesite, confirmPassword
+        businessName, businessOwnersName, businessType, businessWesite, confirmPassword, businessContact
     }
 
     switch (formStep) {
@@ -61,7 +62,7 @@ const Register = () => {
             return (
                 <StepTwo vendorDetails={vendorDetails} nextStep={nextStep} prevStep={prevStep}
                     setBusinessName={setBusinessName} setBusinessType={setBusinessType}
-                    setBusinessOwnersName={setBusinessOwnersName} setBusinessWesite={setBusinessWesite} />
+                    setBusinessOwnersName={setBusinessOwnersName} setBusinessContact={setBusinessContact} />
             )
         case 3:
             return (

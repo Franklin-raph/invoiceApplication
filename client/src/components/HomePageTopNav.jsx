@@ -34,6 +34,19 @@ const HomePageTopNav = ({ billData }) => {
                         </Link>
                     </div>
                     <div className='items-center justify-between p-5 flex bg-[#7B5EF8] w-full rounded-lg'>
+                        <div className='flex items-start justify-between flex-col'>
+                            <p>Todo - 2 / 3</p>
+                            <p className='font-bold text-xl flex gap-[1px] items-center'>Update Your Porfle</p>
+                            {/* <p className=''><i className="ph ph-currency-gbp"></i>100 million</p> */}
+                        </div>
+                        <Link to="/settings">
+                            <div className="flex items-center justify-between bg-[#1F213A] rounded-full gap-2 py-1 px-2 hover:cursor-pointer">
+                                <i className="ri-pencil-fill text-xl"></i>
+                                <p className="hidden lg:block">Update Profile</p>
+                            </div>
+                        </Link>
+                    </div>
+                    {/* <div className='items-center justify-between p-5 flex bg-[#7B5EF8] w-full rounded-lg'>
                         <div className='flex items-center justify-between flex-col'>
                             <p>Total Income</p>
                             <p className='font-bold text-xl flex gap-[1px] items-center'><i className="ph ph-currency-gbp"></i>100 million</p>
@@ -44,7 +57,7 @@ const HomePageTopNav = ({ billData }) => {
                                 <p className="hidden lg:block">View Transactions</p>
                             </div>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

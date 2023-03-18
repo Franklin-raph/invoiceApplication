@@ -13,7 +13,7 @@ const VendorSchema = mongoose.Schema({
         type: String,
         required: [true, "Please Provide an email"]
     },
-    phone:{
+    businessContact:{
         type: String,
     },
     password: {

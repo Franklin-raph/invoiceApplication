@@ -8,7 +8,7 @@ const StepFour = ({ vendorDetails, prevStep }) => {
 
     const {
         fName, lName, email, password, city, streetAddress, postalCode, country,
-        businessName, businessOwnersName, businessType, businessWesite, confirmPassword
+        businessName, businessOwnersName, businessType, businessWesite, confirmPassword, businessContact
     } = vendorDetails
 
     const navigate = useNavigate()
@@ -27,7 +27,7 @@ const StepFour = ({ vendorDetails, prevStep }) => {
             body: JSON.stringify({
                 fName, lName, email, password,
                 businessName, businessType, businessOwnersName,
-                businessWesite, country, city, streetAddress, postalCode
+                businessWesite, country, city, streetAddress, postalCode, businessContact
             })
         })
         if (response) {
@@ -78,7 +78,7 @@ const StepFour = ({ vendorDetails, prevStep }) => {
                         </div>
                         <div className="flex flex-col md:flex-row items-start md:items-center gap-3">
                             <p> <span className="font-bold text-gray-700">Business Type:</span> {businessType}</p>
-                            <p><span className="font-bold text-gray-700 ml-0 md:ml-[90px]">Business Website:</span> {businessWesite} </p>
+                            <p><span className="font-bold text-gray-700 ml-0 md:ml-[90px]">Business Contact:</span> {businessContact} </p>
                         </div>
                     </div>
 

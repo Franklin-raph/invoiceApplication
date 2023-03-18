@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import LoginImage from '../assets/images/teaching-img.png'
 
-const StepTwo = ({ vendorDetails, nextStep, prevStep, setBusinessName, setBusinessType, setBusinessOwnersName, setBusinessWesite }) => {
+const StepTwo = ({ vendorDetails, nextStep, prevStep, setBusinessName, setBusinessType, setBusinessOwnersName, setBusinessContact }) => {
     const [error, setError] = useState("")
 
     function validateFieldsAndUpdateStep(e) {
         e.preventDefault()
-        if (!vendorDetails.businessName || !vendorDetails.businessType || !vendorDetails.businessOwnersName || !vendorDetails.businessWesite) {
+        if (!vendorDetails.businessName || !vendorDetails.businessType || !vendorDetails.businessOwnersName || !vendorDetails.businessContact) {
             setError("Fill in all fields")
             setTimeout(() => {
                 setError("")
@@ -41,7 +41,7 @@ const StepTwo = ({ vendorDetails, nextStep, prevStep, setBusinessName, setBusine
                     </label>
                     <label className="block my-3">
                         <h1>Business Website</h1>
-                        <input onChange={(e) => setBusinessWesite(e.target.value)} value={vendorDetails.businessWesite} type="text" placeholder='https://www.franklinraphael.com' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
+                        <input onChange={(e) => setBusinessContact(e.target.value)} value={vendorDetails.businessContact} type="text" placeholder='081 393 6296 9' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
                     </label>
                     <div className="flex items-center justify-between">
                         <button onClick={() => prevStep()} className="flex justify-center items-center border-gray-300 rounded-[4px] border-[1px] px-3 py-1 hover:bg-slate-500 hover:text-white transition">

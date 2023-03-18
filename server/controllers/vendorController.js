@@ -15,11 +15,11 @@ const createToken = (id) => {
 const registerVendor = async (req, res) => {
 
     const {fName, lName, email, password, businessName, businessType, businessOwnersName, 
-            businessWesite, country, city, streetAddress, phone, postalCode } = req.body
+            businessWesite, country, city, streetAddress, businessContact, postalCode } = req.body
 
     try {
         if(!fName || !lName || !email || !password || !businessName || !businessType || !businessOwnersName 
-            || !businessWesite || !country || !city || !streetAddress || !postalCode) {
+            || !businessContact || !country || !city || !streetAddress || !postalCode) {
             res.status(400).json({msg: "Please fill in all fields"})
             return
         }else{

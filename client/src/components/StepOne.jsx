@@ -40,11 +40,11 @@ const StepOne = ({ vendorDetails, nextStep, setFname, setLname, setEmail, setPas
                     {error && <p className="text-white text-center bg-red-600 py-1 px-2">{error}</p>}
                     <label className="block my-3">
                         <h1>First Name</h1>
-                        <input onChange={(e) => setFname(e.target.value)} value={fName} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
+                        <input onChange={(e) => setFname(e.target.value)} value={fName} type="text" placeholder='First Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
                     </label>
                     <label className="block my-3">
                         <h1>Last Name</h1>
-                        <input onChange={(e) => setLname(e.target.value)} value={lName} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
+                        <input onChange={(e) => setLname(e.target.value)} value={lName} type="text" placeholder='Last Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
                     </label>
                     <label className="block my-3">
                         <h1>Email</h1>
