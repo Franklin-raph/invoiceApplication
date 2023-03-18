@@ -5,6 +5,9 @@ const ClientSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Vendor'
     },
+    clientPhone:{
+        type: String,
+    },
     clientName: {
         type: String,
         required: [true, "Please Provide a name"]

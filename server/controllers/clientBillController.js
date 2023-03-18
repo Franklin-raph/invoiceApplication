@@ -5,11 +5,11 @@ const mongoose = require('mongoose')
 // Register a client purchase item info into the invoice
 const registerClientBillInfo = async (req, res) => {
     const {clientName, clientEmail, clientStreetAddress, clientCountry, clientCity, clientPostalCode, 
-        invoiceDate, paymentTerms, productDescription, itemList, status, grandTotal} = req.body
+        invoiceDate, paymentTerms, productDescription, clientPhone, itemList, status, grandTotal} = req.body
 
         try {
             if(!clientName || !clientEmail || !clientStreetAddress || !clientCountry || !clientCity || !clientPostalCode 
-                || !invoiceDate || !paymentTerms || !productDescription || !status) {
+                || !invoiceDate || !paymentTerms || !productDescription || !status || !clientPhone) {
                 res.status(400).json({msg: "Please fill in all fields"})
                 return
             }else{

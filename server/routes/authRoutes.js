@@ -10,6 +10,6 @@ router.post('/register', registerVendor)
 router.patch('/updateAccount/:id', protectedRoute, updateVendorAccount)
 
 // Protected Route
-router.delete('/deleteAccount/:id', protectedRoute, deleteVendorAccount)
+router.post('/deleteAccount/:id', protectedRoute, deleteVendorAccount)
 
 module.exports = router;

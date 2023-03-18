@@ -13,6 +13,9 @@ const VendorSchema = mongoose.Schema({
         type: String,
         required: [true, "Please Provide an email"]
     },
+    phone:{
+        type: String,
+    },
     password: {
         type: String,
         required: [true, "Please Provide a password"]

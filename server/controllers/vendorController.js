@@ -15,7 +15,7 @@ const createToken = (id) => {
 const registerVendor = async (req, res) => {
 
     const {fName, lName, email, password, businessName, businessType, businessOwnersName, 
-            businessWesite, country, city, streetAddress, postalCode } = req.body
+            businessWesite, country, city, streetAddress, phone, postalCode } = req.body
 
     try {
         if(!fName || !lName || !email || !password || !businessName || !businessType || !businessOwnersName 
@@ -55,8 +55,6 @@ const registerVendor = async (req, res) => {
 // Login a vendor
 const loginVendor = async (req, res) => {
     const { email, password } = req.body
-
-    console.log(req.body)
 
     try {
         // checking if vendor exists or not
@@ -115,6 +113,8 @@ const deleteVendorAccount = async (req, res) => {
     // console.log(req.vendor)
     const vendorId = req.params.id
 
+    const { email, password } = req.body
+
     try {
 
         if(await Vendor.findById(req.vendor) === null) return res.status(404).json({Msg: "Vendor not found"})
@@ -124,9 +124,15 @@ const deleteVendorAccount = async (req, res) => {
 
         if(vendorId !== signedInvendorId._id.toString()) return res.status(401).json({Msg: "Not authorized"})
 
-        await Vendor.findOneAndDelete({_id: vendorId})
+        const vendor = await Vendor.findOne({email})
 
-        res.status(200).json({msg:"Vendor account deleted successfully", vendorId})
+        if(vendor && (await bcrypt.compare(password, vendor.password))){
+            await Vendor.findOneAndDelete({_id: vendorId})
+            res.status(200).json({msg:"Vendor account deleted successfully", vendorId})
+        }else{
+            res.status(400).json({err: "Password is incorrect"})
+        }
+
     } catch (error) {
         res.status(500).json({err: error.message})
     }
