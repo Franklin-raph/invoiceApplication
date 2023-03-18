@@ -5,7 +5,7 @@ import Alert from '../components/Alert'
 import { useNavigate } from 'react-router-dom'
 import LoadingSpinner from '../components/LoaderComponent'
 
-const NewInvioce = () => {
+const NewInvioce = ({ baseUrl }) => {
 
     const [clientName, setClientName] = useState("")
     const [clientEmail, setClientEmail] = useState("")
@@ -29,7 +29,7 @@ const NewInvioce = () => {
         clientName, clientEmail, clientCountry,
         clientCity, clientStreetAddress, clientPostalCode,
         invoiceDate, paymentTerms, productDescription,
-        status: "Pending"
+        status: "Pending", clientPhone
     }
 
     let logedInVendor = JSON.parse(localStorage.getItem('vendorInfo'))
@@ -43,7 +43,7 @@ const NewInvioce = () => {
 
     async function handleClientDetailSubmission(e) {
         e.preventDefault();
-        if (!clientName || !clientEmail || !clientCountry || !clientCity || !clientStreetAddress || !clientPostalCode || !invoiceDate || !paymentTerms || !productDescription) {
+        if (!clientName || !clientPhone || !clientEmail || !clientCountry || !clientCity || !clientStreetAddress || !clientPostalCode || !invoiceDate || !paymentTerms || !productDescription) {
             setMessage("Update all client's details")
             setTimeout(() => {
                 setMessage("")
@@ -52,7 +52,7 @@ const NewInvioce = () => {
             setLoading(true)
         }
 
-        const response = await fetch("https://invoice-application-0qd7.onrender.com/api/v1/clienbillinfo/registerClientPurchaseInfo", {
+        const response = await fetch(`${baseUrl}/clienbillinfo/registerClientPurchaseInfo`, {
             method: "POST",
             body: JSON.stringify(clientBillInfo),
             headers: {

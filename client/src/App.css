@@ -240,6 +240,22 @@ input[type=number] {
     }
 }
 
+.settingsTopNav div:nth-of-type(1) {
+    margin-bottom: 1rem;
+}
+
+@media screen and (min-width:568px) {
+    .settingsTopNav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        place-items: center;
+    }
+
+    .settingsTopNav div:nth-of-type(1) {
+        margin-bottom: 0;
+    }
+}
+
 .bottomNav {
     bottom: -200px;
     transition: .5s;

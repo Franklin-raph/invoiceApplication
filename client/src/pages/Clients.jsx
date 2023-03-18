@@ -94,7 +94,7 @@ const Clients = () => {
                         <div className='clientInfo mt-2'>
                             <div className='flex gap-2 items-center'>
                                 <i className='ph ph-phone'></i>
-                                <a href={`tel:+${2348139692969}`}>+234 813 969 296 9</a>
+                                <a href={`tel:+${2348139692969}`}>{clientInfo.clientPhone}</a>
                                 {/* <p>+234 813 969 296 9</p> */}
                             </div>
                         </div>

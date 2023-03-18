@@ -12,9 +12,10 @@ const Login = ({ baseUrl }) => {
     const [password, setPassword] = useState("")
     const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
+    const [loading, setLoading] = useState(false)
+
     const { vendorData } = useSelector((state) => state.vendorAuth)
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (vendorData) {

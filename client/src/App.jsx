@@ -43,12 +43,12 @@ function App() {
         <Routes>
           <Route path='/home' element={<InvoiceHomePage baseUrl={baseUrl} />} />
           <Route path='/' element={<InvoiceHomePage />} />
-          <Route path='/newinvoice' element={<NewInvioce />} />
+          <Route path='/newinvoice' element={<NewInvioce baseUrl={baseUrl} />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login baseUrl={baseUrl} />} />
           <Route path='/itemlist/:billId' element={<Itemlist />} />
           <Route path='/invoicepreview/:billId' element={<PreviewInvoice baseUrl={baseUrl} />} />
-          <Route path='/settings' element={<VendorSettings />} />
+          <Route path='/settings' element={<VendorSettings baseUrl={baseUrl} />} />
           <Route path='/clients' element={<Clients />} />
         </Routes>
         {logedInVendor && <BottomNav navValue={navValue} toggleBackground={toggleBackground} />}
