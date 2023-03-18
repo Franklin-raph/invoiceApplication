@@ -23,6 +23,7 @@ const VendorSettings = ({ baseUrl }) => {
     const [fName, setFname] = useState("")
     const [lName, setLname] = useState("")
     const [email, setEmail] = useState("")
+    const [profilePic, setProfilePic] = useState("")
     const [businessName, setBusinessName] = useState("")
     const [businessType, setBusinessType] = useState("")
     const [businessOwnersName, setBusinessOwnersName] = useState("")
@@ -134,7 +135,14 @@ const VendorSettings = ({ baseUrl }) => {
                                     </div>
                                     <div className="block my-3 w-full">
                                         <h1>Phone Number</h1>
-                                        <input onChange={(e) => setLname(e.target.value)} value={"081"} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
+                                        <input onChange={(e) => setLname(e.target.value)} value={vendorDetails.vendor.businessContact} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
+                                    </div>
+                                </div>
+
+                                <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
+                                    <div className="block my-3 w-full">
+                                        <h1>Profile Picture url</h1>
+                                        <input onChange={(e) => setProfilePic(e.target.value)} value={vendorDetails.vendor.profilePic} type="text" placeholder='https://google.com/my_picture.jpeg' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
                                     </div>
                                 </div>
 

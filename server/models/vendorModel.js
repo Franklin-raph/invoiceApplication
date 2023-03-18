@@ -13,8 +13,12 @@ const VendorSchema = mongoose.Schema({
         type: String,
         required: [true, "Please Provide an email"]
     },
+    profilePic: {
+        type: String,
+    },
     businessContact:{
         type: String,
+        required: [true, "Please Provide a business contact number"]
     },
     password: {
         type: String,
@@ -34,7 +38,6 @@ const VendorSchema = mongoose.Schema({
     },
     businessWesite:{
         type: String,
-        required: [true, "Please Provide a business website link"]
     },
     country:{
         type: String,

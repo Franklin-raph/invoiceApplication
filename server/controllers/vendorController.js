@@ -15,7 +15,7 @@ const createToken = (id) => {
 const registerVendor = async (req, res) => {
 
     const {fName, lName, email, password, businessName, businessType, businessOwnersName, 
-            businessWesite, country, city, streetAddress, businessContact, postalCode } = req.body
+            businessWesite, profilePic, country, city, streetAddress, businessContact, postalCode } = req.body
 
     try {
         if(!fName || !lName || !email || !password || !businessName || !businessType || !businessOwnersName 

@@ -19,7 +19,7 @@ const StepFour = ({ vendorDetails, prevStep }) => {
     const handleVedorRegister = async (e) => {
         e.preventDefault();
         setLoading(true)
-        const response = await fetch('https://invoice-application-0qd7.onrender.com/api/v1/auth/register', {
+        const response = await fetch('http://localhost:5000/api/v1/auth/register', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
