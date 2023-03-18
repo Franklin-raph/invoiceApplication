@@ -44,7 +44,7 @@ function App() {
           <Route path='/home' element={<InvoiceHomePage baseUrl={baseUrl} />} />
           <Route path='/' element={<InvoiceHomePage />} />
           <Route path='/newinvoice' element={<NewInvioce baseUrl={baseUrl} />} />
-          <Route path='/register' element={<Register />} />
+          <Route path='/register' element={<Register baseUrl={baseUrl} />} />
           <Route path='/login' element={<Login baseUrl={baseUrl} />} />
           <Route path='/itemlist/:billId' element={<Itemlist />} />
           <Route path='/invoicepreview/:billId' element={<PreviewInvoice baseUrl={baseUrl} />} />

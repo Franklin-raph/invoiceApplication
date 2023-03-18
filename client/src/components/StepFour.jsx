@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Alert from '../components/Alert'
 import LoadingSpinner from '../components/LoaderComponent'
 
-const StepFour = ({ vendorDetails, prevStep }) => {
+const StepFour = ({ vendorDetails, prevStep, baseUrl }) => {
 
 
     const {
@@ -19,7 +19,7 @@ const StepFour = ({ vendorDetails, prevStep }) => {
     const handleVedorRegister = async (e) => {
         e.preventDefault();
         setLoading(true)
-        const response = await fetch('http://localhost:5000/api/v1/auth/register', {
+        const response = await fetch(`${baseUrl}/auth/register`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

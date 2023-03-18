@@ -33,6 +33,7 @@ const NewInvioce = ({ baseUrl }) => {
     }
 
     let logedInVendor = JSON.parse(localStorage.getItem('vendorInfo'))
+    let token = localStorage.getItem('token')
 
     useEffect(() => {
         if (!vendorData) {
@@ -57,7 +58,7 @@ const NewInvioce = ({ baseUrl }) => {
             body: JSON.stringify(clientBillInfo),
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${vendorData.token}`
+                Authorization: `Bearer ${token}`
             }
         })
         if (response) {
@@ -90,22 +91,22 @@ const NewInvioce = ({ baseUrl }) => {
                         <div className='flex items-center flex-col md:flex-row md:gap-4'>
                             <div className="block my-3 w-full">
                                 <h1>Country</h1>
-                                <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.country}</p>
+                                <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.country}</p>
                             </div>
                             <div className="block my-3 w-full">
                                 <h1>City</h1>
-                                <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.city}</p>
+                                <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.city}</p>
                             </div>
                         </div>
 
                         <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
                             <div className="block my-3 w-full">
                                 <h1>Street Address</h1>
-                                <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.streetAddress}</p>
+                                <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.streetAddress}</p>
                             </div>
                             <div className="block my-3 w-full">
                                 <h1>Postal Code</h1>
-                                <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.vendor.postalCode}</p>
+                                <p className='text-white bg-[#141625] py-[7px] mt-1 px-2 rounded-[4px]'>{vendorData.postalCode}</p>
                             </div>
                         </div>
                     </div>

@@ -14,8 +14,6 @@ const InvoiceHomePage = () => {
     const { billData } = useSelector((state) => state.clientBill)
     const { vendorData } = useSelector((state) => state.vendorAuth)
 
-    console.log(vendorData)
-
     let logedInVendor = JSON.parse(localStorage.getItem('vendorInfo'))
 
     useEffect(() => {

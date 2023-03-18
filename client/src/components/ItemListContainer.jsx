@@ -8,8 +8,7 @@ import LoadingSpinner from '../components/LoaderComponent'
 
 
 const ItemListContainer = ({ previousItemList, clientBillInfo }) => {
-    console.log(clientBillInfo)
-
+    const token = localStorage.getItem("token")
 
     const items = useSelector((state) => state.itemList)
     // const clientBill = JSON.parse(localStorage.getItem('clientBill'))
@@ -58,7 +57,7 @@ const ItemListContainer = ({ previousItemList, clientBillInfo }) => {
             method: "PUT",
             headers: {
                 'Content-type': "application/json",
-                Authorization: `Bearer ${vendorData.token}`
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({ ...updatedClientBillInfo, itemList })
         })

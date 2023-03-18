@@ -7,7 +7,7 @@ import StepThree from '../components/StepThree'
 import StepFour from '../components/StepFour'
 import { useSelector, useDispatch } from 'react-redux'
 
-const Register = () => {
+const Register = ({ baseUrl }) => {
     const [fName, setFname] = useState("")
     const [lName, setLname] = useState("")
     const [email, setEmail] = useState("")
@@ -71,7 +71,7 @@ const Register = () => {
             )
         case 4:
             return (
-                <StepFour vendorDetails={vendorDetails} prevStep={prevStep} />
+                <StepFour vendorDetails={vendorDetails} prevStep={prevStep} baseUrl={baseUrl} />
             )
     }
 

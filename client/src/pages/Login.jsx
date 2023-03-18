@@ -51,7 +51,8 @@ const Login = ({ baseUrl }) => {
             }, 3000)
         }
         if (response.ok) {
-            localStorage.setItem('vendorInfo', JSON.stringify(data))
+            localStorage.setItem('vendorInfo', JSON.stringify(data.vendor))
+            localStorage.setItem('token', data.token)
             navigate('/')
             location.reload()
             setAlertType("Success")

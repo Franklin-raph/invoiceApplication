@@ -26,8 +26,7 @@ const PreviewInvoice = ({ baseUrl }) => {
     // const clientBill = JSON.parse(localStorage.getItem('clientBill'))
     const { vendorData } = useSelector((state) => state.vendorAuth)
     const navigate = useNavigate()
-
-    console.log(items)
+    const token = localStorage.getItem("token")
 
     const { billId } = useParams()
 
@@ -59,7 +58,7 @@ const PreviewInvoice = ({ baseUrl }) => {
         setLoading(true)
         const res = await fetch(`${baseUrl}/clienbillinfo/billInfo/${billId}`, {
             headers: {
-                Authorization: `Bearer ${vendorData.token}`
+                Authorization: `Bearer ${token}`
             },
         })
         if (res) {
@@ -115,7 +114,7 @@ const PreviewInvoice = ({ baseUrl }) => {
             method: "DELETE",
             headers: {
                 'Content-type': "application/json",
-                Authorization: `Bearer ${vendorData.token}`
+                Authorization: `Bearer ${token}`
             }
         })
         if (res.status === 401) {
@@ -150,7 +149,7 @@ const PreviewInvoice = ({ baseUrl }) => {
             method: "PUT",
             headers: {
                 'Content-type': "application/json",
-                Authorization: `Bearer ${vendorData.token}`
+                Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({ ...billInfo, status: "Paid" })
         })
