@@ -80,8 +80,8 @@ const ItemListContainer = ({ previousItemList, clientBillInfo }) => {
                     <div className='text-white flex items-center justify-between'>
                         <h1 className='text-left text-2xl font-bold'>Item List</h1>
                         <div className='text-[18px] relative flex items-center justify-center'>
-                            <i className="ph-shopping-cart text-[35px] md:text-[50px]"></i>
-                            <p className="absolute bg-[#7B5EF8] text-[10px] md:text-[14px] rounded-full py-1 px-2 border-2 border-[#141625] top-0 right-0">{(items.length + previousItemList.length)}</p>
+                            <i className="fa-solid fa-cart-shopping text-[35px] md:text-[50px]"></i>
+                            <p className="absolute bg-[#7B5EF8] text-[10px] md:text-[14px] rounded-full py-1 px-2 border-2 border-[#141625] top-[-15px] right-[-10px]">{(items.length + previousItemList.length)}</p>
                         </div>
                     </div>
                     <p className='text-white text-lg'>Newly Purchased Items <span className='text-[16px] font-normal'>({items.length})</span></p>

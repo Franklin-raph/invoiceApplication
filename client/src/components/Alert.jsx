@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Alert = ({ message, alertType }) => {
+const Alert = ({ message, alertType, alertLocation }) => {
+    console.log(alertLocation)
     const billId = localStorage.getItem("billId")
     return (
         <div className=" flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-[51]">
@@ -19,11 +20,17 @@ const Alert = ({ message, alertType }) => {
                     <p className="text-center text-green-600 py-1 px-2 mb-3 text-sm sm:text-lg">{message}</p>
                 }
 
-                {alertType === "Success" ?
-                    <Link to={`/itemlist/${billId}`} className='text-green-600 text-sm sm:text-lg rounded-[4px] border-green-600 border-[1px] py-1 px-3 hover:bg-green-600 hover:text-white transition-all'>Continue</Link>
-                    :
-                    null
+                {alertLocation === "settings" ? null :
+                    <>
+                        {alertType === "Success" ?
+                            <Link to={`/itemlist/${billId}`} className='text-green-600 text-sm sm:text-lg rounded-[4px] border-green-600 border-[1px] py-1 px-3 hover:bg-green-600 hover:text-white transition-all'>Continue</Link>
+                            :
+                            null
+                        }
+                    </>
                 }
+
+
             </div>
         </div>
     )

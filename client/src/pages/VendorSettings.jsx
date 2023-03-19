@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import LoadingSpinner from '../components/LoaderComponent'
+import Alert from '../components/Alert'
 
 const VendorSettings = ({ baseUrl }) => {
 
@@ -9,6 +10,7 @@ const VendorSettings = ({ baseUrl }) => {
     const token = localStorage.getItem('token')
     const { vendorData } = useSelector((state) => state.vendorAuth)
     const navigate = useNavigate();
+    const [alertType, setAlertType] = useState("")
 
     let logedInVendor = JSON.parse(localStorage.getItem('vendorInfo'))
 
@@ -43,8 +45,10 @@ const VendorSettings = ({ baseUrl }) => {
     const [showPassword, setShowPassword] = useState(false)
     const [inputType, setInputType] = useState('password');
     const [loading, setLoading] = useState("")
+    const [alertLocation, setAlertLocation] = useState("settings")
 
     async function updateVendorAccount(e) {
+        console.log(vendorDetails._id)
         e.preventDefault()
         if (!fName || !lName || !businessName || !businessType || !businessOwnersName
             || !businessContact || !country || !city || !streetAddress || !postalCode) {
@@ -55,7 +59,7 @@ const VendorSettings = ({ baseUrl }) => {
             return
         }
         setLoading(true)
-        const response = await fetch(`http://localhost:5000/api/v1/auth/updateAccount/${vendorDetails._id}`, {
+        const response = await fetch(`${baseUrl}/auth/updateAccount/${vendorDetails._id}`, {
             method: "PATCH",
             body: JSON.stringify({
                 fName, lName, businessName, businessType, businessOwnersName,
@@ -79,10 +83,18 @@ const VendorSettings = ({ baseUrl }) => {
         if (response.ok) {
             console.log(data)
             localStorage.setItem('vendorInfo', JSON.stringify(data))
+
             setMessage("Account Update was successful")
+            setAlertType("Success")
             setTimeout(() => {
                 setMessage("")
+                setAlertType("")
             }, 3000)
+
+            // setMessage("Account Update was successful")
+            // setTimeout(() => {
+            //     setMessage("")
+            // }, 3000)
         }
     }
 
@@ -104,7 +116,7 @@ const VendorSettings = ({ baseUrl }) => {
         const response = await fetch(`${baseUrl}/auth/deleteAccount/${vendorDetails._id}`, {
             method: "POST",
             body: JSON.stringify({
-                password, email: vendorData.vendor.email
+                password, email: vendorDetails.email
             }),
             headers: {
                 'Content-type': "application/json",
@@ -131,16 +143,17 @@ const VendorSettings = ({ baseUrl }) => {
     return (
         <div className="md:px-[100px] px-5 mx-auto w-full md:w-[90%] md:mt-2 mt-[6rem] md:mb-2 mb-[10rem] relative">
             {loading && <LoadingSpinner />}
+            {message && <Alert message={message} alertType={alertType} alertLocation={alertLocation} />}
             <div className='flex mb-5 w-full md:w-[80%] mx-auto justify-start mt-20'>
                 <h1 className='text-white font-bold text-2xl'>Account Settings</h1>
             </div>
             <div className="settingsTopNav text-white mt-5 flex-col mb-5 w-full md:w-[80%] mx-auto justify-start gap-[3rem] bg-[#1F213A] p-4 rounded-md relative">
                 <div onClick={() => setIsEdit(true)} className="flex items-center gap-2 bg-[#FFBD03] border-[1px] py-1 px-3 rounded-md hover:cursor-pointer">
-                    <i className="ri-pencil-fill"></i>
+                    <i className="fa-solid fa-pen-to-square"></i>
                     <p>Update Account</p>
                 </div>
                 <div onClick={() => setIsEdit(false)} className='flex items-center gap-2 bg-red-500 border-[1px] py-1 px-3 rounded-md hover:cursor-pointer'>
-                    <i className="ph ph-trash"></i>
+                    <i className="fa-solid fa-trash"></i>
                     <p>Delete Account</p>
                 </div>
             </div>

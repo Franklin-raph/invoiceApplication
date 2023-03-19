@@ -10,7 +10,6 @@ const Sidenav = ({ toggleBackground }) => {
     const dispatch = useDispatch()
 
     const currentLocation = useLocation().pathname.toLowerCase();
-    console.log(currentLocation)
 
     function logout() {
         dispatch(reset())
@@ -28,19 +27,22 @@ const Sidenav = ({ toggleBackground }) => {
                 </div>
                 <div className='px-4 w-full'>
                     <Link to='/home' className={currentLocation.includes('/home') ? "mt-5 flex items-center justify-start gap-2 text-white w-full bg-[#7B5EF8] py-2 rounded-lg pl-2" : "mt-5 flex items-center justify-start gap-2 text-white w-full py-2 rounded-lg pl-2"}>
-                        <i className="ph-house text-[24px]"></i>
+                        {/* <i className="ph-house "></i> */}
+                        <i className="fa-solid fa-house-chimney text-[18px]"></i>
                         <p>Home</p>
                     </Link>
                     <Link to='/newinvoice' className={currentLocation.includes('/newinvoice') ? "mt-5 flex items-center justify-start gap-2 text-white w-full bg-[#7B5EF8] py-2 rounded-lg pl-2" : "mt-5 flex items-center justify-start gap-2 text-white w-full py-2 rounded-lg pl-2"}>
-                        <i className="ri-add-circle-fill text-[20px]"></i>
+                        {/* <i className="ri-add-circle-fill text-[20px]"></i> */}
+                        <i className="fa-solid fa-circle-plus"></i>
                         <p>New Invoice</p>
                     </Link>
                     <Link to='/clients' className={currentLocation.includes('/clients') ? "mt-5 flex items-center justify-start gap-2 text-white w-full bg-[#7B5EF8] py-2 rounded-lg pl-2" : "mt-5 flex items-center justify-start gap-2 text-white w-full py-2 rounded-lg pl-2"}>
-                        <i className="ph ph-users-three text-[24px]"></i>
+                        {/* <i className="ph ph-users-three text-[24px]"></i> */}
+                        <i className="fa-solid fa-users text-[18px]"></i>
                         <p>Clients</p>
                     </Link>
                     <Link to='/settings' className={currentLocation.includes('/settings') ? "mt-5 flex items-center justify-start gap-2 text-white w-full bg-[#7B5EF8] py-2 rounded-lg pl-2" : "mt-5 flex items-center justify-start gap-2 text-white w-full py-2 rounded-lg pl-2"}>
-                        <i className="ph ph-gear-six text-[24px]"></i>
+                        <i className="fa-solid fa-user-gear text-[18px]"></i>
                         <p>Settings</p>
                     </Link>
                 </div>
@@ -49,7 +51,7 @@ const Sidenav = ({ toggleBackground }) => {
             <div className='w-full'>
                 <div className='border-t-2 border-gray-700 w-full'></div>
                 <div onClick={logout} className="w-[90%] mx-auto pl-2 mt-5 flex items-center justify-start gap-2 text-white py-1 rounded-lg hover:cursor-pointer hover:bg-[#141625]">
-                    <i className="ri-logout-box-r-line text-white text-center text-2xl"></i>
+                    <i className="fa-solid fa-right-from-bracket text-center text-xl"></i>
                     <p>Logout</p>
                 </div>
             </div>
