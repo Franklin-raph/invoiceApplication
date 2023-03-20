@@ -36,7 +36,7 @@ const HomePageTopNav = ({ billData }) => {
     return (
         <div className="text-white w-[100%] lg:w-[85%] ml-0 lg:ml-[10rem] px-[1rem] lg:px-[4rem] mt-[8rem] lg:mt-[4rem] mb-10">
             {loggedInVendor &&
-                <div className='flex items-center justify-between mb-3 relative'>
+                <div className='flex items-end justify-between mb-3 relative'>
                     {toggleLogout &&
                         <div className="absolute right-0 top-12 flex items-center bg-[#1F213A] px-3 py-1 gap-1" onClick={logout}>
                             <i className="fa-solid fa-right-from-bracket text-center text-sm"></i>
@@ -81,7 +81,7 @@ const HomePageTopNav = ({ billData }) => {
                         {loggedInVendor.businessWesite === "" || loggedInVendor.profilePic === "" ?
                             <div className='flex items-start justify-between flex-col'>
                                 <p>Todo - 2 / 3</p>
-                                <p className='font-bold text-lg flex gap-[1px] items-center'>Update Your Porfle</p>
+                                <p className='font-bold text-lg flex gap-[1px] items-center'>Update Your Porfile</p>
                             </div>
                             :
                             <div className='flex items-start justify-between flex-col'>

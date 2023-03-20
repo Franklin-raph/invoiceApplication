@@ -57,7 +57,7 @@ const Clients = () => {
                             if (searchWord === "") return client
                             else if (client.clientName.toLowerCase().includes(searchWord.toLowerCase())) return client
                         }).map((client) => (
-                            <div onClick={() => viewClientInfo(client._id)} key={client._id} className="bg-[#1F213A] p-5 rounded-md hover:cursor-pointer flex items-center justify-between">
+                            <div onClick={() => viewClientInfo(client._id)} key={client._id} className="bg-[#1F213A] p-5 rounded-md hover:cursor-pointer flex items-center justify-between border-gray-700 border-[1px]">
                                 <p>{client.clientName}</p>
                                 <i className="ph ph-eye text-[20px]"></i>
                             </div>
