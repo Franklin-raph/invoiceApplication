@@ -51,7 +51,7 @@ const HomePageTopNav = ({ billData }) => {
                         </div>
                     </div>
                     {loggedInVendor.profilePic ?
-                        <div className='flex items-center w-[15%]'>
+                        <div className='flex items-center w-[15%] md:w-[7%]'>
                             <img className='rounded-full w-[80%]' src={loggedInVendor.profilePic} alt="" />
                             <i className="ri-arrow-down-s-fill lg:hidden" onClick={() => setToggleLogout(!toggleLogout)}></i>
                         </div>
