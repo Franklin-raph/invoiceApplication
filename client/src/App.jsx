@@ -13,6 +13,7 @@ import { useState } from 'react'
 import VendorSettings from './pages/VendorSettings'
 import Clients from './pages/Clients'
 import BottomNav from './components/BottomNav'
+import PageNotFound from './pages/PageNotFound'
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
           <Route path='/invoicepreview/:billId' element={<PreviewInvoice baseUrl={baseUrl} />} />
           <Route path='/settings' element={<VendorSettings baseUrl={baseUrl} />} />
           <Route path='/clients' element={<Clients />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         {logedInVendor && <BottomNav navValue={navValue} toggleBackground={toggleBackground} />}
       </Router>

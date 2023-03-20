@@ -74,6 +74,7 @@ const Login = ({ baseUrl }) => {
                     </label>
                     <input type="submit" value="Sign In" className="w-full bg-green-500 text-white py-2 rounded-[4px] hover:cursor-pointer" />
                     <p className="text-center pt-3 text-white">Don't have an account? <Link to='/register'>Sign Up</Link> </p>
+                    <p className='text-white text-center pt-2'><Link to='/forgotPassword'>Forgot Password?</Link></p>
                 </div>
                 <img src={LoginImage} className="lg:w-1/2 lg:block hidden" alt="" />
             </form>
