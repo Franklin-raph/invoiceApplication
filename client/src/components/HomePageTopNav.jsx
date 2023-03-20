@@ -7,10 +7,12 @@ const HomePageTopNav = ({ billData }) => {
 
     const [loggedInVendor, setLoggedInVendor] = useState("")
     const [toggleLogout, setToggleLogout] = useState(false)
+    const [checkUpdatedAccount, setCheckUpdatedAccount] = useState()
     const dispatch = useDispatch()
 
     useEffect(() => {
         setLoggedInVendor(JSON.parse(localStorage.getItem("vendorInfo")))
+        // checkProfileUpdate()
     }, [])
 
     function logout() {
@@ -18,9 +20,21 @@ const HomePageTopNav = ({ billData }) => {
         dispatch(logoutVendor())
     }
 
+    // function checkProfileUpdate() {
+    //     if (loggedInVendor.businessWesite === "") {
+    //         console.log("In complete")
+    //         console.log(loggedInVendor.businessWesite)
+    //         setCheckUpdatedAccount(false)
+    //     } else {
+    //         console.log("Complete")
+    //         setCheckUpdatedAccount(true)
+    //     }
+    // }
+
+    console.log(loggedInVendor)
+
     return (
         <div className="text-white w-[100%] lg:w-[85%] ml-0 lg:ml-[10rem] px-[1rem] lg:px-[4rem] mt-[8rem] lg:mt-[4rem] mb-10">
-            {/* <div className='flex items-center justify-between mb-3'> */}
             {loggedInVendor &&
                 <div className='flex items-center justify-between mb-3 relative'>
                     {toggleLogout &&
@@ -43,15 +57,12 @@ const HomePageTopNav = ({ billData }) => {
                         </div>
                         :
                         <div className='flex items-center w-[10%]'>
-                            {/* <i className="ri-user-3-fill text-3xl"></i> */}
                             <i className="fa-solid fa-user text-3xl"></i>
                             <i className="ri-arrow-down-s-fill lg:hidden" onClick={() => setToggleLogout(!toggleLogout)}></i>
                         </div>
                     }
                 </div>
             }
-            {/* <p className='sm:flex items-center gap-2 hidden'>Help center <i className="ri-question-line"></i> </p> */}
-            {/* </div> */}
             <div className='flex items-center justify-between'>
                 <div className='flex flex-col md:flex-row justify-between items-center w-full gap-10'>
                     <div className='items-center justify-between p-5 flex bg-[#7B5EF8] w-full rounded-lg'>
@@ -67,11 +78,19 @@ const HomePageTopNav = ({ billData }) => {
                         </Link>
                     </div>
                     <div className='items-center justify-between p-5 flex bg-[#7B5EF8] w-full rounded-lg'>
-                        <div className='flex items-start justify-between flex-col'>
-                            <p>Todo - 2 / 3</p>
-                            <p className='font-bold text-xl flex gap-[1px] items-center'>Update Your Porfle</p>
-                            {/* <p className=''><i className="ph ph-currency-gbp"></i>100 million</p> */}
-                        </div>
+                        {loggedInVendor.businessWesite === "" || loggedInVendor.profilePic === "" ?
+                            <div className='flex items-start justify-between flex-col'>
+                                <p>Todo - 2 / 3</p>
+                                <p className='font-bold text-lg flex gap-[1px] items-center'>Update Your Porfle</p>
+                            </div>
+                            :
+                            <div className='flex items-start justify-between flex-col'>
+                                <p>Todo - 3 / 3</p>
+                                <p className='font-bold text-lg flex gap-[1px] items-center'>Your Porfle is up to date</p>
+                                {/* <p className=''><i className="ph ph-currency-gbp"></i>100 million</p> */}
+                            </div>
+                        }
+
                         <Link to="/settings">
                             <div className="flex items-center justify-between bg-[#1F213A] rounded-full gap-2 py-1 px-2 hover:cursor-pointer">
                                 <i className="ri-pencil-fill text-xl"></i>
