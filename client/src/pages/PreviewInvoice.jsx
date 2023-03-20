@@ -8,7 +8,6 @@ import ConfirmModal from '../components/ConfirmModal';
 import JsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import LoadingSpinner from '../components/LoaderComponent';
-// import 'boxicons'
 
 const PreviewInvoice = ({ baseUrl }) => {
 
@@ -143,8 +142,6 @@ const PreviewInvoice = ({ baseUrl }) => {
 
     async function confirmBill() {
         setLoading(true)
-
-        // console.log()
         const res = await fetch(`${baseUrl}/clienbillinfo/updatebillinfo/${billId}`, {
             method: "PUT",
             headers: {

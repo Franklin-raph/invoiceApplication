@@ -32,7 +32,7 @@ export const updateVendor = createAsyncThunk(
 export const logoutVendor = () => {
     console.log("logout")
     location.href = '/login'
-    localStorage.removeItem('vendorInfo')
+    localStorage.clear()
 }
 
 let logedInVendor = JSON.parse(localStorage.getItem('vendorInfo'))

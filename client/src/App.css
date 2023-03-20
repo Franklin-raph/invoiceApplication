@@ -265,7 +265,7 @@ input[type=number] {
     .showNav {
         bottom: 0;
         transition: .5s;
-        box-shadow: 0px 0px 50px #181616;
+        box-shadow: 0px 0px 50px #19191f;
     }
 }
 
