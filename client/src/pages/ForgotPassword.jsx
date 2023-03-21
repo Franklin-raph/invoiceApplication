@@ -16,7 +16,7 @@ const ForgotPassword = ({ baseUrl }) => {
             }, 3000)
             return
         }
-        const response = await fetch("http://localhost:5000/api/v1/auth/forgotpassword", {
+        const response = await fetch(`${baseUrl}/auth/forgotpassword`, {
             method: "POST",
             body: JSON.stringify({ email }),
             headers: {

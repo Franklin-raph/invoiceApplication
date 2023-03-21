@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 
-const PasswordReset = () => {
+const PasswordReset = ({ baseUrl }) => {
 
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
@@ -13,7 +13,7 @@ const PasswordReset = () => {
     }, [])
 
     async function getRoute() {
-        const response = await fetch(`http://localhost:5000/api/v1/auth/resetpassword/${token}/${vendor_id}`)
+        const response = await fetch(`${baseUrl}/auth/resetpassword/${token}/${vendor_id}`)
         const data = await response.json()
         console.log(data)
     }

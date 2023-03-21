@@ -162,7 +162,7 @@ const forgotPassword = async (req, res) => {
 
     const token = jwt.sign(payload, secret, {expiresIn: "15h"})
     // const link = `https://invoice-application-three.vercel.app/resetpassword/${vendor._id}/${token}`
-    const link = `http://localhost:5173/resetpassword/${token}/${vendor._id}`
+    const link = `https://invoice-application-three.vercel.app/resetpassword/${token}/${vendor._id}`
 
      // Code for sending email
      const transporter = nodemailer.createTransport({
