@@ -21,7 +21,7 @@ const PasswordReset = ({ baseUrl }) => {
     async function updatePassword(e) {
         e.preventDefault()
         console.log(password)
-        const response = await fetch(`http://localhost:5000/api/v1/auth/resetpassword/${token}/${vendor_id}`, {
+        const response = await fetch(`${baseUrl}/auth/resetpassword/${token}/${vendor_id}`, {
             method: "PATCH",
             headers: {
                 'Content-type': 'application/json'

@@ -222,6 +222,7 @@ const getVendorPasswordResetRoute = async (req, res) => {
 const updateVendorPassword = async (req, res) => {
     const { vendor_id, token } = req.params;
     const vendor = await Vendor.findOne({_id : req.params.vendor_id})
+    // console.log(vendor)
 
     // check if the vendor_id exists
     if(vendor_id !== vendor._id.toString()) return res.status(404).send({msg:`Vendor with id ${vendor._id} doesn't exist`})
@@ -229,35 +230,15 @@ const updateVendorPassword = async (req, res) => {
     // verify the token since we have a valid id and a valid user with the id
     // check for the user with this id and update the password field
     const secret = process.env.JWT_SECRET + vendor.password
+
     try {
+        const vendor = await Vendor.findOne({ _id: req.params.vendor_id })
         const payload = jwt.verify(token, secret)
 
         const salt = await bcrypt.genSalt(10);
         vendor.password = await bcrypt.hash(req.body.password, salt)
-        const vendorAccountToUpdate = await Vendor.findOneAndUpdate({_id: vendor_id}, {...req.body}, {new: true})
-        
-        // await Vendor.findOne({ studentID: req.params.student_id })
-        //     .then( async (signedInStudent) => {
-        //         console.log(signedInStudent)
-        //         signedInStudent.avatar = signedInStudent.avatar
-        //         signedInStudent.cloudinary_id = signedInStudent.cloudinary_id 
-        //         signedInStudent.name = signedInStudent.name
-        //         signedInStudent.email = signedInStudent.email;
-        //         signedInStudent.phoneNum = signedInStudent.phoneNum;
-        //         signedInStudent.gender = signedInStudent.gender;
-        //         signedInStudent.address =signedInStudent.address;
-        //         signedInStudent.gitHub = signedInStudent.giithub;
-        //         signedInStudent.studentID = signedInStudent.studentID;
-
-        //         const salt = await bcrypt.genSalt(10);
-        //         signedInStudent.password = await bcrypt.hash(req.body.password, salt)
-
-        //         await signedInStudent.save();
-        //     })
-                return res.status(200).json({vendorAccountToUpdate})
-
-        
-        
+        const vendorAccountToUpdate = await Vendor.findOneAndUpdate({_id: vendor_id}, {...req.body, password:vendor.password}, {new: true})
+        return res.status(200).json({vendorAccountToUpdate})
     } catch (error) {
         console.log(error)
         res.status(500).json({msg: error.message})
