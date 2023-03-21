@@ -67,7 +67,7 @@ const PasswordReset = ({ baseUrl }) => {
     }
 
     return (
-        <div>
+        <div className='relative'>
             <div className="flex items-center text-white gap-10 justify-center bg-[#1F213A] py-4">
                 <Link to='/login' className='py-1 mx-2 px-2 rounded-md border-[1px] border-[#7B5EF8] hover:bg-[#7B5EF8]'>Login</Link>
                 <Link to='/register' className='py-1 mx-2 px-2 rounded-md border-[1px] border-[#7B5EF8] hover:bg-[#7B5EF8]'>Sign Up</Link>
@@ -90,13 +90,12 @@ const PasswordReset = ({ baseUrl }) => {
                 }
 
                 {
-                    modal &&
+                    !modal &&
                     <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-[51]">
-                        <div className='bg-white flex items-center justify-center py-10 px-5 w-[85%] lg:w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
-                            {/* <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setWarningModal(!warningModal)}></i> */}
-                            <i className="ri-error-warning-fill text-7xl text-yellow-500"></i>
+                        <div className='bg-white flex items-center justify-center py-10 px-5 w-[85%] lg:w-1/2 gap-4 flex-col rounded-lg text-black text-center relative'>
+                            <i className="ri-checkbox-circle-fill text-7xl text-green-500"></i>
                             <p>Your password has been updated successfully click on the button below to login</p>
-                            <p>Login</p>
+                            <Link to='/login' className='py-1 mx-2 px-2 rounded-md border-[1px] border-green-500 hover:bg-green-500 hover:text-white'>Login</Link>
                         </div>
                     </div>
                 }

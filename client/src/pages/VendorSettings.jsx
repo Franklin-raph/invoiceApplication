@@ -137,7 +137,7 @@ const VendorSettings = ({ baseUrl }) => {
 
     return (
         <div className="md:px-[100px] px-5 mx-auto w-full md:w-[90%] md:mt-2 mt-[6rem] md:mb-2 mb-[10rem] relative">
-            {loading && <LoadingSpinner />}
+            {/* {loading && <LoadingSpinner />} */}
             {error && <Alert message={"Please fill in the required field"} alertType={"Danger"} alertLocation={alertLocation} />}
             {message && <Alert message={message} alertType={alertType} alertLocation={alertLocation} />}
             <div className='flex mb-5 w-full md:w-[80%] mx-auto justify-start mt-20'>
@@ -246,9 +246,17 @@ const VendorSettings = ({ baseUrl }) => {
 
                         <div className="flex justify-between items-center flex-col lg:flex-row">
                             <div></div>
-                            <button onClick={updateVendorAccount} className="flex items-center border-gray-300 rounded-[4px] border-[1px] px-3 py-1 bg-[#7B5EF8] hover:text-white transition">
-                                <p>Update</p>
-                            </button>
+                            {!loading ?
+                                <button onClick={updateVendorAccount} className="flex items-center border-gray-300 rounded-[4px] border-[1px] px-3 py-1 bg-[#7B5EF8] hover:text-white transition">
+                                    <p>Update Account</p>
+                                </button>
+                                :
+                                <button disabled className="buttonload cursor-not-allowed flex items-center justify-center gap-3 border-gray-300 rounded-[4px] border-[1px] px-3 py-1 bg-[#beafff] text-white">
+                                    <i className="fa fa-spinner fa-spin"></i>
+                                    <p>Update Account</p>
+                                </button>
+                            }
+
                         </div>
                     </div>
                 </div>
