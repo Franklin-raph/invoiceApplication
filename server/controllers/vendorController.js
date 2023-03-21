@@ -237,6 +237,7 @@ const updateVendorPassword = async (req, res) => {
 
         const salt = await bcrypt.genSalt(10);
         vendor.password = await bcrypt.hash(req.body.password, salt)
+        console.log(vendor.password)
         const vendorAccountToUpdate = await Vendor.findOneAndUpdate({_id: vendor_id}, {...req.body, password:vendor.password}, {new: true})
         return res.status(200).json({vendorAccountToUpdate})
     } catch (error) {
