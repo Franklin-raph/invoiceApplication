@@ -2,6 +2,7 @@ const Vendor = require('../models/vendorModel')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const nodemailer = require('nodemailer')
 const {authenticateVendor} = require('../middlewares/authenticateVendor')
 
 // generating a token for every authenticated vendor
@@ -138,9 +139,140 @@ const deleteVendorAccount = async (req, res) => {
     }
 }
 
+
+// Vendor Forgot password request
+const forgotPassword = async (req, res) => {
+   
+    const { email } = req.body
+    const vendor = await Vendor.findOne({email})
+
+     // check if email exists
+    if(vendor === null){
+        res.status(404).json({msg:"Email does not exist"})
+        return
+    }
+
+    // User exist and now create a one time reset link valid for 15hrs
+    const secret = process.env.JWT_SECRET + vendor.password
+    const payload = {
+        email: vendor.email,
+        id:vendor._id,
+        // used: false
+    }
+
+    const token = jwt.sign(payload, secret, {expiresIn: "15h"})
+    // const link = `https://invoice-application-three.vercel.app/resetpassword/${vendor._id}/${token}`
+    const link = `http://localhost:5173/resetpassword/${token}/${vendor._id}`
+
+     // Code for sending email
+     const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.GMAIL,
+            pass: process.env.INVOICE_APP_PASSWORD,
+        }
+      });
+
+    //   https://stackoverflow.com/questions/59188483/error-invalid-login-535-5-7-8-username-and-password-not-accepted
+      
+      const mailOptions = {
+        from: "noreply@gmail.com",
+        to: vendor.email,
+        subject: 'Sending Email From e-invoice app',
+        html: `<a href = ${link} style="text-decoration: none; padding:5px 10px; background-color: green; border-radius: 5px; color: white;">Click to reset your password</a>`,
+      };
+      
+      transporter.sendMail(mailOptions, (error, info)=>{
+        if (error) {
+          console.log(error + "Error here");
+        } else {
+          console.log('Email sent: ' + info.response);
+          console.log(info)
+        }
+      });
+
+    res.status(200).json({msg:`A one time password reset link has been sent to ${email}, please use the link to reset your password. If you didn't get the link, please resend your request`})
+}
+
+
+// Vendor password reset get route
+const getVendorPasswordResetRoute = async (req, res) => {
+    const { vendor_id, token } = req.params;
+    const vendor = await Vendor.findOne({_id : req.params.vendor_id})
+
+    // check if the studentID exists
+    if(vendor_id !== vendor._id.toString()) return res.status(404).send({msg:`Vendor with id ${vendor_id} doesn't exist`})
+
+    // verify the token since we have a valid id and a valid user with the id
+    // we would use process.env.JWT_SECRET + student.password to verify the token cos that is what i used in signing the token up
+    const secret = process.env.JWT_SECRET + vendor.password
+    try {
+        const payload = jwt.verify(token, secret)
+        return res.status(200).json({vendor})
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({msg: error.message})
+    }
+}
+
+
+
+// Update vendor password
+const updateVendorPassword = async (req, res) => {
+    const { vendor_id, token } = req.params;
+    const vendor = await Vendor.findOne({_id : req.params.vendor_id})
+
+    // check if the studentID exists
+    if(vendor_id !== vendor._id.toString()) return res.status(404).send({msg:`Vendor with id ${vendor._id} doesn't exist`})
+
+    // verify the token since we have a valid id and a valid user with the id
+    // check for the user with this id and update the password field
+    const secret = process.env.JWT_SECRET + student.password
+    try {
+        const payload = jwt.verify(token, secret)
+
+        const salt = await bcrypt.genSalt(10);
+        await bcrypt.hash(req.body.password, salt)
+        const vendorAccountToUpdate = await Vendor.findOneAndUpdate({_id: vendor_id}, {...req.body}, {new: true})
+        
+        // await Vendor.findOne({ studentID: req.params.student_id })
+        //     .then( async (signedInStudent) => {
+        //         console.log(signedInStudent)
+        //         signedInStudent.avatar = signedInStudent.avatar
+        //         signedInStudent.cloudinary_id = signedInStudent.cloudinary_id 
+        //         signedInStudent.name = signedInStudent.name
+        //         signedInStudent.email = signedInStudent.email;
+        //         signedInStudent.phoneNum = signedInStudent.phoneNum;
+        //         signedInStudent.gender = signedInStudent.gender;
+        //         signedInStudent.address =signedInStudent.address;
+        //         signedInStudent.gitHub = signedInStudent.giithub;
+        //         signedInStudent.studentID = signedInStudent.studentID;
+
+        //         const salt = await bcrypt.genSalt(10);
+        //         signedInStudent.password = await bcrypt.hash(req.body.password, salt)
+
+        //         await signedInStudent.save();
+        //     })
+                return res.status(200).json({vendorAccountToUpdate})
+
+        
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({msg: error.message})
+    }
+}
+
+
+
+
 module.exports = {
     registerVendor,
     loginVendor,
     updateVendorAccount,
-    deleteVendorAccount
+    deleteVendorAccount,
+    forgotPassword,
+    getVendorPasswordResetRoute,
+    updateVendorPassword
 }
