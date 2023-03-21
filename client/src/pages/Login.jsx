@@ -61,7 +61,7 @@ const Login = ({ baseUrl }) => {
 
     return (
         <div className="p-0 lg:p-12 mx-auto h-screen flex justify-center items-center">
-            {loading && <LoadingSpinner />}
+            {/* {loading && <LoadingSpinner />} */}
             <form className="border-gray-800 border-[2px] w-[90%] relative flex items-center h-auto justify-between gap-9 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]" onSubmit={handleVedorLogin}>
                 <div className="w-full px-5 lg:px-12 py-12">
                     <h1 className="text-start text-xl text-white">Sign In</h1>
@@ -72,7 +72,14 @@ const Login = ({ baseUrl }) => {
                     <label className="block my-7">
                         <input type="password" placeholder='********' value={password} onChange={(e) => setPassword(e.target.value)} className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full" />
                     </label>
-                    <input type="submit" value="Sign In" className="w-full bg-green-500 text-white py-2 rounded-[4px] hover:cursor-pointer" />
+                    {!loading ?
+                        <input type="submit" value="Sign In" className="w-full bg-green-500 text-white py-2 rounded-[4px] hover:cursor-pointer" />
+                        :
+                        <button type="submit" disabled className="buttonload cursor-not-allowed flex items-center justify-center gap-3 w-full bg-green-300 text-white py-2 rounded-[4px]">
+                            <i className="fa fa-spinner fa-spin"></i>
+                            <p>Sign In</p>
+                        </button>
+                    }
                     <p className="text-center pt-3 text-white">Don't have an account? <Link to='/register'>Sign Up</Link> </p>
                     <p className='text-white text-center pt-2'><Link to='/forgotPassword'>Forgot Password?</Link></p>
                 </div>

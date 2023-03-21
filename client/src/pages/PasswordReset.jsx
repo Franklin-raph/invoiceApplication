@@ -5,6 +5,9 @@ const PasswordReset = ({ baseUrl }) => {
 
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState("")
+    const [modal, setModal] = useState(false)
     const { vendor_id, token } = useParams()
 
     useEffect(() => {
@@ -20,7 +23,24 @@ const PasswordReset = ({ baseUrl }) => {
 
     async function updatePassword(e) {
         e.preventDefault()
-        console.log(password)
+
+        if (password === "" || password2 === "") {
+            setError("Please fill in the fields")
+            setTimeout(() => {
+                setError("")
+            }, 3000)
+            return
+        }
+
+        if (password !== password2) {
+            setError("Password fields must match")
+            setTimeout(() => {
+                setError("")
+            }, 3000)
+            return
+        }
+
+        setLoading(true)
         const response = await fetch(`${baseUrl}/auth/resetpassword/${token}/${vendor_id}`, {
             method: "PATCH",
             headers: {
@@ -28,15 +48,22 @@ const PasswordReset = ({ baseUrl }) => {
             },
             body: JSON.stringify({ password })
         })
+
+        if (response) {
+            setLoading(false)
+        }
         const data = await response.json()
         if (response.ok) {
+            setLoading(false)
+            setModal(true)
             console.log(data)
         }
 
         if (!response.ok) {
+            setLoading(false)
+            setError(data.msg)
             console.log(data)
         }
-        console.log("Password Reset")
     }
 
     return (
@@ -47,13 +74,32 @@ const PasswordReset = ({ baseUrl }) => {
             </div>
             <form onSubmit={updatePassword} className="text-white w-[90%] text-center md:w-[50%] fixed left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] mx-auto justify-between gap-[5rem] bg-[#1F213A] p-8 rounded-md mb-10">
                 <div className="block my-3 w-full relative">
-                    {/* {error && <p className="text-white text-center bg-red-600 py-1 px-2 mb-3">{error}</p>}
-                    {success && <p className="text-white text-center bg-green-600 py-[10px] px-2 mb-3">{success}</p>} */}
+                    {error && <p className="text-white text-center bg-red-600 py-1 px-2 mb-3">{error}</p>}
+                    {/* {success && <p className="text-white text-center bg-green-600 py-[10px] px-2 mb-3">{success}</p>} */}
                     <h1>Reset your password</h1>
                     <input onChange={(e) => setPassword(e.target.value)} value={password} type="text" placeholder='******' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
                     <input onChange={(e) => setPassword2(e.target.value)} value={password2} type="text" placeholder='******' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
                 </div>
-                <button className='mt-3 w-full bg-green-500 border-[1px] py-1 px-3 rounded-md cursor-pointer'>Reset Password</button>
+                {!loading ?
+                    <button className='mt-3 w-full bg-green-500 border-[1px] py-1 px-3 rounded-md cursor-pointer'>Reset Password</button>
+                    :
+                    <button type="submit" disabled className="buttonload cursor-not-allowed flex items-center justify-center gap-3 w-full bg-green-300 text-white py-2 rounded-[4px]">
+                        <i className="fa fa-spinner fa-spin"></i>
+                        <p>Reset Password</p>
+                    </button>
+                }
+
+                {
+                    modal &&
+                    <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-[51]">
+                        <div className='bg-white flex items-center justify-center py-10 px-5 w-[85%] lg:w-1/3 gap-4 flex-col rounded-lg text-black text-center relative'>
+                            {/* <i className="ri-close-circle-fill absolute top-2 right-2 text-2xl text-[#0f141d] cursor-pointer" onClick={() => setWarningModal(!warningModal)}></i> */}
+                            <i className="ri-error-warning-fill text-7xl text-yellow-500"></i>
+                            <p>Your password has been updated successfully click on the button below to login</p>
+                            <p>Login</p>
+                        </div>
+                    </div>
+                }
             </form >
         </div >
     )

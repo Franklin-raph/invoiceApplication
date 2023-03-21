@@ -6,16 +6,18 @@ const ForgotPassword = ({ baseUrl }) => {
     const [email, setEmail] = useState("frank45@gmail.com")
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState("")
+    const [loading, setLoading] = useState(false)
 
     async function verifyEmail(e) {
         e.preventDefault()
-        if (!email) {
+        if (email === "") {
             setError("Please fill in the field")
             setTimeout(() => {
                 setError("")
             }, 3000)
             return
         }
+        setLoading(true)
         const response = await fetch(`${baseUrl}/auth/forgotpassword`, {
             method: "POST",
             body: JSON.stringify({ email }),
@@ -23,6 +25,9 @@ const ForgotPassword = ({ baseUrl }) => {
                 'Content-type': 'application/json'
             }
         })
+        if (response) {
+            setLoading(false)
+        }
         const data = await response.json()
         if (!response.ok) {
             setError(data.msg)
@@ -54,7 +59,15 @@ const ForgotPassword = ({ baseUrl }) => {
                     <h1>Vendor Reset Password Request</h1>
                     <input onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder='frank@gmail.com' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
                 </div>
-                <button className='mt-3 w-full bg-green-500 border-[1px] py-1 px-3 rounded-md cursor-pointer'>Reset Password Link</button>
+                {!loading ?
+                    <button className='mt-3 w-full bg-green-500 border-[1px] py-1 px-3 rounded-md cursor-pointer'>Reset Password Link</button>
+                    :
+                    <button type="submit" disabled className="buttonload cursor-not-allowed flex items-center justify-center gap-3 w-full bg-green-300 text-white py-2 rounded-[4px]">
+                        <i className="fa fa-spinner fa-spin"></i>
+                        <p>Reset Password Link</p>
+                    </button>
+                }
+
             </form >
         </div >
     )
