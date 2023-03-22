@@ -86,10 +86,10 @@ const VendorSettings = ({ baseUrl }) => {
 
             setMessage("Account Update was successful")
             setAlertType("Success")
-            setTimeout(() => {
-                setMessage("")
-                setAlertType("")
-            }, 3000)
+            // setTimeout(() => {
+            //     setMessage("")
+            //     setAlertType("")
+            // }, 3000)
         }
     }
 

@@ -9,9 +9,17 @@ const Alert = ({ message, alertType, alertLocation }) => {
             <div className='bg-white flex items-center justify-center mt-[90px] lg:mt-0 py-10 px-5 w-[80%] lg:w-1/3 gap-4 flex-col rounded-lg'>
 
                 {alertType === "Danger" ?
-                    <i className="ri-close-circle-line text-7xl text-red-500"></i>
+                    <div class="wrapper">
+                        <svg class="cancel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <path class="check__cancel" fill="none" d="M14.1 14.1l23.8 23.8 m0,-23.8 l-23.8,23.8" />
+                        </svg>
+                    </div>
                     :
-                    <i className="ri-checkbox-circle-fill text-7xl text-green-600"></i>
+                    <div class="wrapper">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                        </svg>
+                    </div>
                 }
 
                 {alertType === "Danger" ?

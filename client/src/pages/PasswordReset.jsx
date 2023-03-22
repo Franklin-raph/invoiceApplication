@@ -90,7 +90,7 @@ const PasswordReset = ({ baseUrl }) => {
                 }
 
                 {
-                    !modal &&
+                    modal &&
                     <div className="flex items-center justify-center fixed top-0 left-0 h-full w-full bg-black bg-opacity-[90%] z-[51]">
                         <div className='bg-white flex items-center justify-center py-10 px-5 w-[85%] lg:w-1/2 gap-4 flex-col rounded-lg text-black text-center relative'>
                             <i className="ri-checkbox-circle-fill text-7xl text-green-500"></i>

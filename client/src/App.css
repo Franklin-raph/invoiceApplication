@@ -300,3 +300,110 @@ input[type=number] {
     padding: 12px 16px;
     font-size: 16px;
 }
+
+
+/* ANIMATED CHECKMARK STARTS */
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkmark {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #000000;
+    stroke-miterlimit: 10;
+    margin: 10% auto;
+    box-shadow: inset 0px 0px 0px #9a4cff;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0
+    }
+}
+
+@keyframes scale {
+
+    0%,
+    100% {
+        transform: none
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1)
+    }
+}
+
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px #9a4cff;
+    }
+}
+
+/* ANIMATED CHECKMARK ENDS */
+
+
+
+
+
+/* ANIMATED CANCELMARK STARTS */
+.cancel {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #000000;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px #48ece2 !important;
+    animation: fill_cancel .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+
+.check__cancel {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes scale {
+
+    0%,
+    100% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes fill_cancel {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px #48ece2;
+    }
+}
+
+/* b71d9f green */
+
+/* ANIMATED CANCELMARK STARTS */
