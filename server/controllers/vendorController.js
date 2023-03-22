@@ -76,6 +76,22 @@ const loginVendor = async (req, res) => {
     }
 }
 
+// Login a vendor
+const getMyAccount = async (req, res) => {
+
+    try {
+        const vendor = await Vendor.findById(req.vendor.id)
+        
+        // checking if vendor exists or not
+        if(!vendor) return res.status(400).json({err: "Vendor Details not found"})
+
+        res.status(200).json(vendor)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({err: error.message})
+    }
+}
+
 
 // update vendor account
 const updateVendorAccount = async (req, res) => {
@@ -250,6 +266,7 @@ const updateVendorPassword = async (req, res) => {
 
 
 module.exports = {
+    getMyAccount,
     registerVendor,
     loginVendor,
     updateVendorAccount,

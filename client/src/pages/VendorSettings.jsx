@@ -3,40 +3,76 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import LoadingSpinner from '../components/LoaderComponent'
 import Alert from '../components/Alert'
+import { useDispatch } from 'react-redux'
+import { reset, logoutVendor } from '../redux/vendorAuthSlice'
 
 const VendorSettings = ({ baseUrl }) => {
 
-    const vendorDetails = JSON.parse(localStorage.getItem('vendorInfo'))
     const token = localStorage.getItem('token')
+    const [vendorDetails, setVendorDetails] = useState({})
     const { vendorData } = useSelector((state) => state.vendorAuth)
+    // console.log(vendorData)
     const navigate = useNavigate();
     const [alertType, setAlertType] = useState("")
 
     let logedInVendor = JSON.parse(localStorage.getItem('vendorInfo'))
+    const dispatch = useDispatch()
+
+
+    const [fName, setFname] = useState("")
+    const [lName, setLname] = useState("")
+    const [profilePic, setProfilePic] = useState("")
+    const [businessContact, setBusinessContact] = useState("")
+    const [businessName, setBusinessName] = useState("")
+    const [businessType, setBusinessType] = useState("")
+    const [businessOwnersName, setBusinessOwnersName] = useState("")
+    const [businessWesite, setBusinessWesite] = useState("")
+    const [country, setCountry] = useState("")
+    const [city, setCity] = useState("")
+    const [streetAddress, setStreetAddress] = useState("")
+    const [postalCode, setPostalCode] = useState("")
+
+
 
     useEffect(() => {
         console.log(token)
+        console.log(logedInVendor)
         if (vendorData) {
             navigate('/settings')
         }
         if (logedInVendor === null) {
             navigate('/login')
+        } else {
+            getMyAccount()
         }
     }, [])
 
-    const [fName, setFname] = useState(vendorDetails.fName)
-    const [lName, setLname] = useState(vendorDetails.lName)
-    // const [email, setEmail] = useState(vendorDetails.email)
-    const [profilePic, setProfilePic] = useState(vendorDetails.profilePic)
-    const [businessContact, setBusinessContact] = useState(vendorDetails.businessContact)
-    const [businessName, setBusinessName] = useState(vendorDetails.businessName)
-    const [businessType, setBusinessType] = useState(vendorDetails.businessType)
-    const [businessOwnersName, setBusinessOwnersName] = useState(vendorDetails.businessOwnersName)
-    const [businessWesite, setBusinessWesite] = useState(vendorDetails.businessWesite)
-    const [country, setCountry] = useState(vendorDetails.country)
-    const [city, setCity] = useState(vendorDetails.city)
-    const [streetAddress, setStreetAddress] = useState(vendorDetails.streetAddress)
-    const [postalCode, setPostalCode] = useState(vendorDetails.postalCode)
+    async function getMyAccount() {
+        const response = await fetch("http://localhost:5000/api/v1/auth/myaccount", {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${token}`
+            },
+        })
+        const data = await response.json()
+        if (response.ok) {
+            setVendorDetails(data)
+            setFname(data.fName)
+            setLname(data.lName)
+            setProfilePic(data.profilePic)
+            setBusinessContact(data.businessContact)
+            setBusinessName(data.businessName)
+            setBusinessType(data.businessType)
+            setBusinessOwnersName(data.businessOwnersName)
+            setBusinessWesite(data.businessWesite)
+            setCountry(data.country)
+            setCity(data.city)
+            setStreetAddress(data.streetAddress)
+            setPostalCode(data.postalCode)
+        }
+    }
+
 
     const [error, setError] = useState(false)
     const [message, setMessage] = useState("")
@@ -48,7 +84,7 @@ const VendorSettings = ({ baseUrl }) => {
     const [alertLocation, setAlertLocation] = useState("settings")
 
     async function updateVendorAccount(e) {
-        console.log(vendorDetails._id)
+        console.log(vendorDetails._id, fName, lName, businessContact, country)
         e.preventDefault()
         if (!fName || !lName || !businessName || !businessType || !businessOwnersName
             || !businessContact || !country || !city || !streetAddress || !postalCode) {
@@ -86,10 +122,10 @@ const VendorSettings = ({ baseUrl }) => {
 
             setMessage("Account Update was successful")
             setAlertType("Success")
-            // setTimeout(() => {
-            //     setMessage("")
-            //     setAlertType("")
-            // }, 3000)
+            setTimeout(() => {
+                setMessage("")
+                setAlertType("")
+            }, 3000)
         }
     }
 
@@ -163,12 +199,12 @@ const VendorSettings = ({ baseUrl }) => {
                             <div className="h-0.5 bg-slate-200 w-2/5"></div>
                         </div>
 
-                        {vendorData &&
+                        {vendorDetails &&
                             <>
                                 <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
                                     <div className="block my-3 w-full">
                                         <h1>First Name *</h1>
-                                        <input onChange={(e) => setFname(e.target.value)} value={fName} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
+                                        <input autoComplete="off" onChange={(e) => setFname(e.target.value)} value={fName} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
                                     </div>
                                     <div className="block my-3 w-full">
                                         <h1>Last Name *</h1>
@@ -198,17 +234,17 @@ const VendorSettings = ({ baseUrl }) => {
                                 <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
                                     <div className="block my-3 w-full">
                                         <h1>Business Name *</h1>
-                                        <input onChange={(e) => setBusinessName(e.target.value)} value={businessName} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
+                                        <input onChange={(e) => setBusinessName(e.target.value)} value={businessName} type="text" placeholder='FrankdotDev' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
                                     </div>
                                     <div className="block my-3 w-full">
                                         <h1>Business Owners Name *</h1>
-                                        <input onChange={(e) => setBusinessOwnersName(e.target.value)} value={businessOwnersName} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
+                                        <input onChange={(e) => setBusinessOwnersName(e.target.value)} value={businessOwnersName} type="text" placeholder='Franklin' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
                                     </div>
                                 </div>
                                 <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
                                     <div className="block my-3 w-full">
                                         <h1>Business Type *</h1>
-                                        <input onChange={(e) => setBusinessType(e.target.value)} value={businessType} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
+                                        <input onChange={(e) => setBusinessType(e.target.value)} value={businessType} type="text" placeholder='ICT Services' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
                                     </div>
                                     <div className="block my-3 w-full">
                                         <h1>Business Website</h1>

@@ -319,7 +319,7 @@ input[type=number] {
     stroke-miterlimit: 10;
     margin: 10% auto;
     box-shadow: inset 0px 0px 0px #9a4cff;
-    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    animation: successFill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
 }
 
 .checkmark__check {
@@ -347,7 +347,7 @@ input[type=number] {
     }
 }
 
-@keyframes fill {
+@keyframes successFill {
     100% {
         box-shadow: inset 0px 0px 0px 30px #9a4cff;
     }
@@ -368,8 +368,8 @@ input[type=number] {
     stroke-width: 2;
     stroke: #000000;
     stroke-miterlimit: 10;
-    box-shadow: inset 0px 0px 0px #48ece2 !important;
-    animation: fill_cancel .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+    box-shadow: inset 0px 0px 0px #48ece2;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
 }
 
 
@@ -398,7 +398,7 @@ input[type=number] {
     }
 }
 
-@keyframes fill_cancel {
+@keyframes fill {
     100% {
         box-shadow: inset 0px 0px 0px 30px #48ece2;
     }

@@ -13,10 +13,10 @@ const HomePageTopNav = ({ billData }) => {
     useEffect(() => {
         setLoggedInVendor(JSON.parse(localStorage.getItem("vendorInfo")))
         setGreeting([
-            'What are you doing that early?',
-            'Good Morning',
-            'Good Afternoon',
-            'Good Evening'
+            'What are you doing that early?',  // 12am - 5:59am
+            'Good Morning', // 6am - 11:59pm
+            'Good Afternoon', // 12pm - 5:59pm
+            'Good Evening' // 6pm - 11:59pm
         ][parseInt(new Date().getHours() / 24 * 4)])
 
         console.log(new Date().getHours() / 24 * 4)
