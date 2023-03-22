@@ -87,7 +87,7 @@ const HomePageTopNav = ({ billData }) => {
                             </div>
                         </Link>
                     </div>
-                    <div className='items-center justify-between p-5 flex bg-[#7B5EF8] w-full rounded-lg'>
+                    <div className='items-center justify-between p-5 flex bg-[#7B5EF8] w-full rounded-lg relative'>
                         {loggedInVendor.businessWesite === "" || loggedInVendor.profilePic === "" ?
                             <div className='flex items-start justify-between flex-col'>
                                 <p>Todo - 2 / 3</p>
@@ -101,11 +101,19 @@ const HomePageTopNav = ({ billData }) => {
                             </div>
                         }
 
-                        <Link to="/settings">
+                        <Link to="/settings" >
                             <div className="flex items-center justify-between bg-[#1F213A] rounded-full gap-2 py-1 px-2 hover:cursor-pointer">
                                 <i className="ri-pencil-fill text-xl"></i>
                                 <p className="hidden lg:block">Update Profile</p>
                             </div>
+                            {loggedInVendor.businessWesite === "" || loggedInVendor.profilePic === "" ?
+                                <span class="absolute right-[-5px] flex h-5 w-5 top-[-5px]">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-5 w-5 bg-[#fff]"></span>
+                                </span>
+                                : ""
+                            }
+
                         </Link>
                     </div>
                     {/* <div className='items-center justify-between p-5 flex bg-[#7B5EF8] w-full rounded-lg'>

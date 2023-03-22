@@ -9,15 +9,13 @@ import { reset, logoutVendor } from '../redux/vendorAuthSlice'
 const VendorSettings = ({ baseUrl }) => {
 
     const token = localStorage.getItem('token')
-    const [vendorDetails, setVendorDetails] = useState({})
+    const [vendorDetails, setVendorDetails] = useState()
     const { vendorData } = useSelector((state) => state.vendorAuth)
     // console.log(vendorData)
     const navigate = useNavigate();
     const [alertType, setAlertType] = useState("")
 
     let logedInVendor = JSON.parse(localStorage.getItem('vendorInfo'))
-    const dispatch = useDispatch()
-
 
     const [fName, setFname] = useState("")
     const [lName, setLname] = useState("")
@@ -35,8 +33,6 @@ const VendorSettings = ({ baseUrl }) => {
 
 
     useEffect(() => {
-        console.log(token)
-        console.log(logedInVendor)
         if (vendorData) {
             navigate('/settings')
         }
@@ -173,7 +169,6 @@ const VendorSettings = ({ baseUrl }) => {
 
     return (
         <div className="md:px-[100px] px-5 mx-auto w-full md:w-[90%] md:mt-2 mt-[6rem] md:mb-2 mb-[10rem] relative">
-            {/* {loading && <LoadingSpinner />} */}
             {error && <Alert message={"Please fill in the required field"} alertType={"Danger"} alertLocation={alertLocation} />}
             {message && <Alert message={message} alertType={alertType} alertLocation={alertLocation} />}
             <div className='flex mb-5 w-full md:w-[80%] mx-auto justify-start mt-20'>
@@ -199,7 +194,7 @@ const VendorSettings = ({ baseUrl }) => {
                             <div className="h-0.5 bg-slate-200 w-2/5"></div>
                         </div>
 
-                        {vendorDetails &&
+                        {vendorDetails ?
                             <>
                                 <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
                                     <div className="block my-3 w-full">
@@ -263,7 +258,7 @@ const VendorSettings = ({ baseUrl }) => {
                                     </div>
                                     <div className="block my-3 w-full">
                                         <h1>City *</h1>
-                                        <input onChange={(e) => setCity(e.target.value)} value={city} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
+                                        <div></div>
                                     </div>
                                 </div>
 
@@ -278,21 +273,105 @@ const VendorSettings = ({ baseUrl }) => {
                                     </div>
                                 </div>
                             </>
+                            :
+                            <>
+                                <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                </div>
+
+                                <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                </div>
+
+                                <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-between mt-[5rem] gap-2 relative">
+                                    <h1 className="text-start text-xl font-bold">Business Information</h1>
+                                    <div className="h-0.5 bg-slate-200 w-2/5"></div>
+                                </div>
+
+                                <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                </div>
+                                <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center justify-between mt-[5rem] gap-2 relative">
+                                    <h1 className="text-start text-xl font-bold">Business Location</h1>
+                                    <div className="h-0.5 bg-slate-200 w-2/5"></div>
+                                </div>
+                                <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                </div>
+
+                                <div className='flex items-center flex-col md:flex-row md:gap-4 mt-3'>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                    <div className="block my-3 w-full">
+                                        <h1 className='p-1 w-[30%] mt-2 bg-[#141625] rounded-md settings-animated-background'></h1>
+                                        <div className='p-5 w-full mt-2 bg-[#141625] rounded-md settings-animated-background'></div>
+                                    </div>
+                                </div>
+                            </>
                         }
 
                         <div className="flex justify-between items-center flex-col lg:flex-row">
                             <div></div>
                             {!loading ?
-                                <button onClick={updateVendorAccount} className="flex items-center border-gray-300 rounded-[4px] border-[1px] px-3 py-1 bg-[#7B5EF8] hover:text-white transition">
-                                    <p>Update Account</p>
-                                </button>
+                                <>
+                                    {vendorDetails && <button onClick={updateVendorAccount} className="flex items-center border-gray-300 rounded-[4px] border-[1px] px-3 py-1 bg-[#7B5EF8] hover:text-white transition">
+                                        <p>Update Account</p>
+                                    </button>
+                                    }
+                                </>
                                 :
-                                <button disabled className="buttonload cursor-not-allowed flex items-center justify-center gap-3 border-gray-300 rounded-[4px] border-[1px] px-3 py-1 bg-[#beafff] text-white">
-                                    <i className="fa fa-spinner fa-spin"></i>
-                                    <p>Update Account</p>
-                                </button>
+                                <>
+                                    {vendorDetails && <button disabled className="buttonload cursor-not-allowed flex items-center justify-center gap-3 border-gray-300 rounded-[4px] border-[1px] px-3 py-1 bg-[#beafff] text-white">
+                                        <i className="fa fa-spinner fa-spin"></i>
+                                        <p>Update Account</p>
+                                    </button>
+                                    }
+                                </>
                             }
-
                         </div>
                     </div>
                 </div>

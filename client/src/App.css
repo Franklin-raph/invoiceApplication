@@ -293,6 +293,18 @@ input[type=number] {
     position: relative;
 }
 
+.settings-animated-background {
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #141625;
+    background: linear-gradient(to right, #141625 10%, #1F213A 18%, #141625 33%);
+    background-size: 800px 104px;
+    position: relative;
+}
+
 .buttonload {
     background-color: #04AA6D;
     border: none;

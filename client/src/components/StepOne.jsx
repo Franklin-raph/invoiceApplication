@@ -6,6 +6,8 @@ import LoginImage from '../assets/images/360_F_556550658_HdTG42xb5HCJENnAJ9FtanF
 const StepOne = ({ vendorDetails, nextStep, setFname, setLname, setEmail, setPassword, setConfirmPassword }) => {
 
     const [error, setError] = useState("")
+    const [inputType, setInputType] = useState('password');
+    const [showPassword, setShowPassword] = useState(false)
     const { fName, lName, email, password, confirmPassword } = vendorDetails
 
     function validateFieldsAndUpdateStep(e) {
@@ -26,6 +28,11 @@ const StepOne = ({ vendorDetails, nextStep, setFname, setLname, setEmail, setPas
             return
         }
         nextStep()
+    }
+
+    const toggleInput = () => {
+        setInputType(inputType === 'password' ? 'text' : 'password')
+        setShowPassword(!showPassword)
     }
 
     return (
@@ -50,13 +57,19 @@ const StepOne = ({ vendorDetails, nextStep, setFname, setLname, setEmail, setPas
                         <h1>Email</h1>
                         <input onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder='Email' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full  mt-2" />
                     </label>
-                    <label className="block my-3">
+                    <label className="block my-3 relative">
                         <h1>Password</h1>
-                        <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" placeholder='Password' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
+                        <input onChange={(e) => setPassword(e.target.value)} value={password} type={inputType} placeholder='Password' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
+                        <div className='absolute md:top-[40px] top-[40px] right-5 cursor-pointer'>
+                            {showPassword ? <i className="ri-eye-fill" onClick={toggleInput}></i> : <i className="ri-eye-off-fill" onClick={toggleInput}></i>}
+                        </div>
                     </label>
-                    <label className="block my-3">
+                    <label className="block my-3 relative">
                         <h1>Confirm Password</h1>
-                        <input onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} type="password" placeholder='Confirm Password' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
+                        <input onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} type={inputType} placeholder='Confirm Password' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2" />
+                        <div className='absolute md:top-[40px] top-[40px] right-5 cursor-pointer'>
+                            {showPassword ? <i className="ri-eye-fill" onClick={toggleInput}></i> : <i className="ri-eye-off-fill" onClick={toggleInput}></i>}
+                        </div>
                     </label>
                     <div className="flex justify-between items-center flex-col lg:flex-row">
                         <p className="text-center py-3 pb-5">Already have an account? <Link to='/login' className="underline">Sign In</Link> </p>

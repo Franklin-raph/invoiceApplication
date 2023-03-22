@@ -13,6 +13,8 @@ const Login = ({ baseUrl }) => {
     const [message, setMessage] = useState("")
     const [alertType, setAlertType] = useState("")
     const [loading, setLoading] = useState(false)
+    const [inputType, setInputType] = useState('password');
+    const [showPassword, setShowPassword] = useState(false)
 
     const { vendorData } = useSelector((state) => state.vendorAuth)
     const navigate = useNavigate();
@@ -59,6 +61,11 @@ const Login = ({ baseUrl }) => {
         }
     }
 
+    const toggleInput = () => {
+        setInputType(inputType === 'password' ? 'text' : 'password')
+        setShowPassword(!showPassword)
+    }
+
     return (
         <div className="p-0 lg:p-12 mx-auto h-screen flex justify-center items-center">
             {/* {loading && <LoadingSpinner />} */}
@@ -69,8 +76,11 @@ const Login = ({ baseUrl }) => {
                     <label className="block my-7">
                         <input type="text" placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full" />
                     </label>
-                    <label className="block my-7">
-                        <input type="password" placeholder='********' value={password} onChange={(e) => setPassword(e.target.value)} className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full" />
+                    <label className="block my-7 relative">
+                        <input type={inputType} placeholder='********' value={password} onChange={(e) => setPassword(e.target.value)} className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full" />
+                        <div className='absolute md:top-[10px] top-[10px] right-5 cursor-pointer'>
+                            {showPassword ? <i className="ri-eye-fill" onClick={toggleInput}></i> : <i className="ri-eye-off-fill" onClick={toggleInput}></i>}
+                        </div>
                     </label>
                     {!loading ?
                         <input type="submit" value="Sign In" className="w-full bg-green-500 text-white py-2 rounded-[4px] hover:cursor-pointer" />

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const ForgotPassword = ({ baseUrl }) => {
 
-    const [email, setEmail] = useState("frank45@gmail.com")
+    const [email, setEmail] = useState("")
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState("")
     const [loading, setLoading] = useState(false)
