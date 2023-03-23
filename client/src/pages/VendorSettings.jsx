@@ -44,7 +44,7 @@ const VendorSettings = ({ baseUrl }) => {
     }, [])
 
     async function getMyAccount() {
-        const response = await fetch("http://localhost:5000/api/v1/auth/myaccount", {
+        const response = await fetch(`${baseUrl}/auth/myaccount`, {
             method: "GET",
             headers: {
                 'Content-type': 'application/json',
