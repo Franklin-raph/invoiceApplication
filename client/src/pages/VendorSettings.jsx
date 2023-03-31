@@ -258,7 +258,8 @@ const VendorSettings = ({ baseUrl }) => {
                                     </div>
                                     <div className="block my-3 w-full">
                                         <h1>City *</h1>
-                                        <div></div>
+                                        <input onChange={(e) => setCity(e.target.value)} value={city} type="text" placeholder='Name' className="focus:outline-none border-gray-300 rounded-[4px] border-[1px] pl-3 py-2 w-full mt-2 bg-[#141625]" />
+                                        {/* <div></div> */}
                                     </div>
                                 </div>
 
